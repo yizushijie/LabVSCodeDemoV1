@@ -1,4 +1,4 @@
-﻿namespace Harry.LabUserControlPlus
+﻿namespace Harry.LabCOMMPort
 {
     partial class COMMBasePortPlus
     {

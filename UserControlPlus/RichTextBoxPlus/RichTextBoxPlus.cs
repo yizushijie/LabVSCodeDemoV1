@@ -21,7 +21,14 @@ namespace Harry.LabUserControlPlus
         /// <param name="newLine ">是否换行</param>
         public static void AppendTextColorFull(RichTextBox rtBox, string text, Color textColor, bool newLine = true)
         {
-            if (newLine)
+
+			//---检查对象控件
+			if (rtBox == null)
+			{
+				return;
+			}
+			
+			if (newLine)
             {
                 text += Environment.NewLine;
             }
@@ -62,7 +69,14 @@ namespace Harry.LabUserControlPlus
         /// <param name="newLine"></param>
         public static void AppendTextInfo(RichTextBox rtBox, string text, Color textColor, bool newLine = true)
         {
-            if (newLine)
+
+			//---检查对象控件
+			if (rtBox == null)
+			{
+				return;
+			}
+
+			if (newLine)
             {
                 text += Environment.NewLine;
             }
@@ -110,7 +124,14 @@ namespace Harry.LabUserControlPlus
         public static void AppendTextInfoTop(RichTextBox rtBox, string text, Color textColor, bool newLine = true)
         {
             string temp = string.Empty;
-            if (newLine)
+
+			//---检查对象控件
+			if (rtBox == null)
+			{
+				return;
+			}
+
+			if (newLine)
             {
                 text += Environment.NewLine;
             }
@@ -170,7 +191,14 @@ namespace Harry.LabUserControlPlus
         public static void AppendTextInfoWithDateTime(RichTextBox rtBox, string text, Color textColor, bool newLine = true)
         {
             string str = string.Format("{0} {1} {2}", System.DateTime.Now.ToString(), "：", text);
-            if (newLine)
+
+			//---检查对象控件
+			if (rtBox == null)
+			{
+				return;
+			}
+
+			if (newLine)
             {
                 str += Environment.NewLine;
             }
@@ -219,7 +247,14 @@ namespace Harry.LabUserControlPlus
         /// <param name="newLine"></param>
         public static void AppendTextInfoWithoutDateTime(RichTextBox rtBox, string text, Color textColor, bool newLine = true)
         {
-            if (newLine)
+
+			//---检查对象控件
+			if (rtBox == null)
+			{
+				return;
+			}
+
+			if (newLine)
             {
                 text += Environment.NewLine;
             }
@@ -270,6 +305,13 @@ namespace Harry.LabUserControlPlus
         {
             string temp = string.Empty;
             string str = string.Empty;
+
+			//---检查对象
+			if (rtBox==null)
+			{
+				return;
+			}
+
             if (rtBox.InvokeRequired)
             {
                 rtBox.Invoke((EventHandler)
@@ -313,8 +355,14 @@ namespace Harry.LabUserControlPlus
         {
             string temp = string.Empty;
 
-            //---异步调用
-            if (rtBox.InvokeRequired)
+			//---检查对象控件
+			if (rtBox == null)
+			{
+				return;
+			}
+
+			//---异步调用
+			if (rtBox.InvokeRequired)
             {
                 rtBox.Invoke((EventHandler)
                          (delegate
@@ -350,8 +398,14 @@ namespace Harry.LabUserControlPlus
         /// <param name="rtb"></param>
         public static void Clear(RichTextBox rtBox)
         {
-            //---异步调用
-            if (rtBox.InvokeRequired)
+			//---检查对象控件
+			if (rtBox == null)
+			{
+				return;
+			}
+
+			//---异步调用
+			if (rtBox.InvokeRequired)
             {
                 rtBox.Invoke((EventHandler)
                          (delegate

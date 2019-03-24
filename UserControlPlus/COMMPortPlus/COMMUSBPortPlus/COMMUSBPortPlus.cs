@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Harry.LabUserControlPlus
+namespace Harry.LabCOMMPort
 {
     public partial class COMMUSBPortPlus:COMMBasePortPlus
     {
