@@ -13,7 +13,8 @@ namespace Harry.LabMdiForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MdiForm());
+			System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+			Application.Run(new MdiForm());
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿
 using Harry.LabEmbeddedProcessForm;
 using Harry.LabUserControlPlus;
+using Harry.LabUserGenFunc;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Harry.LabMdiForm
@@ -54,6 +56,13 @@ namespace Harry.LabMdiForm
 			this.ToolStripMenuItem_Calc.Click += new EventHandler(this.ToolStripMenuItem_Click);
 			//---调用并嵌套记事本应用
 			this.ToolStripMenuItem_TXT.Click += new EventHandler(this.ToolStripMenuItem_Click);
+
+			//---打印
+			this.ToolStripMenuItem_Printf.Click += new EventHandler(this.ToolStripMenuItem_Click);
+			//---打印页面设置
+			this.ToolStripMenuItem_PrintfPageSet.Click += new EventHandler(this.ToolStripMenuItem_Click);
+			//---打印预览
+			this.ToolStripMenuItem_PrintfView.Click += new EventHandler(this.ToolStripMenuItem_Click);
 		}
 
         #endregion
@@ -69,8 +78,8 @@ namespace Harry.LabMdiForm
         private void MdiForm_FormLoad(object sender, System.EventArgs e)
         {
             this.MdiForm_Init();
-        }
-
+		}
+		
         /// <summary>
         /// 
         /// </summary>
@@ -128,6 +137,7 @@ namespace Harry.LabMdiForm
             ToolStripMenuItem tsm = (ToolStripMenuItem)sender;
             tsm.Enabled = false;
 			int i = 0;
+			string exePatch = null;
             switch (tsm.Name)
             {
                 //---退出操作
@@ -166,14 +176,44 @@ namespace Harry.LabMdiForm
 							return;
 						}
 					}
-					EmbeddedProcessForm txtForm = new EmbeddedProcessForm(@"C:\Windows\system32\notepad.exe","记事本");
+					exePatch = EXEFunc.GetExeNamePatch("notepad++.exe");
+					//---检查应用是否存在
+					if (exePatch==null)
+					{
+						exePatch = @"C:\Windows\system32\notepad.exe";
+					}
+					//---将外部应用嵌套当前窗体
+					EmbeddedProcessForm txtForm = new EmbeddedProcessForm(exePatch,"记事本");
 					txtForm.MdiParent = this;
 					txtForm.StartPosition = FormStartPosition.CenterScreen;
 					txtForm.Show();
 					txtForm.Focus();
 					//txtForm.StartProcess(@"C:\Windows\system32\notepad.exe");
 					break;
-                default:
+				//---打印设置
+				case "ToolStripMenuItem_Printf":
+					PrintDialog printDialog = new PrintDialog();
+					printDialog.Document = printDocument_MdiFormPrintf;
+					//---获取打印界面的选择结果
+					if(printDialog.ShowDialog()==DialogResult.OK)
+					{
+						//---打印设局文档
+						printDocument_MdiFormPrintf.Print();
+					}
+					break;
+				//---页面设置
+				case "ToolStripMenuItem_PrintfPageSet":
+					PageSetupDialog pageSetupDialog = new PageSetupDialog();
+					pageSetupDialog.Document = printDocument_MdiFormPrintf;
+					pageSetupDialog.ShowDialog();
+					break;
+				//---打印预览
+				case "ToolStripMenuItem_PrintfView":
+					PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
+					printPreviewDialog.Document = printDocument_MdiFormPrintf;
+					printPreviewDialog.ShowDialog();
+					break;
+				default:
                     break;
             }
             tsm.Enabled = true;
