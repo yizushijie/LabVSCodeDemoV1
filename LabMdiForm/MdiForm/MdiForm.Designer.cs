@@ -38,8 +38,9 @@
 			this.ToolStripMenuItem_Save = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolStripMenuItem_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolStripSeparator_File2 = new System.Windows.Forms.ToolStripSeparator();
-			this.ToolStripMenuItem_Printf = new System.Windows.Forms.ToolStripMenuItem();
-			this.ToolStripMenuItem_PrintfView = new System.Windows.Forms.ToolStripMenuItem();
+			this.ToolStripMenuItem_Print = new System.Windows.Forms.ToolStripMenuItem();
+			this.ToolStripMenuItem_PageSet = new System.Windows.Forms.ToolStripMenuItem();
+			this.ToolStripMenuItem_PrintView = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolStripSeparator_File3 = new System.Windows.Forms.ToolStripSeparator();
 			this.ToolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolStripMenuItem_Edit = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,8 +58,7 @@
 			this.ToolStripStatusLabel_Separator1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.ToolStripStatusLabel_SysTime = new System.Windows.Forms.ToolStripStatusLabel();
 			this.timer_MdiFormSysTime = new System.Windows.Forms.Timer(this.components);
-			this.ToolStripMenuItem_PrintfPageSet = new System.Windows.Forms.ToolStripMenuItem();
-			this.printDocument_MdiFormPrintf = new System.Drawing.Printing.PrintDocument();
+			this.printDocument_MdiFormPrint = new System.Drawing.Printing.PrintDocument();
 			this.menuStrip_MdiFormMenu.SuspendLayout();
 			this.statusStrip_MdiFormStatu.SuspendLayout();
 			this.SuspendLayout();
@@ -85,13 +85,13 @@
             this.ToolStripMenuItem_Save,
             this.ToolStripMenuItem_SaveAs,
             this.ToolStripSeparator_File2,
-            this.ToolStripMenuItem_Printf,
-            this.ToolStripMenuItem_PrintfPageSet,
-            this.ToolStripMenuItem_PrintfView,
+            this.ToolStripMenuItem_Print,
+            this.ToolStripMenuItem_PageSet,
+            this.ToolStripMenuItem_PrintView,
             this.ToolStripSeparator_File3,
             this.ToolStripMenuItem_Exit});
-			this.ToolStripMenuItem_File.Name = "ToolStripMenuItem_File";
 			resources.ApplyResources(this.ToolStripMenuItem_File, "ToolStripMenuItem_File");
+			this.ToolStripMenuItem_File.Name = "ToolStripMenuItem_File";
 			// 
 			// ToolStripMenuItem_Open
 			// 
@@ -123,15 +123,20 @@
 			this.ToolStripSeparator_File2.Name = "ToolStripSeparator_File2";
 			resources.ApplyResources(this.ToolStripSeparator_File2, "ToolStripSeparator_File2");
 			// 
-			// ToolStripMenuItem_Printf
+			// ToolStripMenuItem_Print
 			// 
-			this.ToolStripMenuItem_Printf.Name = "ToolStripMenuItem_Printf";
-			resources.ApplyResources(this.ToolStripMenuItem_Printf, "ToolStripMenuItem_Printf");
+			this.ToolStripMenuItem_Print.Name = "ToolStripMenuItem_Print";
+			resources.ApplyResources(this.ToolStripMenuItem_Print, "ToolStripMenuItem_Print");
 			// 
-			// ToolStripMenuItem_PrintfView
+			// ToolStripMenuItem_PageSet
 			// 
-			this.ToolStripMenuItem_PrintfView.Name = "ToolStripMenuItem_PrintfView";
-			resources.ApplyResources(this.ToolStripMenuItem_PrintfView, "ToolStripMenuItem_PrintfView");
+			this.ToolStripMenuItem_PageSet.Name = "ToolStripMenuItem_PageSet";
+			resources.ApplyResources(this.ToolStripMenuItem_PageSet, "ToolStripMenuItem_PageSet");
+			// 
+			// ToolStripMenuItem_PrintView
+			// 
+			this.ToolStripMenuItem_PrintView.Name = "ToolStripMenuItem_PrintView";
+			resources.ApplyResources(this.ToolStripMenuItem_PrintView, "ToolStripMenuItem_PrintView");
 			// 
 			// ToolStripSeparator_File3
 			// 
@@ -231,11 +236,6 @@
 			this.timer_MdiFormSysTime.Interval = 1000;
 			this.timer_MdiFormSysTime.Tag = "timer_MdiFormSysTime";
 			// 
-			// ToolStripMenuItem_PrintfPageSet
-			// 
-			this.ToolStripMenuItem_PrintfPageSet.Name = "ToolStripMenuItem_PrintfPageSet";
-			resources.ApplyResources(this.ToolStripMenuItem_PrintfPageSet, "ToolStripMenuItem_PrintfPageSet");
-			// 
 			// MdiForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -270,8 +270,8 @@
 		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Open;
 		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Save;
 		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_SaveAs;
-		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Printf;
-		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_PrintfView;
+		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Print;
+		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_PrintView;
 		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Custom;
 		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Option;
 		private System.Windows.Forms.ToolStripSeparator ToolStripSeparator_Tool1;
@@ -283,8 +283,8 @@
 		private System.Windows.Forms.ToolStripStatusLabel ToolStripStatusLabel_SysTime;
 		private System.Windows.Forms.ToolStripStatusLabel ToolStripStatusLabel_Separator1;
 		private System.Windows.Forms.Timer timer_MdiFormSysTime;
-		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_PrintfPageSet;
-		private System.Drawing.Printing.PrintDocument printDocument_MdiFormPrintf;
+		private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_PageSet;
+		private System.Drawing.Printing.PrintDocument printDocument_MdiFormPrint;
 	}
 }
 

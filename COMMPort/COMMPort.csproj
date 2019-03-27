@@ -85,7 +85,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="COMMBasePort\COMMBasePortPlus.en.resx">
+      <DependentUpon>COMMBasePortPlus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COMMBasePort\COMMBasePortPlus.ja.resx">
+      <DependentUpon>COMMBasePortPlus.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="COMMBasePort\COMMBasePortPlus.resx">
+      <DependentUpon>COMMBasePortPlus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COMMBasePort\COMMBasePortPlus.zh.resx">
       <DependentUpon>COMMBasePortPlus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="COMMSerialPort\COMMSerialPortPlusFull.resx">

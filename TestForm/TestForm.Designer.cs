@@ -94,6 +94,7 @@
 			this.Controls.Add(this.richTextBoxEx1);
 			this.Controls.Add(this.commSerialPortPlusFull1);
 			this.Controls.Add(this.commSerialPortPlus1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "TestForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Form1";

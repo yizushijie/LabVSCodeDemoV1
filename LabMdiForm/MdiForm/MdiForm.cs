@@ -10,13 +10,20 @@ namespace Harry.LabMdiForm
 {
     public partial class MdiForm : Form
     {
-        #region 构造函数
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public MdiForm()
+
+		#region 属性定义
+
+		//private string 
+
+		#endregion
+
+		#region 构造函数
+		/// <summary>
+		/// 构造函数
+		/// </summary>
+		public MdiForm()
         {
-            InitializeComponent();
+			InitializeComponent();
 
             //---注册船体加载事件
             this.Load += new System.EventHandler(this.MdiForm_FormLoad);
@@ -58,11 +65,11 @@ namespace Harry.LabMdiForm
 			this.ToolStripMenuItem_TXT.Click += new EventHandler(this.ToolStripMenuItem_Click);
 
 			//---打印
-			this.ToolStripMenuItem_Printf.Click += new EventHandler(this.ToolStripMenuItem_Click);
+			this.ToolStripMenuItem_Print.Click += new EventHandler(this.ToolStripMenuItem_Click);
 			//---打印页面设置
-			this.ToolStripMenuItem_PrintfPageSet.Click += new EventHandler(this.ToolStripMenuItem_Click);
+			this.ToolStripMenuItem_PageSet.Click += new EventHandler(this.ToolStripMenuItem_Click);
 			//---打印预览
-			this.ToolStripMenuItem_PrintfView.Click += new EventHandler(this.ToolStripMenuItem_Click);
+			this.ToolStripMenuItem_PrintView.Click += new EventHandler(this.ToolStripMenuItem_Click);
 		}
 
         #endregion
@@ -191,26 +198,26 @@ namespace Harry.LabMdiForm
 					//txtForm.StartProcess(@"C:\Windows\system32\notepad.exe");
 					break;
 				//---打印设置
-				case "ToolStripMenuItem_Printf":
+				case "ToolStripMenuItem_Print":
 					PrintDialog printDialog = new PrintDialog();
-					printDialog.Document = printDocument_MdiFormPrintf;
+					printDialog.Document = printDocument_MdiFormPrint;
 					//---获取打印界面的选择结果
 					if(printDialog.ShowDialog()==DialogResult.OK)
 					{
 						//---打印设局文档
-						printDocument_MdiFormPrintf.Print();
+						printDocument_MdiFormPrint.Print();
 					}
 					break;
 				//---页面设置
-				case "ToolStripMenuItem_PrintfPageSet":
+				case "ToolStripMenuItem_PageSet":
 					PageSetupDialog pageSetupDialog = new PageSetupDialog();
-					pageSetupDialog.Document = printDocument_MdiFormPrintf;
+					pageSetupDialog.Document = printDocument_MdiFormPrint;
 					pageSetupDialog.ShowDialog();
 					break;
 				//---打印预览
-				case "ToolStripMenuItem_PrintfView":
+				case "ToolStripMenuItem_PrintView":
 					PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
-					printPreviewDialog.Document = printDocument_MdiFormPrintf;
+					printPreviewDialog.Document = printDocument_MdiFormPrint;
 					printPreviewDialog.ShowDialog();
 					break;
 				default:
@@ -227,14 +234,50 @@ namespace Harry.LabMdiForm
 		private void Timer_Tick(object sender, System.EventArgs e)
 		{
 			Timer tt = (Timer)sender;
+			string[] str = new string[] { };
 			switch (tt.Tag.ToString())
 			{
 				case "timer_MdiFormSysTime":
+					//str = this.ToolStripStatusLabel_SysTime.Text.Split('：');
 					this.ToolStripStatusLabel_SysTime.Text = "系统时间：" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"  "+System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek);
 					break;
 				default:
 					break;
 			}
+		}
+
+		#endregion
+
+		#region 公共函数
+
+		/// <summary>
+		/// 加载语言
+		/// </summary>
+		/// <param name="language"></param>
+		public void LoadLanguage(string language)
+		{
+			//---获取系统当前的语言格式
+			string defaultLanguage = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+			if (defaultLanguage!= language)
+			{
+				System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(language);
+				this.Controls.Clear();
+				InitializeComponent();
+				this.MdiForm_Init();
+			}
+		}
+
+		/// <summary>
+		/// 加载语言
+		/// </summary>
+		public void LoadLanguage()
+		{
+			//---获取系统当前的语言格式
+			string language = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+			System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(language);
+			this.Controls.Clear();
+			InitializeComponent();
+			this.MdiForm_Init();
 		}
 
 		#endregion

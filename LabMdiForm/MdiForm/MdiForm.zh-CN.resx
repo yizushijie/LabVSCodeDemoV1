@@ -120,4 +120,64 @@
   <data name="menuStrip_MdiFormMenu.Text" xml:space="preserve">
     <value>父菜单栏</value>
   </data>
+  <data name="ToolStripMenuItem_About.Text" xml:space="preserve">
+    <value>关于(&amp;A)</value>
+  </data>
+  <data name="ToolStripMenuItem_Calc.Text" xml:space="preserve">
+    <value>计算器(&amp;Calc)</value>
+  </data>
+  <data name="ToolStripMenuItem_Custom.Text" xml:space="preserve">
+    <value>自定义(&amp;C)</value>
+  </data>
+  <data name="ToolStripMenuItem_Edit.Text" xml:space="preserve">
+    <value>编辑(&amp;E)</value>
+  </data>
+  <data name="ToolStripMenuItem_Exit.Text" xml:space="preserve">
+    <value>退出(&amp;X)</value>
+  </data>
+  <data name="ToolStripMenuItem_File.Text" xml:space="preserve">
+    <value>文件(&amp;F)</value>
+  </data>
+  <data name="ToolStripMenuItem_Func.Text" xml:space="preserve">
+    <value>功能(&amp;F)</value>
+  </data>
+  <data name="ToolStripMenuItem_Help.Text" xml:space="preserve">
+    <value>帮助(&amp;H)</value>
+  </data>
+  <data name="ToolStripMenuItem_New.Text" xml:space="preserve">
+    <value>新建(&amp;N)</value>
+  </data>
+  <data name="ToolStripMenuItem_Open.Text" xml:space="preserve">
+    <value>打开(&amp;O)</value>
+  </data>
+  <data name="ToolStripMenuItem_Option.Text" xml:space="preserve">
+    <value>选项(&amp;O)</value>
+  </data>
+  <data name="ToolStripMenuItem_Printf.Text" xml:space="preserve">
+    <value>打印(&amp;P)</value>
+  </data>
+  <data name="ToolStripMenuItem_PrintfPageSet.Text" xml:space="preserve">
+    <value>页面设置(&amp;S)</value>
+  </data>
+  <data name="ToolStripMenuItem_PrintfView.Text" xml:space="preserve">
+    <value>打印预览(&amp;V)</value>
+  </data>
+  <data name="ToolStripMenuItem_Save.Text" xml:space="preserve">
+    <value>保存(&amp;S)</value>
+  </data>
+  <data name="ToolStripMenuItem_SaveAs.Text" xml:space="preserve">
+    <value>另存为(&amp;A)</value>
+  </data>
+  <data name="ToolStripMenuItem_Tool.Text" xml:space="preserve">
+    <value>工具(&amp;T)</value>
+  </data>
+  <data name="ToolStripMenuItem_TXT.Text" xml:space="preserve">
+    <value>记事本(&amp;TXT)</value>
+  </data>
+  <data name="ToolStripMenuItem_Wind.Text" xml:space="preserve">
+    <value>窗口(&amp;W)</value>
+  </data>
+  <data name="ToolStripStatusLabel_SysTime.Text" xml:space="preserve">
+    <value>系统时间：2019-03-24</value>
+  </data>
 </root>

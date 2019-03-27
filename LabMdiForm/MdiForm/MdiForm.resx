@@ -124,6 +124,9 @@
   <data name="menuStrip_MdiFormMenu.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft YaHei UI, 10pt</value>
   </data>
+  <data name="ToolStripMenuItem_File.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft YaHei UI, 10pt</value>
+  </data>
   <data name="ToolStripMenuItem_File.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 24</value>
   </data>
@@ -171,7 +174,7 @@
     <value>2</value>
   </data>
   <data name="menuStrip_MdiFormMenu.Text" xml:space="preserve">
-    <value>menuStrip1</value>
+    <value>父菜单栏</value>
   </data>
   <data name="&gt;&gt;menuStrip_MdiFormMenu.Name" xml:space="preserve">
     <value>menuStrip_MdiFormMenu</value>
@@ -228,19 +231,25 @@
   <data name="ToolStripSeparator_File2.Size" type="System.Drawing.Size, System.Drawing">
     <value>177, 6</value>
   </data>
-  <data name="ToolStripMenuItem_Printf.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+  <data name="ToolStripMenuItem_Print.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+P</value>
   </data>
-  <data name="ToolStripMenuItem_Printf.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItem_Print.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 24</value>
   </data>
-  <data name="ToolStripMenuItem_Printf.Text" xml:space="preserve">
+  <data name="ToolStripMenuItem_Print.Text" xml:space="preserve">
     <value>打印(&amp;P)</value>
   </data>
-  <data name="ToolStripMenuItem_PrintfView.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItem_PageSet.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 24</value>
   </data>
-  <data name="ToolStripMenuItem_PrintfView.Text" xml:space="preserve">
+  <data name="ToolStripMenuItem_PageSet.Text" xml:space="preserve">
+    <value>页面设置(&amp;P)</value>
+  </data>
+  <data name="ToolStripMenuItem_PrintView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 24</value>
+  </data>
+  <data name="ToolStripMenuItem_PrintView.Text" xml:space="preserve">
     <value>打印预览(&amp;V)</value>
   </data>
   <data name="ToolStripSeparator_File3.Size" type="System.Drawing.Size, System.Drawing">
@@ -250,37 +259,37 @@
     <value>180, 24</value>
   </data>
   <data name="ToolStripMenuItem_Exit.Text" xml:space="preserve">
-    <value>退出(&amp;X)</value>
+    <value>退出(&amp;E)</value>
   </data>
   <data name="ToolStripMenuItem_Calc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 24</value>
+    <value>152, 24</value>
   </data>
   <data name="ToolStripMenuItem_Calc.Text" xml:space="preserve">
-    <value>计算器(&amp;Calc)</value>
+    <value>计算器(&amp;C)</value>
   </data>
   <data name="ToolStripMenuItem_TXT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 24</value>
+    <value>152, 24</value>
   </data>
   <data name="ToolStripMenuItem_TXT.Text" xml:space="preserve">
-    <value>记事本(&amp;TXT)</value>
+    <value>记事本(&amp;T)</value>
   </data>
   <data name="ToolStripSeparator_Tool1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 6</value>
+    <value>149, 6</value>
   </data>
   <data name="ToolStripMenuItem_Custom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 24</value>
+    <value>152, 24</value>
   </data>
   <data name="ToolStripMenuItem_Custom.Text" xml:space="preserve">
     <value>自定义(&amp;C)</value>
   </data>
   <data name="ToolStripMenuItem_Option.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 24</value>
+    <value>152, 24</value>
   </data>
   <data name="ToolStripMenuItem_Option.Text" xml:space="preserve">
     <value>选项(&amp;O)</value>
   </data>
   <data name="ToolStripMenuItem_About.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 24</value>
+    <value>152, 24</value>
   </data>
   <data name="ToolStripMenuItem_About.Text" xml:space="preserve">
     <value>关于(&amp;A)</value>
@@ -288,6 +297,18 @@
   <metadata name="statusStrip_MdiFormStatu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>224, 17</value>
   </metadata>
+  <data name="ToolStripStatusLabel_Separator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1123, 17</value>
+  </data>
+  <data name="ToolStripStatusLabel_SysTime.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="ToolStripStatusLabel_SysTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 17</value>
+  </data>
+  <data name="ToolStripStatusLabel_SysTime.Text" xml:space="preserve">
+    <value>系统时间：2019-03-24</value>
+  </data>
   <data name="statusStrip_MdiFormStatu.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 730</value>
   </data>
@@ -298,7 +319,7 @@
     <value>4</value>
   </data>
   <data name="statusStrip_MdiFormStatu.Text" xml:space="preserve">
-    <value>statusStrip1</value>
+    <value>父工具栏</value>
   </data>
   <data name="&gt;&gt;statusStrip_MdiFormStatu.Name" xml:space="preserve">
     <value>statusStrip_MdiFormStatu</value>
@@ -312,29 +333,11 @@
   <data name="&gt;&gt;statusStrip_MdiFormStatu.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ToolStripStatusLabel_Separator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1123, 17</value>
-  </data>
-  <data name="ToolStripStatusLabel_SysTime.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
-  <data name="ToolStripStatusLabel_SysTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 17</value>
-  </data>
-  <data name="ToolStripStatusLabel_SysTime.Text" xml:space="preserve">
-    <value>系统时间：2019-03-24</value>
-  </data>
   <metadata name="timer_MdiFormSysTime.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>429, 17</value>
   </metadata>
-  <data name="ToolStripMenuItem_PrintfPageSet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 24</value>
-  </data>
-  <data name="ToolStripMenuItem_PrintfPageSet.Text" xml:space="preserve">
-    <value>页面设置(&amp;S)</value>
-  </data>
-  <metadata name="printDocument_MdiFormPrintf.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 55</value>
+  <metadata name="printDocument_MdiFormPrint.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>616, 20</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -344,6 +347,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1272, 752</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>宋体, 9pt</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -393,16 +399,22 @@
   <data name="&gt;&gt;ToolStripSeparator_File2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem_Printf.Name" xml:space="preserve">
-    <value>ToolStripMenuItem_Printf</value>
+  <data name="&gt;&gt;ToolStripMenuItem_Print.Name" xml:space="preserve">
+    <value>ToolStripMenuItem_Print</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem_Printf.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItem_Print.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem_PrintfView.Name" xml:space="preserve">
-    <value>ToolStripMenuItem_PrintfView</value>
+  <data name="&gt;&gt;ToolStripMenuItem_PageSet.Name" xml:space="preserve">
+    <value>ToolStripMenuItem_PageSet</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem_PrintfView.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItem_PageSet.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem_PrintView.Name" xml:space="preserve">
+    <value>ToolStripMenuItem_PrintView</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem_PrintView.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator_File3.Name" xml:space="preserve">
@@ -501,16 +513,10 @@
   <data name="&gt;&gt;timer_MdiFormSysTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem_PrintfPageSet.Name" xml:space="preserve">
-    <value>ToolStripMenuItem_PrintfPageSet</value>
+  <data name="&gt;&gt;printDocument_MdiFormPrint.Name" xml:space="preserve">
+    <value>printDocument_MdiFormPrint</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem_PrintfPageSet.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;printDocument_MdiFormPrintf.Name" xml:space="preserve">
-    <value>printDocument_MdiFormPrintf</value>
-  </data>
-  <data name="&gt;&gt;printDocument_MdiFormPrintf.Type" xml:space="preserve">
+  <data name="&gt;&gt;printDocument_MdiFormPrint.Type" xml:space="preserve">
     <value>System.Drawing.Printing.PrintDocument, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
