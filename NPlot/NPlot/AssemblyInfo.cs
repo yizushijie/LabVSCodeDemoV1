@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -38,9 +38,9 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("NPlot project")]
 [assembly: AssemblyProduct("NPlot")]
-[assembly: AssemblyCopyright("Copyright (C) 2003-2007 Matt Howlett and others")]
+[assembly: AssemblyCopyright("Copyright (C) 2003-2006 Matt Howlett and others")]
 [assembly: AssemblyTrademark("This program is under The BSD license")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("0.9.10.1")]
+[assembly: AssemblyVersion("0.9.10.0")]
 [assembly: CLSCompliant(true)]
 

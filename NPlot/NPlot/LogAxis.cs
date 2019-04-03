@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -36,7 +36,6 @@ using System.Text;
 
 namespace NPlot
 {
-
 	/// <summary>
 	/// The class implementing logarithmic axes.
 	/// </summary>
@@ -141,12 +140,13 @@ namespace NPlot
 			ArrayList smallTickPositions;
 			this.WorldTickPositions( physicalMin, physicalMax, out largeTickPositions, out smallTickPositions );
 
-			//Point offset = new Point( 0, 0 );
+			Point offset = new Point( 0, 0 );
 			object bb = null;
-
 			// Missed this protection
-			if (largeTickPositions.Count > 0) {
-				for (int i=0; i<largeTickPositions.Count; ++i) {
+			if (largeTickPositions.Count > 0)
+			{
+				for (int i=0; i<largeTickPositions.Count; ++i)
+				{
 					StringBuilder label = new StringBuilder();
 					// do google search for "format specifier writeline" for help on this.
 					label.AppendFormat(this.NumberFormat, (double)largeTickPositions[i]);
@@ -156,7 +156,8 @@ namespace NPlot
 					Axis.UpdateOffsetAndBounds( ref labelOffset, ref boundingBox, tLabelOffset, tBoundingBox );
 				}
 			}
-			else {
+			else
+			{
 				// just get the axis bounding box)
 				PointF dir = Utils.UnitVector(physicalMin,physicalMax);
 				Rectangle rr = new Rectangle( physicalMin.X,
@@ -165,15 +166,19 @@ namespace NPlot
 					(int)((physicalMax.Y-physicalMin.Y)*dir.Y) );
 				bb = rr;
 			}
+			
 
 			// missed protection for zero ticks
-			if (smallTickPositions.Count > 0) {
-				for (int i=0; i<smallTickPositions.Count; ++i) {
+			if (smallTickPositions.Count > 0)
+			{
+				for (int i=0; i<smallTickPositions.Count; ++i)
+				{
 					this.DrawTick( g, (double)smallTickPositions[i], this.SmallTickSize,
 						"", new Point(0,0), physicalMin, physicalMax, out tLabelOffset, out tBoundingBox );
 					// ignore r for now - assume bb unchanged by small tick bounds.
 				}
 			}
+
 		}
 
 
@@ -283,17 +288,16 @@ namespace NPlot
 					}
 				}
 			}
+
 		}
 
-
-		private static double m_d5Log = -Math.Log10(0.5);	// .30103
+		private static double m_d5Log = -Math.Log10(0.5);   // .30103
 		private static double m_d5RegionPos = Math.Abs(m_d5Log + ((1 - m_d5Log) / 2)); //	   ' .6505
 		private static double m_d5RegionNeg = Math.Abs(m_d5Log / 2); //	   '.1505
 
-
 		private void CalcGrids( double dLenAxis, int nNumDivisions, ref double dDivisionInterval)
 		{
-			double dMyInterval	= dLenAxis / nNumDivisions;
+			double dMyInterval  = dLenAxis / nNumDivisions;
 			double dPower = Math.Log10(dMyInterval);
 			dDivisionInterval = 10 ^ (int)dPower;
 			double dFixPower = dPower - (int)dPower;
@@ -315,7 +319,6 @@ namespace NPlot
 			}
 		}
 
-
 		/// <summary>
 		/// Determines the positions, in world coordinates, of the log spaced large ticks. 
 		/// </summary>
@@ -330,6 +333,7 @@ namespace NPlot
 			out ArrayList smallTickPositions
 			)
 		{
+
 			smallTickPositions = null;
 			largeTickPositions = new ArrayList();
 
@@ -388,6 +392,7 @@ namespace NPlot
 				largeTickPositions.Add( val );
 				mark += roundTickDist;
 			}
+
 		}
 
 
@@ -589,6 +594,7 @@ namespace NPlot
 			}
 
 			return ret;
+
 		}
 
 
@@ -647,5 +653,6 @@ namespace NPlot
 				return false;
 			}
 		}
+
 	}
 }

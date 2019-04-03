@@ -32,38 +32,307 @@ namespace Harry.LabCOMMPort
     /// <summary>
     /// 数据通讯结构
     /// </summary>
-    public struct COMMDataType
+    public class COMMDataType
     {
-        /// <summary>
-        /// crc校验值
-        /// </summary>
-        public UInt32 commCRCVal;
+		#region 变量定义
+		/// <summary>
+		/// crc校验值
+		/// </summary>
+		public UInt32 commCRCVal = 0;
 
-        /// <summary>
-        /// 使用的CRC方式
-        /// </summary>
-        public USE_STATE commCRC;
+		/// <summary>
+		/// 使用的CRC方式
+		/// </summary>
+		public USE_CRC commCRC =USE_CRC.CRC_NONE;
 
-        /// <summary>
-        /// 数据存储
-        /// </summary>
-        public List<byte> commByte;
+		/// <summary>
+		/// 数据长度
+		/// </summary>
+		public int commLemgth = 0;
 
-    };
+		/// <summary>
+		/// 数据存储
+		/// </summary>
+		public List<byte> commByte=null;
+		#endregion
+
+		#region 构造函数
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public COMMDataType()
+		{
+			this.commCRCVal = 0;
+			this.commCRC = USE_CRC.CRC_NONE;
+			this.commLemgth = 0;
+			this.commByte = null;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crc"></param>
+		public COMMDataType(UInt32 crc)
+		{
+			this.commCRCVal = crc;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcVal"></param>
+		/// <param name="crcMode"></param>
+		public COMMDataType(UInt32 crcVal, USE_CRC crcMode)
+		{
+			this.commCRCVal = crcVal;
+			this.commCRC = crcMode;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcVal"></param>
+		/// <param name="crcMode"></param>
+		public COMMDataType(UInt32 crcVal, USE_CRC crcMode,byte[] commByte)
+		{
+			this.commCRCVal = crcVal;
+			this.commCRC = crcMode;
+			this.commByte = new List<byte>();
+			this.commByte.AddRange(commByte);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcVal"></param>
+		/// <param name="crcMode"></param>
+		public COMMDataType(UInt32 crcVal, USE_CRC crcMode, List<byte>commByte)
+		{
+			this.commCRCVal = crcVal;
+			this.commCRC = crcMode;
+			this.commByte = commByte;
+		}
+
+		#endregion
+
+		#region 函数定义
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Init()
+		{
+			this.commCRCVal = 0;
+			this.commCRC = USE_CRC.CRC_NONE;
+			this.commLemgth = 0;
+			this.commByte = null;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Init(byte[] commByte)
+		{
+
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void Init(USE_CRC crcMode,byte[] commByte)
+		{
+
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="commByte"></param>
+		public void Init(List<byte> commByte)
+		{
+
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcMode"></param>
+		/// <param name="commByte"></param>
+		public void Init(USE_CRC crcMode, List<byte> commByte)
+		{
+
+		}
+
+		#endregion
+
+
+	};
 
     /// <summary>
     /// 通讯串口的参数
     /// </summary>
-    public struct COMMSerialPortParam
+    public class COMMSerialPortParam
     {
-		public string name;
-		public string baudRate;
-		public string parity;
-		public string dataBits;
-		public string stopBits;
-    };
+		#region 变量定义
+		public string name=null;
+		public string baudRate="115200";
+		public string parity="NONE";
+		public string dataBits="8";
+		public string stopBits="1";
+		#endregion
+		#region 构造函数
 
-	public partial class COMMBasePort
+		/// <summary>
+		/// 
+		/// </summary>
+		public COMMSerialPortParam()
+		{
+			this.name = null;
+			this.baudRate = "115200";
+			this.parity = "NONE";
+			this.dataBits = "8";
+			this.stopBits = "1";
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		public COMMSerialPortParam(string name)
+		{
+			this.name = name;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="baudRate"></param>
+		public COMMSerialPortParam(string name, string baudRate)
+		{
+			this.name = name;
+			this.baudRate = baudRate;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="baudRate"></param>
+		/// <param name="parity"></param>
+		public COMMSerialPortParam(string name, string baudRate, string parity)
+		{
+			this.name = name;
+			this.baudRate = baudRate;
+			this.parity = parity;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="baudRate"></param>
+		/// <param name="parity"></param>
+		/// <param name="dataBits"></param>
+		public COMMSerialPortParam(string name, string baudRate, string parity, string dataBits )
+		{
+			this.name = name;
+			this.baudRate = baudRate;
+			this.parity = parity;
+			this.dataBits = dataBits;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="baudRate"></param>
+		/// <param name="parity"></param>
+		/// <param name="dataBits"></param>
+		/// <param name="stopBits"></param>
+		public COMMSerialPortParam(string name, string baudRate, string parity, string dataBits, string stopBits)
+		{
+			this.name = name;
+			this.baudRate = baudRate;
+			this.parity = parity;
+			this.dataBits = dataBits;
+			this.stopBits = stopBits;
+		}
+
+		#endregion
+
+		#region 函数定义
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		public void Init(string name)
+		{
+			this.name = name;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="baudRate"></param>
+		public void Init(string name, string baudRate)
+		{
+			this.name = name;
+			this.baudRate = baudRate;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="baudRate"></param>
+		/// <param name="parity"></param>
+		public void Init(string name, string baudRate, string parity)
+		{
+			this.name = name;
+			this.baudRate = baudRate;
+			this.parity = parity;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="baudRate"></param>
+		/// <param name="parity"></param>
+		/// <param name="dataBits"></param>
+		public void Init(string name, string baudRate, string parity, string dataBits)
+		{
+			this.name = name;
+			this.baudRate = baudRate;
+			this.parity = parity;
+			this.dataBits = dataBits;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="baudRate"></param>
+		/// <param name="parity"></param>
+		/// <param name="dataBits"></param>
+		/// <param name="stopBits"></param>
+		public void Init(string name, string baudRate, string parity, string dataBits, string stopBits)
+		{
+			this.name = name;
+			this.baudRate = baudRate;
+			this.parity = parity;
+			this.dataBits = dataBits;
+			this.stopBits = stopBits;
+		}
+		#endregion
+
+	};
+
+	public partial class COMMBasePort:IDisposable
 	{
 		#region 变量定义
 
@@ -127,10 +396,10 @@ namespace Harry.LabCOMMPort
 		/// </summary>
 		private Form commForm = null;
 
-		/// <summary>
-		/// 通讯写数据报头
-		/// </summary>
-		private byte commWriteID = 0x55;
+        /// <summary>
+        /// 通讯写数据报头
+        /// </summary>
+        private byte commWriteID = 0x55;
 
 		/// <summary>
 		/// 通讯读数据报头
@@ -156,6 +425,11 @@ namespace Harry.LabCOMMPort
 		/// 端口控件
 		/// </summary>
 		private ComboBox commComboBox = null;
+
+		/// <summary>
+		/// 串口使用的参数
+		/// </summary>
+		private COMMSerialPortParam commSerialPortParam = null;
 
 		#endregion
 
@@ -443,6 +717,25 @@ namespace Harry.LabCOMMPort
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual COMMSerialPortParam m_COMMSerialPortParam
+		{
+			get
+			{
+				return this.commSerialPortParam;
+			}
+			set
+			{
+				if (this.commSerialPortParam==null)
+				{
+					this.commSerialPortParam = new COMMSerialPortParam();
+				}
+				this.commSerialPortParam = value;
+			}
+		}
+
 		#endregion
 
 		#region 构造函数
@@ -529,6 +822,52 @@ namespace Harry.LabCOMMPort
 			GC.SuppressFinalize(this);
 		}
 
+
+		#region IDisposable Support
+
+		private bool disposedValue = false; // 要检测冗余调用
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="disposing"></param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!disposedValue)
+			{
+				if (disposing)
+				{
+					// TODO: 释放托管状态(托管对象)。
+				}
+
+				// TODO: 释放未托管的资源(未托管的对象)并在以下内容中替代终结器。
+				// TODO: 将大型字段设置为 null。
+
+				disposedValue = true;
+			}
+		}
+
+		// TODO: 仅当以上 Dispose(bool disposing) 拥有用于释放未托管资源的代码时才替代终结器。
+		// ~COMMBasePort() {
+		//   // 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
+		//   Dispose(false);
+		// }
+
+		// 添加此代码以正确实现可处置模式。
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual void Dispose()
+		{
+			// 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
+			this.Dispose(true);
+			// TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
+			GC.SuppressFinalize(this);
+		}
+		#endregion
+
+
 		#endregion
 
 		#region 函数定义
@@ -598,7 +937,15 @@ namespace Harry.LabCOMMPort
 			return 1;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="cbb"></param>
+		/// <param name="msg"></param>
+		public virtual  void GetPortNames(ComboBox cbb, RichTextBox msg = null)
+		{
 
+		}
 		/// <summary>
 		/// 设置多设备通信
 		/// </summary>
@@ -1036,18 +1383,47 @@ namespace Harry.LabCOMMPort
             }
         }
 
+		/// <summary>
+		/// 接收事件
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		[Description("委托设备移除事件"), Category("自定义事件")]
+		private event COMMEventHandler OnRemoveDeviceEvent = null;
 
-        /// <summary>
-        /// 通讯数据接收事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public virtual void COMMReceivedEventHandler(object sender, EventArgs e)
+		/// <summary>
+		/// 事件的属性为读写
+		/// </summary>
+		public virtual COMMEventHandler m_OnRemoveDeviceEvent
+		{
+			get
+			{
+				return this.OnRemoveDeviceEvent;
+			}
+			set
+			{
+				//---判断事件是否为空，避免多次进入
+				if (this.OnRemoveDeviceEvent != null)
+				{
+					this.OnRemoveDeviceEvent = null;
+				}
+				this.OnRemoveDeviceEvent = value;
+			}
+		}
+
+
+		/// <summary>
+		/// 通讯数据接收事件
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public virtual void OnReceivedEventHandler(object sender, EventArgs e)
         {
 
         }
 
-        #endregion
+		
+		#endregion
 
-    }
+	}
 }

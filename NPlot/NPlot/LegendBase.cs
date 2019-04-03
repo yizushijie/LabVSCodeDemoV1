@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -85,6 +85,7 @@ namespace NPlot
 		/// <returns>bounding box</returns>
 		public Rectangle Draw( Graphics g, Point position, ArrayList plots, float scale )
 		{
+
 			// first of all determine the Font to use in the legend.
 			Font textFont;
 			if (this.AutoScaleText)
@@ -137,6 +138,7 @@ namespace NPlot
 			bool extendingHorizontally = numberItemsHorizontally_ == -1;
 			bool extendingVertically = numberItemsVertically_ == -1;
 
+
 			// determine width in legend items count units.
 			int widthInItemCount = 0;
 			if (extendingVertically)
@@ -160,6 +162,7 @@ namespace NPlot
 			{
 				throw new NPlotException( "logic error in legend base" );
 			}
+
 
 			// determine height of legend in items count units.
 			int heightInItemCount = 0;
@@ -214,6 +217,7 @@ namespace NPlot
 				   // TODO. make this nice.
 			   }
 			*/
+
 			else
 			{
 				// do nothing.
@@ -271,6 +275,7 @@ namespace NPlot
 				++labelCount;
 			}
 			return new Rectangle( position.X, position.Y, totalWidth, totalHeight );
+
 		}
 
 
@@ -351,12 +356,10 @@ namespace NPlot
 			/// No border.
 			/// </summary>
 			None = 0,
-
 			/// <summary>
 			/// Line border.
 			/// </summary>
 			Line = 1,
-
 			/// <summary>
 			/// Shaded border.
 			/// </summary>
@@ -430,5 +433,7 @@ namespace NPlot
 			}
 		}
 		int numberItemsHorizontally_ = 1;
+
 	}
+
 }

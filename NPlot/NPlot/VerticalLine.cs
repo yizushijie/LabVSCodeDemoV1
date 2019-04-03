@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -120,7 +120,6 @@ namespace NPlot
 		}
 		private bool showInLegend_ = false;
 
-
 		/// <summary>
 		/// Returns an x-axis that is suitable for drawing this plot.
 		/// </summary>
@@ -151,6 +150,7 @@ namespace NPlot
 		/// <param name="onlyInRegion">If true, data will be written only if the line is in the specified region.</param>
 		public void WriteData(System.Text.StringBuilder sb, RectangleD region, bool onlyInRegion)
 		{
+
 			// return if line is not in plot region and 
 			if (value_ > region.X+region.Width || value_ < region.X)
 			{
@@ -165,6 +165,7 @@ namespace NPlot
 			sb.Append( "\r\n" );
 			sb.Append( value_.ToString() );
 			sb.Append( "\r\n" );
+
 		}
 
 
@@ -211,7 +212,6 @@ namespace NPlot
 				value_ = value;
 			}
 		}
-
 
 		/// <summary>
 		/// Pen to use to draw the horizontal line.
@@ -266,5 +266,7 @@ namespace NPlot
 			}
 		}
 		private float scale_ = 1.0f;
+
+
 	}
 }

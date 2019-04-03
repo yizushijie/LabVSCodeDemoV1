@@ -306,6 +306,22 @@ namespace Harry.LabCOMMPort
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		public override COMMSerialPortParam m_COMMSerialPortParam
+		{
+			get
+			{
+				return base.m_COMMSerialPortParam;
+			}
+
+			set
+			{
+				base.m_COMMSerialPortParam = value;
+			}
+		}
+
 		#endregion
 
 		#endregion
@@ -439,11 +455,24 @@ namespace Harry.LabCOMMPort
 			GC.SuppressFinalize(this);
 		}
 
+		// 添加此代码以正确实现可处置模式。
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override void Dispose()
+		{
+			// 请勿更改此代码。将清理代码放入以上 Dispose(bool disposing) 中。
+			base.Dispose(true);
+			// TODO: 如果在以上内容中替代了终结器，则取消注释以下行。
+			GC.SuppressFinalize(this);
+		}
+
 		#endregion
 
 		#region 函数定义
 
-		#region 自定义函数
+		#region 私有函数
 
 		/// <summary>
 		/// 获取校验位信息
@@ -549,76 +578,7 @@ namespace Harry.LabCOMMPort
 			return _return;
 		}
 
-		/// <summary>
-		/// 获取设备的端口
-		/// </summary>
-		public void GetPortNames(ComboBox cbb,RichTextBox msg=null)
-		{
-			//---获取当前设备的端口
-			string[] argNames = SerialPort.GetPortNames();
-			if ((argNames==null)||(argNames.Length==0))
-			{
-				this.commIndexMemu = new List<byte>();
-				if (cbb != null)
-				{
-					//---异步调用
-					if (cbb.InvokeRequired)
-					{
-						cbb.Invoke((EventHandler)
-								 (delegate
-								 {
-									 cbb.Items.Clear();
-									 cbb.SelectedIndex = -1;
-								 }));
-					}
-					else
-					{
-						cbb.Items.Clear();
-						cbb.SelectedIndex = -1;
-					}
-				}
-				if (msg != null)
-				{
-					RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "获取设备失败，请插入设备！\r\n", Color.Red, false);
-				}
-			}
-			else
-			{
-				this.commIndexMemu = this.GetPortIndex(argNames);
-				if (cbb != null)
-				{
-					//---异步调用
-					if (cbb.InvokeRequired)
-					{
-						cbb.Invoke((EventHandler)
-								 (delegate
-								 {
-									 cbb.Items.Clear();
-									 for (int i = 0; i < this.commIndexMemu.Count; i++)
-									 {
-										 cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
-									 }
-									 cbb.SelectedIndex = 0;
-								 }));
-					}
-					else
-					{
-						cbb.Items.Clear();
-						for (int i = 0; i < this.commIndexMemu.Count; i++)
-						{
-							cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
-						}
-						cbb.SelectedIndex = 0;
-					}
-				}
-				if (msg != null)
-				{
-					RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "获取设备成功，请选择设备！\r\n", Color.Black, false);
-				}
-			}
-			
-		}
-
+		
 		#endregion
 
 		#region 重载函数
@@ -661,6 +621,7 @@ namespace Harry.LabCOMMPort
 			this.commSerialPort.PortName = argName;
 			//---端口名称
 			this.m_COMMName = argName;
+			this.m_COMMSerialPortParam.name = this.m_COMMName;
 			//---获取端口序号
 			this.m_COMMIndex = Convert.ToInt16(this.m_COMMName.Replace("COM", ""), 10);
 
@@ -686,7 +647,8 @@ namespace Harry.LabCOMMPort
 			}
 			this.commSerialPort.PortName = argName;
 			this.commSerialPort.BaudRate = bandRate;
-
+			this.m_COMMSerialPortParam.name = this.m_COMMName;
+			this.m_COMMSerialPortParam.baudRate = bandRate.ToString();
 			//---端口名称
 			this.m_COMMName = argName;
 			//---获取端口序号
@@ -712,11 +674,16 @@ namespace Harry.LabCOMMPort
 			{
 				this.commSerialPort.Close();
 			}
+
+			//
 			this.commSerialPort.PortName = commSerialPortParam.name;
 			this.commSerialPort.BaudRate = int.Parse(commSerialPortParam.baudRate);
 			this.commSerialPort.Parity = this.GetParityBits(commSerialPortParam.parity);
 			this.commSerialPort.StopBits = this.GetStopBits(commSerialPortParam.stopBits);
 			this.commSerialPort.DataBits = int.Parse(commSerialPortParam.dataBits);
+
+			//
+			this.m_COMMSerialPortParam = commSerialPortParam;
 
 			//---端口名称
 			this.m_COMMName = commSerialPortParam.name;
@@ -724,6 +691,77 @@ namespace Harry.LabCOMMPort
 			this.m_COMMIndex = Convert.ToInt16(this.m_COMMName.Replace("COM", ""), 10);
 
 			return 0;
+		}
+		/// <summary>
+		/// 获取设备的端口
+		/// </summary>
+		public override void GetPortNames(ComboBox cbb, RichTextBox msg = null)
+		{
+			//---获取当前设备的端口
+			string[] argNames = SerialPort.GetPortNames();
+			if ((argNames == null) || (argNames.Length == 0))
+			{
+				this.commIndexMemu = new List<byte>();
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.BeginInvoke((EventHandler)
+								 //cbb.Invoke((EventHandler)
+								 (delegate
+								 {
+									 cbb.Items.Clear();
+									 cbb.SelectedIndex = -1;
+								 }));
+					}
+					else
+					{
+						cbb.Items.Clear();
+						cbb.SelectedIndex = -1;
+					}
+				}
+				if (msg != null)
+				{
+					RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "获取设备失败，请插入设备！\r\n", Color.Red, false);
+				}
+			}
+			else
+			{
+				this.commIndexMemu = this.GetPortIndex(argNames);
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.BeginInvoke((EventHandler)
+								 //cbb.Invoke((EventHandler)
+								 (delegate
+								 {
+									 cbb.Items.Clear();
+									 for (int i = 0; i < this.commIndexMemu.Count; i++)
+									 {
+										 cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
+									 }
+									 cbb.SelectedIndex = 0;
+								 }));
+					}
+					else
+					{
+						cbb.Items.Clear();
+						for (int i = 0; i < this.commIndexMemu.Count; i++)
+						{
+							cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
+						}
+						cbb.SelectedIndex = 0;
+					}
+				}
+				if (msg != null)
+				{
+					RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "获取设备成功，请选择设备！\r\n", Color.Black, false);
+				}
+			}
+
 		}
 
 		/// <summary>
@@ -798,7 +836,133 @@ namespace Harry.LabCOMMPort
 		/// <returns></returns>
 		public override int AddDevice(ComboBox cbb, RichTextBox msg = null)
 		{
-			return 1;
+			int _return = 0;
+			//---获取当前设备存在的通信端口
+			List<byte> addNames = this.GetPortIndex( SerialPort.GetPortNames());
+			//---检查
+			if ((addNames == null) || (addNames.Count == 0))
+			{
+				this.commIndexMemu = new List<byte>();
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.BeginInvoke((EventHandler)
+								 //cbb.Invoke((EventHandler)
+								 (delegate
+								 {
+									 cbb.Items.Clear();
+									 cbb.SelectedIndex = -1;
+								 }));
+					}
+					else
+					{
+						cbb.Items.Clear();
+						cbb.SelectedIndex = -1;
+					}
+				}
+				if (msg != null)
+				{
+					RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "获取设备失败，请插入设备！\r\n", Color.Red, false);
+				}
+			}
+			else
+			{
+				int portIndex = -1;
+				int i = 0;
+				
+				//---遍历是哪个设备插入
+				for ( i = 0; i < addNames.Count; i++)
+				{
+					if ((this.commIndexMemu!=null)&&(this.commIndexMemu.Count>0))
+					{
+						//---查询是哪个设备插入
+						portIndex = this.commIndexMemu.IndexOf(addNames[i]);
+					}
+					//---UI显示插入的设备
+					if (portIndex<0)
+					{
+						if (msg != null)
+						{
+							RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "COM" + addNames[i].ToString() + "设备插入！\r\n", Color.Black, false);
+						}
+					}
+				}
+
+				portIndex = -1;
+
+				List<byte> addDevice = new List<byte>();
+
+ 				if (cbb!=null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.Invoke((EventHandler)
+									 (delegate
+									 {
+										 portIndex = cbb.SelectedIndex;
+									 }));
+					}
+					else
+					{
+						portIndex = cbb.SelectedIndex;
+					}
+				}
+
+				if ((this.commIndexMemu.Count!=0)&&(portIndex>=0))
+				{
+					portIndex = this.commIndexMemu[portIndex];
+				}
+
+
+
+				this.commIndexMemu = new List<byte>();
+				this.commIndexMemu.AddRange(addNames.ToArray());
+
+				if (this.commIndexMemu.Count != 0)
+				{
+					if (portIndex<0)
+					{
+						portIndex = 0;
+					}
+					else
+					{
+						portIndex = this.commIndexMemu.IndexOf((byte)portIndex);
+					}
+					
+				}
+				
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.BeginInvoke((EventHandler)
+								 //cbb.Invoke((EventHandler)
+								 (delegate
+								 {
+									 cbb.Items.Clear();
+									 for (i = 0; i < this.commIndexMemu.Count; i++)
+									 {
+										 cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
+									 }
+									 cbb.SelectedIndex = portIndex;
+								 }));
+					}
+					else
+					{
+						cbb.Items.Clear();
+						for (i = 0; i < this.commIndexMemu.Count; i++)
+						{
+							cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
+						}
+						cbb.SelectedIndex = portIndex;
+					}
+				}
+			}
+			return _return;
 		}
 
 		/// <summary>
@@ -820,8 +984,144 @@ namespace Harry.LabCOMMPort
 		{
 			int _return = 0;
 			//---获取当前设备存在的通信端口
-			string[] argNames = SerialPort.GetPortNames();
-			
+			List<byte> addNames = this.GetPortIndex(SerialPort.GetPortNames());
+			if ((addNames == null) || (addNames.Count == 0))
+			{
+				this.commIndexMemu = new List<byte>();
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.BeginInvoke((EventHandler)
+								 //cbb.Invoke((EventHandler)
+								 (delegate
+								 {
+									 cbb.Items.Clear();
+									 cbb.SelectedIndex = -1;
+								 }));
+					}
+					else
+					{
+						cbb.Items.Clear();
+						cbb.SelectedIndex = -1;
+					}
+				}
+				if (msg != null)
+				{
+					RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "获取设备失败，请插入设备！\r\n", Color.Red, false);
+				}
+			}
+			else
+			{
+				int portIndex = -1;
+				int i = 0;
+
+				//---遍历是哪个设备插入
+				for (i = 0; i < this.commIndexMemu.Count; i++)
+				{
+					//---查询是哪个设备插入
+					portIndex = addNames.IndexOf(this.commIndexMemu[i]);
+					//---UI显示插入的设备
+					if (portIndex < 0)
+					{
+						if (msg != null)
+						{
+							RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "COM" + this.commIndexMemu[i].ToString() + "设备移除！\r\n", Color.Red, false);
+						}
+					}
+				}
+
+				portIndex = -1;
+
+				List<byte> addDevice = new List<byte>();
+
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.Invoke((EventHandler)
+									 (delegate
+									 {
+										 portIndex = cbb.SelectedIndex;
+									 }));
+					}
+					else
+					{
+						portIndex = cbb.SelectedIndex;
+					}
+				}
+
+				if ((this.commIndexMemu.Count != 0)&&(portIndex>=0))
+				{
+					portIndex = this.commIndexMemu[portIndex];
+				}
+
+
+
+				this.commIndexMemu = new List<byte>();
+				this.commIndexMemu.AddRange(addNames.ToArray());
+
+				if (this.commIndexMemu.Count != 0)
+				{
+					if (portIndex < 0)
+					{
+						portIndex = 0;
+					}
+					else
+					{
+						portIndex = this.commIndexMemu.IndexOf((byte)portIndex);
+						if (portIndex<0)
+						{
+							portIndex = 0;
+						}
+					}
+
+				}
+
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.BeginInvoke((EventHandler)
+						//cbb.Invoke((EventHandler)
+								 (delegate
+								 {
+									 cbb.Items.Clear();
+									 for (i = 0; i < this.commIndexMemu.Count; i++)
+									 {
+										 cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
+									 }
+									 cbb.SelectedIndex = portIndex;
+								 }));
+					}
+					else
+					{
+						cbb.Items.Clear();
+						for (i = 0; i < this.commIndexMemu.Count; i++)
+						{
+							cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
+						}
+						cbb.SelectedIndex = portIndex;
+					}
+				}
+			}
+			//---判断设备是否为空
+			if (this.commIndexMemu.Count==0)
+			{
+				//---释放端口
+				if ((this.commSerialPort != null) && (this.m_COMMIndex != 0))
+				{
+					//---端口状态，空闲
+					this.m_COMMSTATE = USE_STATE.IDLE;
+					//---关闭端口
+					this.commSerialPort.Close();
+					this.m_COMMName = null;
+					this.m_COMMIndex = 0;
+				}
+			}
 			return _return;
 		}
 
@@ -843,9 +1143,114 @@ namespace Harry.LabCOMMPort
 		public override int RefreshDevice(ComboBox cbb, RichTextBox msg = null)
 		{
 			int _return = 0;
+			int i = 0;
 			//---获取当前设备存在的通信端口
-			string[] argNames = SerialPort.GetPortNames();
+			List<byte> addNames = this.GetPortIndex(SerialPort.GetPortNames());
+			//---判断端口
+			if ((addNames == null) || (addNames.Count == 0))
+			{
+				this.commIndexMemu = new List<byte>();
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.BeginInvoke((EventHandler)
+						//cbb.Invoke((EventHandler)
+								(delegate
+								 {
+									 cbb.Items.Clear();
+									 cbb.SelectedIndex = -1;
+								 }));
+					}
+					else
+					{
+						cbb.Items.Clear();
+						cbb.SelectedIndex = -1;
+					}
+				}
+				if (msg != null)
+				{
+					RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "获取设备失败，请插入设备！\r\n", Color.Red, false);
+				}
+			}
+			else
+			{
+				int portIndex = -1;
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.Invoke((EventHandler)
+									 (delegate
+									 {
+										 portIndex = cbb.SelectedIndex;
+									 }));
+					}
+					else
+					{
+						portIndex = cbb.SelectedIndex;
+					}
+				}
 
+				if ((this.commIndexMemu.Count != 0) && (portIndex >= 0))
+				{
+					portIndex = this.commIndexMemu[portIndex];
+				}
+
+				this.commIndexMemu = new List<byte>();
+				this.commIndexMemu.AddRange(addNames.ToArray());
+
+				if (this.commIndexMemu.Count != 0)
+				{
+					if (portIndex < 0)
+					{
+						portIndex = 0;
+					}
+					else
+					{
+						portIndex = this.commIndexMemu.IndexOf((byte)portIndex);
+						if (portIndex < 0)
+						{
+							portIndex = 0;
+						}
+					}
+
+				}
+
+				if (cbb != null)
+				{
+					//---异步调用
+					if (cbb.InvokeRequired)
+					{
+						cbb.BeginInvoke((EventHandler)
+						//cbb.Invoke((EventHandler)
+								 (delegate
+								 {
+									 cbb.Items.Clear();
+									 for (i = 0; i < this.commIndexMemu.Count; i++)
+									 {
+										 cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
+									 }
+									 cbb.SelectedIndex = portIndex;
+								 }));
+					}
+					else
+					{
+						cbb.Items.Clear();
+						for (i = 0; i < this.commIndexMemu.Count; i++)
+						{
+							cbb.Items.Add("COM" + this.commIndexMemu[i].ToString());
+						}
+						cbb.SelectedIndex = portIndex;
+					}
+				}
+				if (msg != null)
+				{
+					RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, "刷新设备成功，请选择设备！\r\n", Color.Black, false);
+				}
+			}
 			return _return;
 		}
 
@@ -857,7 +1262,43 @@ namespace Harry.LabCOMMPort
 		/// <returns></returns>
 		public override int WriteToDevice(byte cmd, RichTextBox msg = null)
 		{
-			return 1;
+			int _return = 0;
+			try
+			{
+				if ((this.commSerialPort != null) && (this.commSerialPort.IsOpen))
+				{
+					//---等待发送完成
+					while (this.commSerialPort.BytesToWrite > 0)
+					{
+						//---响应窗体函数
+						Application.DoEvents();
+					}
+					byte[] tempCmd = new byte[] { cmd };
+					//---发送数据
+					this.commSerialPort.Write(tempCmd, 0, tempCmd.Length);
+					//---发送消息
+					this.m_COMMErrMsg = "数据发送成功\r\n";
+					if (msg != null)
+					{
+						RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, this.m_COMMErrMsg, Color.Black, false);
+					}
+				}
+				else
+				{
+					_return = 1;
+					MessageBoxPlus.Show(this.m_COMMForm, "端口初始化失败!!!", "错误提示");
+				}
+			}
+			catch
+			{
+				_return = 2;
+				this.m_COMMErrMsg = "数据发送出现异常\r\n";
+				if (msg != null)
+				{
+					RichTextBoxPlus.AppendTextInfoTopWithDataTime(msg, this.m_COMMErrMsg, Color.Red, false);
+				}
+			}
+			return _return;
 		}
 
 		/// <summary>
@@ -880,7 +1321,17 @@ namespace Harry.LabCOMMPort
 		/// <returns></returns>
 		public override int WriteToDevice(byte[] cmd, RichTextBox msg = null)
 		{
-			return 1;
+			int _return = 1;
+			if ((this.commSerialPort != null) && (this.commSerialPort.IsOpen))
+			{
+				//---等待发送完成
+				while (this.commSerialPort.BytesToWrite > 0)
+				{
+					//---响应窗体函数
+					Application.DoEvents();
+				}
+			}
+			return _return;
 		}
 
 		/// <summary>
@@ -981,8 +1432,13 @@ namespace Harry.LabCOMMPort
 				//---判断当前端口是否可用
 				if (this.commSerialPort.IsOpen)
 				{
-					//---响应窗体事件
-					Application.DoEvents();
+					//---等待端口事件处理完成
+					while (!((this.m_COMMSTATE == USE_STATE.IDLE) || (this.m_COMMSTATE == USE_STATE.ERROR)))
+					{
+						Application.DoEvents();
+					}
+					//---端口状态，空闲
+					this.m_COMMSTATE = USE_STATE.IDLE;
 					//---关闭端口
 					this.commSerialPort.Close();
 				}
@@ -992,20 +1448,57 @@ namespace Harry.LabCOMMPort
 					//---获取端口名称
 					if (this.commSerialPort.PortName != this.m_COMMName)
 					{
-						this.commSerialPort.PortName = m_COMMName;
+						this.commSerialPort.PortName = this.m_COMMName;
+						
 					}
 
+					//---查空操作
+					if (this.m_COMMSerialPortParam == null)
+					{
+						this.m_COMMSerialPortParam = new COMMSerialPortParam();
+					}
+					//---更新端口名称
+					this.m_COMMSerialPortParam.name = this.m_COMMName;
+
+					//---波特率
+					if (this.commSerialPort.BaudRate != int.Parse(this.m_COMMSerialPortParam.baudRate))
+					{
+						this.commSerialPort.BaudRate = int.Parse(this.m_COMMSerialPortParam.baudRate);
+					}
+
+					//---校验位
+					if (this.commSerialPort.Parity != this.GetParityBits(this.m_COMMSerialPortParam.parity))
+					{
+						this.commSerialPort.Parity = this.GetParityBits(this.m_COMMSerialPortParam.parity);
+					}
+
+					//---停止位
+					if (this.commSerialPort.StopBits != this.GetStopBits(this.m_COMMSerialPortParam.stopBits))
+					{
+						this.commSerialPort.StopBits = this.GetStopBits(this.m_COMMSerialPortParam.stopBits);
+					}
+
+					//---数据位
+					if (this.commSerialPort.DataBits != int.Parse(this.m_COMMSerialPortParam.dataBits))
+					{
+						this.commSerialPort.DataBits = int.Parse(this.m_COMMSerialPortParam.dataBits);
+					}
+					
 					//---打开端口
 					this.commSerialPort.Open();
 					//---判断端口打开是否成功
 					if (this.commSerialPort.IsOpen == false)
 					{
+						//---端口状态，错误
+						this.m_COMMSTATE = USE_STATE.ERROR;
 						this.m_COMMErrMsg = "端口：" + this.m_COMMName + "打开失败!\r\n";
 						_return = 1;
 					}
 				}
 				else
 				{
+					//---端口状态，错误
+					this.m_COMMSTATE = USE_STATE.ERROR;
 					this.m_COMMErrMsg = "端口：" + this.m_COMMName + "初始化失败!\r\n";
 					_return = 2;
 				}
@@ -1039,51 +1532,89 @@ namespace Harry.LabCOMMPort
 			int _return = 0;
 			if (((argName != string.Empty) && (argName != null) && (argName != "") && (argName.StartsWith("COM"))))
 			{
-				//---判断串口类是否有效
+				//---判断串口类是否初始化
 				if (this.commSerialPort == null)
 				{
-					this.m_COMMErrMsg = "端口对象参数配置错误！\r\n";
-					_return = 1;
+					this.commSerialPort = new SerialPort();
+				}
+				//---判断当前端口是否可用
+				if (this.commSerialPort.IsOpen)
+				{
+					//---等待端口事件处理完成
+					while (!((this.m_COMMSTATE == USE_STATE.IDLE) || (this.m_COMMSTATE == USE_STATE.ERROR)))
+					{
+						Application.DoEvents();
+					}
+					//---端口状态，空闲
+					this.m_COMMSTATE = USE_STATE.IDLE;
+					//---关闭端口
+					this.commSerialPort.Close();
+				}
+				//---判断端口状态
+				if (this.commSerialPort.IsOpen == false)
+				{
+					//---获取端口名称
+					if (this.commSerialPort.PortName != argName)
+					{
+						this.commSerialPort.PortName = argName;
+					}
+
+					//---使用的设备端口
+					this.m_COMMName = argName;
+
+					//---获取端口序号
+					this.m_COMMIndex = Convert.ToInt16(this.m_COMMName.Replace("COM", ""), 10);
+
+					//---查空操作
+					if (this.m_COMMSerialPortParam==null)
+					{
+						this.m_COMMSerialPortParam = new COMMSerialPortParam();
+					}
+					//---端口参数
+					this.m_COMMSerialPortParam.name = this.m_COMMName;
+
+					//---波特率
+					if (this.commSerialPort.BaudRate != int.Parse(this.m_COMMSerialPortParam.baudRate))
+					{
+						this.commSerialPort.BaudRate = int.Parse(this.m_COMMSerialPortParam.baudRate);
+					}
+
+					//---校验位
+					if (this.commSerialPort.Parity != this.GetParityBits(this.m_COMMSerialPortParam.parity))
+					{
+						this.commSerialPort.Parity = this.GetParityBits(this.m_COMMSerialPortParam.parity);
+					}
+
+					//---停止位
+					if (this.commSerialPort.StopBits != this.GetStopBits(this.m_COMMSerialPortParam.stopBits))
+					{
+						this.commSerialPort.StopBits = this.GetStopBits(this.m_COMMSerialPortParam.stopBits);
+					}
+
+					//---数据位
+					if (this.commSerialPort.DataBits != int.Parse(this.m_COMMSerialPortParam.dataBits))
+					{
+						this.commSerialPort.DataBits = int.Parse(this.m_COMMSerialPortParam.dataBits);
+					}
+
+					//---打开端口
+					this.commSerialPort.Open();
+					//---判断端口打开是否成功
+					if (this.commSerialPort.IsOpen == false)
+					{
+						//---端口状态，错误
+						this.m_COMMSTATE = USE_STATE.ERROR;
+						this.m_COMMErrMsg = "端口：" + this.m_COMMName + "打开失败!\r\n";
+						_return = 2;
+					}
 				}
 				else
 				{
-
-					//---判断当前端口是否可用
-					if (this.commSerialPort.IsOpen)
-					{
-						//---响应窗体事件
-						Application.DoEvents();
-						//---关闭端口
-						this.commSerialPort.Close();
-					}
-					//---判断端口状态
-					if (this.commSerialPort.IsOpen==false)
-					{
-						//---获取端口名称
-						if (this.commSerialPort.PortName != argName)
-						{
-							this.commSerialPort.PortName = argName;
-							this.m_COMMName = argName;
-						}
-						//---获取端口序号
-						this.m_COMMIndex = Convert.ToInt16(this.m_COMMName.Replace("COM", ""), 10);
-
-						//---打开端口
-						this.commSerialPort.Open();
-						//---判断端口打开是否成功
-						if (this.commSerialPort.IsOpen == false)
-						{
-							this.m_COMMErrMsg = "端口：" + this.m_COMMName + "打开失败!\r\n";
-							_return = 2;
-						}
-					}
-					else
-					{
-						this.m_COMMErrMsg = "端口：" + this.m_COMMName + "初始化失败!\r\n";
-						_return = 3;
-					}
+					//---端口状态，错误
+					this.m_COMMSTATE = USE_STATE.ERROR;
+					this.m_COMMErrMsg = "端口：" + this.m_COMMName + "初始化失败!\r\n";
+					_return = 3;
 				}
-				
 				//---消息显示
 				if (_return==0)
 				{
@@ -1116,54 +1647,89 @@ namespace Harry.LabCOMMPort
 			int _return = 0;
 			if (((argName != string.Empty) && (argName != null) && (argName != "") && (argName.StartsWith("COM"))))
 			{
-				//---判断串口类是否有效
 				if (this.commSerialPort == null)
 				{
-					this.m_COMMErrMsg = "端口对象参数配置错误！\r\n";
-					_return = 1;
+					this.commSerialPort = new SerialPort();
+				}
+				//---判断当前端口是否可用
+				if (this.commSerialPort.IsOpen)
+				{
+					//---等待端口事件处理完成
+					while (!((this.m_COMMSTATE == USE_STATE.IDLE) || (this.m_COMMSTATE == USE_STATE.ERROR)))
+					{
+						Application.DoEvents();
+					}
+					//---端口状态，空闲
+					this.m_COMMSTATE = USE_STATE.IDLE;
+					//---关闭端口
+					this.commSerialPort.Close();
+				}
+				//---判断端口状态
+				if (this.commSerialPort.IsOpen == false)
+				{
+					//---获取端口名称
+					if (this.commSerialPort.PortName != argName)
+					{
+						this.commSerialPort.PortName = argName;
+						this.m_COMMName = argName;
+					}
+					//---获取端口序号
+					this.m_COMMIndex = Convert.ToInt16(this.m_COMMName.Replace("COM", ""), 10);
+
+					//---查空操作
+					if (this.m_COMMSerialPortParam == null)
+					{
+						this.m_COMMSerialPortParam = new COMMSerialPortParam();
+					}
+
+					//---端口参数
+					this.m_COMMSerialPortParam.name = this.m_COMMName;
+
+					//---配置波特率
+					this.m_COMMSerialPortParam.baudRate = baudRate.ToString();
+
+					//---波特率
+					if (this.commSerialPort.BaudRate != int.Parse(this.m_COMMSerialPortParam.baudRate))
+					{
+						this.commSerialPort.BaudRate = int.Parse(this.m_COMMSerialPortParam.baudRate);
+					}
+
+					//---校验位
+					if (this.commSerialPort.Parity != this.GetParityBits(this.m_COMMSerialPortParam.parity))
+					{
+						this.commSerialPort.Parity = this.GetParityBits(this.m_COMMSerialPortParam.parity);
+					}
+
+					//---停止位
+					if (this.commSerialPort.StopBits != this.GetStopBits(this.m_COMMSerialPortParam.stopBits))
+					{
+						this.commSerialPort.StopBits = this.GetStopBits(this.m_COMMSerialPortParam.stopBits);
+					}
+
+					//---数据位
+					if (this.commSerialPort.DataBits != int.Parse(this.m_COMMSerialPortParam.dataBits))
+					{
+						this.commSerialPort.DataBits = int.Parse(this.m_COMMSerialPortParam.dataBits);
+					}
+					
+					//---打开端口
+					this.commSerialPort.Open();
+					//---判断端口打开是否成功
+					if (this.commSerialPort.IsOpen == false)
+					{
+						//---端口状态，错误
+						this.m_COMMSTATE = USE_STATE.ERROR;
+						this.m_COMMErrMsg = "端口：" + this.m_COMMName + "打开失败!\r\n";
+						_return = 2;
+					}
 				}
 				else
 				{
-
-					//---判断当前端口是否可用
-					if (this.commSerialPort.IsOpen)
-					{
-						//---响应窗体事件
-						Application.DoEvents();
-						//---关闭端口
-						this.commSerialPort.Close();
-					}
-					//---判断端口状态
-					if (this.commSerialPort.IsOpen == false)
-					{
-						//---获取端口名称
-						if (this.commSerialPort.PortName != argName)
-						{
-							this.commSerialPort.PortName = argName;
-							this.m_COMMName = argName;
-						}
-						//---获取端口序号
-						this.m_COMMIndex = Convert.ToInt16(this.m_COMMName.Replace("COM", ""), 10);
-
-						//---配置波特率
-						this.commSerialPort.BaudRate = baudRate;
-
-						//---打开端口
-						this.commSerialPort.Open();
-						//---判断端口打开是否成功
-						if (this.commSerialPort.IsOpen == false)
-						{
-							this.m_COMMErrMsg = "端口：" + this.m_COMMName + "打开失败!\r\n";
-							_return = 2;
-						}
-					}
-					else
-					{
-						this.m_COMMErrMsg = "端口：" + this.m_COMMName + "初始化失败!\r\n";
-						_return = 3;
-					}
+					//---端口状态，错误状态
+					this.m_COMMSTATE = USE_STATE.ERROR;
+					this.m_COMMErrMsg = "端口：" + this.m_COMMName + "初始化失败!\r\n";
+					_return = 3;
 				}
-
 				//---消息显示
 				if (_return == 0)
 				{
@@ -1206,11 +1772,20 @@ namespace Harry.LabCOMMPort
 				}
 				if (this.commSerialPort.IsOpen)
 				{
-					Application.DoEvents();
+					//---等待端口事件处理完成
+					while (!((this.m_COMMSTATE == USE_STATE.IDLE) || (this.m_COMMSTATE == USE_STATE.ERROR)))
+					{
+						Application.DoEvents();
+					}
+					//---端口状态，空闲
+					this.m_COMMSTATE = USE_STATE.IDLE;
+					//---关闭端口
 					this.commSerialPort.Close();
 				}
 				if (this.commSerialPort.IsOpen)
 				{
+					//---端口状态，错误状态
+					this.m_COMMSTATE = USE_STATE.ERROR;
 					_return = 2;
 					this.m_COMMErrMsg = "端口：" + this.m_COMMName + "初始化失败!\r\n";
 				}
@@ -1225,11 +1800,23 @@ namespace Harry.LabCOMMPort
 					this.m_COMMName = commSerialPortParam.name;
 					//---获取端口序号
 					this.m_COMMIndex = Convert.ToInt16(this.m_COMMName.Replace("COM", ""), 10);
+
+					//---查空操作
+					if (this.m_COMMSerialPortParam == null)
+					{
+						this.m_COMMSerialPortParam = new COMMSerialPortParam();
+					}
+
+					//---更新端口参数
+					this.m_COMMSerialPortParam = commSerialPortParam;
+
 					//---打开端口
 					this.commSerialPort.Open();
 					//---判断端口打开是否成功
 					if (this.commSerialPort.IsOpen == false)
 					{
+						//---端口状态，错误状态
+						this.m_COMMSTATE = USE_STATE.ERROR;
 						this.m_COMMErrMsg = "端口：" + this.m_COMMName + "打开失败!\r\n";
 						_return = 3;
 					}
@@ -1261,7 +1848,16 @@ namespace Harry.LabCOMMPort
 			{
 				if (this.commSerialPort.IsOpen)
 				{
+					//---等待端口事件处理完成
+					while (!((this.m_COMMSTATE == USE_STATE.IDLE)||(this.m_COMMSTATE == USE_STATE.ERROR)))
+					{
+						Application.DoEvents();
+					}
+					//---端口状态，空闲
+					this.m_COMMSTATE = USE_STATE.IDLE;
+					//---关闭端口
 					this.commSerialPort.Close();
+					//---判断端口是否关闭成功
 					if (this.commSerialPort.IsOpen==false)
 					{
 						this.m_COMMErrMsg = "端口关闭成功！\r\n";
@@ -1273,9 +1869,12 @@ namespace Harry.LabCOMMPort
 					}
 					this.m_COMMName = null;
 					this.m_COMMIndex = 0;
+					this.m_COMMSerialPortParam.name = this.m_COMMName;
 				}
 				else
 				{
+					//---释放端口
+					this.commSerialPort.Close();
 					this.m_COMMErrMsg = "端口初始化失败！\r\n";
 					_return = 2;
 				}
@@ -1308,7 +1907,15 @@ namespace Harry.LabCOMMPort
 				{
 					if (this.commSerialPort.IsOpen)
 					{
+						//---等待端口事件处理完成
+						while (!((this.m_COMMSTATE == USE_STATE.IDLE) || (this.m_COMMSTATE == USE_STATE.ERROR)))
+						{
+							Application.DoEvents();
+						}
+						this.m_COMMSTATE = USE_STATE.IDLE;
+						//---关闭端口
 						this.commSerialPort.Close();
+						//---判断端口是否关闭成功
 						if (this.commSerialPort.IsOpen == false)
 						{
 							this.m_COMMErrMsg = "端口关闭成功！\r\n";
@@ -1326,6 +1933,7 @@ namespace Harry.LabCOMMPort
 					}
 					this.m_COMMName = null;
 					this.m_COMMIndex = 0;
+					this.m_COMMSerialPortParam.name = this.m_COMMName;
 				}
 				else
 				{
@@ -1401,11 +2009,27 @@ namespace Harry.LabCOMMPort
 		}
 
 		/// <summary>
+		/// 设备移除事件
+		/// </summary>
+		public override COMMEventHandler m_OnRemoveDeviceEvent
+		{
+			get
+			{
+				return base.m_OnRemoveDeviceEvent;
+			}
+
+			set
+			{
+				base.m_OnRemoveDeviceEvent = value;
+			}
+		}
+
+		/// <summary>
 		/// 通讯数据接收事件
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public override void COMMReceivedEventHandler(object sender, EventArgs e)
+		public override void OnReceivedEventHandler(object sender, EventArgs e)
 		{
 			string str = e.ToString();
 			//---判断事件的类型
@@ -1439,6 +2063,11 @@ namespace Harry.LabCOMMPort
 			else if (e.NewEvent.ClassPath.ClassName == "__InstanceDeletionEvent")
 			{
 				this.RemoveDevice(this.m_COMMComboBox, this.m_COMMRichTextBox);
+
+				if (this.m_OnRemoveDeviceEvent!=null)
+				{
+					this.m_OnRemoveDeviceEvent(sender,e);
+				}
 			}
 		}
 

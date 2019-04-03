@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -87,29 +87,23 @@ namespace NPlot
 
 				// (1) determine the top left hand point of the bar (assuming not centered)
 				PointD p1 = data[i];
-				if (double.IsNaN(p1.X) || double.IsNaN(p1.Y))
-				{
+				if ( double.IsNaN(p1.X) || double.IsNaN(p1.Y) )
 					continue;
-				}
 				
 				// (2) determine the top right hand point of the bar (assuming not centered)
 				PointD p2;
 				if (i+1 != data.Count)
 				{
 					p2 = data[i+1];
-					if (double.IsNaN(p2.X) || double.IsNaN(p2.Y))
-					{
+					if ( double.IsNaN(p2.X) || double.IsNaN(p2.Y) )
 						continue;
-					}
 					p2.Y = p1.Y;
 				}
 				else if (i != 0)
 				{
 					p2 = data[i-1];
-					if (double.IsNaN(p2.X) || double.IsNaN(p2.Y))
-					{
+					if ( double.IsNaN(p2.X) || double.IsNaN(p2.Y) )
 						continue;
-					}
 					double offset = p1.X - p2.X;
 					p2.X = p1.X + offset;
 					p2.Y = p1.Y;
@@ -149,13 +143,14 @@ namespace NPlot
 				}
 
 				// (5) now account for BaseOffset (shift of bar sideways).
-				p1.X += baseOffset_;
-				p2.X += baseOffset_;
+                p1.X += baseOffset_;
+                p2.X += baseOffset_;
 
 				// (6) now get physical coordinates of top two points.
-				PointF xPos1 = xAxis.WorldToPhysical( p1.X, false );
+                PointF xPos1 = xAxis.WorldToPhysical( p1.X, false );
 				PointF yPos1 = yAxis.WorldToPhysical( p1.Y, false );
 				PointF xPos2 = xAxis.WorldToPhysical( p2.X, false );
+				PointF yPos2 = yAxis.WorldToPhysical( p2.Y, false );
 
 				if (isStacked_)
 				{
@@ -179,8 +174,8 @@ namespace NPlot
 				}
 
 				float xoff = (1.0f - baseWidth_)/2.0f*width;
-				RectangleF r = new RectangleF( xPos1.X+xoff, yPos1.Y, width-2*xoff, height );
-				   
+				Rectangle r = new Rectangle( (int)(xPos1.X+xoff), (int)yPos1.Y, (int)(width-2*xoff), (int)height );
+
 				if (this.Filled)
 				{
 					if (r.Height != 0 && r.Width != 0)
@@ -191,6 +186,7 @@ namespace NPlot
 				}
 
 				g.DrawRectangle( Pen, r.X, r.Y, r.Width, r.Height );
+				
 			}
 		}
 
@@ -213,10 +209,10 @@ namespace NPlot
 
 
 		private float baseWidth_ = 1.0f;
-		/// <summary>
-		/// The width of the histogram bar as a proportion of the data spacing 
-		/// (in range 0.0 - 1.0).
-		/// </summary>
+        /// <summary>
+        /// The width of the histogram bar as a proportion of the data spacing 
+        /// (in range 0.0 - 1.0).
+        /// </summary>
 		public float BaseWidth
 		{
 			get
@@ -299,7 +295,8 @@ namespace NPlot
 		/// <returns>A suitable y-axis.</returns>
 		public Axis SuggestYAxis()
 		{
-			if (this.isStacked_)
+
+			if ( this.isStacked_ )
 			{
 				double tmpMax = 0.0f;
 				ArrayList adapterList = new ArrayList();
@@ -436,69 +433,73 @@ namespace NPlot
 		/// <param name="startEnd">A rectangle specifying the bounds of the area in the legend set aside for drawing.</param>
 		public void DrawInLegend( Graphics g, Rectangle startEnd )
 		{
+	
 			if (Filled)
 			{
 				g.FillRectangle( rectangleBrush_.Get(startEnd), startEnd );
 			}
 
 			g.DrawRectangle( Pen, startEnd.X, startEnd.Y, startEnd.Width, startEnd.Height );
+
 		}
 
 
-		/// <summary>
-		/// The pen used to draw the plot
-		/// </summary>
-		public System.Drawing.Pen Pen
-		{
-			get
-			{
-				return pen_;
-			}
-			set
-			{
-				pen_ = value;
-			}
-		}
-		private System.Drawing.Pen pen_ = new Pen(Color.Black);
+        /// <summary>
+        /// The pen used to draw the plot
+        /// </summary>
+        public System.Drawing.Pen Pen
+        {
+            get
+            {
+                return pen_;
+            }
+            set
+            {
+                pen_ = value;
+            }
+        }
+        private System.Drawing.Pen pen_ = new Pen(Color.Black);
 
 
-		/// <summary>
-		/// The color of the pen used to draw lines in this plot.
-		/// </summary>
-		public System.Drawing.Color Color
-		{
-			set
-			{
-				if (pen_ != null)
-				{
-					pen_.Color = value;
-				}
-				else
-				{
-					pen_ = new Pen(value);
-				}
-			}
-			get
-			{
-				return pen_.Color;
-			}
-		}
+        /// <summary>
+        /// The color of the pen used to draw lines in this plot.
+        /// </summary>
+        public System.Drawing.Color Color
+        {
+            set
+            {
+                if (pen_ != null)
+                {
+                    pen_.Color = value;
+                }
+                else
+                {
+                    pen_ = new Pen(value);
+                }
+            }
+            get
+            {
+                return pen_.Color;
+            }
+        }
 
 
-		/// <summary>
-		/// Horizontal position of histogram columns is offset by this much (in world coordinates).
-		/// </summary>
-		public double BaseOffset
-		{
-			set
-			{
-				baseOffset_ = value;
-			}
-			get
-			{
-				return baseOffset_;
-			}
-		}
-		private double baseOffset_;
-	}
+        /// <summary>
+        /// Horizontal position of histogram columns is offset by this much (in world coordinates).
+        /// </summary>
+        public double BaseOffset
+        {
+            set
+            {
+                baseOffset_ = value;
+            }
+            get
+            {
+                return baseOffset_;
+            }
+        }
+        private double baseOffset_;
+
+
+    }
 }

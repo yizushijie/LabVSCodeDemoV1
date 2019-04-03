@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -60,7 +60,7 @@ namespace NPlot
 		/// <param name="xp">the x-axis to add the plot against.</param>
 		/// <param name="yp">the y-axis to add the plot against.</param>
 		/// <param name="zOrder">The z-ordering when drawing (objects with lower numbers are drawn first)</param>
-		void Add( IDrawable p, XAxisPosition xp, YAxisPosition yp, int zOrder );
+		void Add( IDrawable p, NPlot.PlotSurface2D.XAxisPosition xp, NPlot.PlotSurface2D.YAxisPosition yp, int zOrder );
 
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace NPlot
 		/// <param name="p">the IDrawable object to add to the plot surface</param>
 		/// <param name="xax">the x-axis to add the plot against.</param>
 		/// <param name="yax">the y-axis to add the plot against.</param>
-		void Add(IDrawable p, XAxisPosition xax, YAxisPosition yax);
+		void Add(IDrawable p, NPlot.PlotSurface2D.XAxisPosition xax, NPlot.PlotSurface2D.YAxisPosition yax);
 		
 		
 		/// <summary>
@@ -102,7 +102,7 @@ namespace NPlot
 		/// The distance in pixels to leave between of the edge of the bounding rectangle
 		/// supplied to the Draw method, and the markings that make up the plot.
 		/// </summary>
-		int SurfacePadding { get; set; }
+		int Padding { get; set; }
 		
 
 		/// <summary>
@@ -231,5 +231,6 @@ namespace NPlot
 		/// <param name="p"></param>
 		void UpdateAxes( IPlot p );
 */
+
 	}
 }

@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -101,7 +101,6 @@ namespace NPlot
 		}
 		private long startTradingTime_;
 
-
 		/// <summary>
 		/// Optional time at which trading ends.
 		/// All data points later than that (same day) will be collapsed.
@@ -142,7 +141,6 @@ namespace NPlot
 		{
 			Init();
 		}
-
 
 		/// <summary>
 		/// Copy Constructor
@@ -225,8 +223,10 @@ namespace NPlot
 			PointF physicalMax,
 			bool clip)
 		{
+
 			// (1) account for reversed axis. Could be tricky and move
 			// this out, but would be a little messy.
+
 			PointF _physicalMin;
 			PointF _physicalMax;
 
@@ -243,6 +243,7 @@ namespace NPlot
 
 
 			// (2) if want clipped value, return extrema if outside range.
+
 			if (clip)
 			{
 				if (WorldMin < WorldMax)
@@ -269,38 +270,33 @@ namespace NPlot
 				}
 			}
 
+
 			// (3) we are inside range or don't want to clip.
+
 			coord = SparseWorldRemap(coord);
 			double range = virtualWorldMax_ - virtualWorldMin_;
 			double prop = (double)((coord - virtualWorldMin_) / range);
 			//double range = WorldMax - WorldMin;
 			//double prop = (double)((coord - WorldMin) / range);
 			//if (range1 != range)
-			//	  range1 = range;
+			//    range1 = range;
 
 			// Force clipping at bounding box largeClip times that of real bounding box
 			// anyway. This is effectively at infinity.
-			double largeClip = 100.0;	// don't use 'const double' - Mono bug #475578
+			const double largeClip = 100.0;
 			if (prop > largeClip && clip)
-			{
 				prop = largeClip;
-			}
 
 			if (prop < -largeClip && clip)
-			{
 				prop = -largeClip;
-			}
 
 			if (range == 0)
 			{
 				if (coord >= virtualWorldMin_)
-				{
 					prop = largeClip;
-				}
-				else
-				{
+
+				if (coord < virtualWorldMin_)
 					prop = -largeClip;
-				}		
 			}
 
 			// calculate the physical coordinate.
@@ -396,20 +392,13 @@ namespace NPlot
 				days_in_last_week = 5;
 				ticks_in_last_day = 0;
 			}
-			if (ticks_in_last_day < startTradingTime_)
-			{
-				ticks_in_last_day = startTradingTime_;
-			}
-			else if (ticks_in_last_day > endTradingTime_)
-			{
-				ticks_in_last_day = endTradingTime_;
-			}
+			if (ticks_in_last_day < startTradingTime_) ticks_in_last_day = startTradingTime_;
+			else if (ticks_in_last_day > endTradingTime_) ticks_in_last_day = endTradingTime_;
 			ticks_in_last_day -= startTradingTime_;
 
 			long whole_working_days = (full_weeks * 5 + days_in_last_week);
 			long working_ticks = whole_working_days * tradingTimeSpan_;
 			long new_ticks = working_ticks + ticks_in_last_day;
-
 			return (double)new_ticks;
 		}
 
@@ -429,14 +418,13 @@ namespace NPlot
 			long week_part = ticks % 5;
 
 			long day_ticks = (full_weeks * 7 + week_part) * TimeSpan.TicksPerDay;
-
 			return (double)(day_ticks + ticks_in_last_day + startTradingTime_);
 		}
 
 
 		/// <summary>
 		/// Adds a delta amount to the given world coordinate in such a way that
-		/// all "sparse gaps" are skipped.	In other words, the returned value is
+		/// all "sparse gaps" are skipped.  In other words, the returned value is
 		/// in delta distance from the given in the "virtual" world.
 		/// </summary>
 		/// <param name="coord">world coordinate to shift.</param>
@@ -472,14 +460,10 @@ namespace NPlot
 			long ticks_in_last_day = ticks % TimeSpan.TicksPerDay;
 			long days_in_last_week = whole_days % 7;
 			if (days_in_last_week >= 5)
-			{
 				return false;
-			}
 
-			if ((ticks_in_last_day < startTradingTime_) || (ticks_in_last_day >= endTradingTime_))
-			{
-				return false;
-			}
+			if (ticks_in_last_day < startTradingTime_) return false;
+			if (ticks_in_last_day >= endTradingTime_) return false;
 
 			return true;
 		}
@@ -495,7 +479,6 @@ namespace NPlot
 			long ticks = (long)coord;
 			long whole_days = ticks / TimeSpan.TicksPerDay;
 			long days_in_last_week = whole_days % 7;
-
 			return (days_in_last_week < 5);
 		}
 
@@ -542,9 +525,7 @@ namespace NPlot
 					foreach (object tick in largeTickPositions_FirstPass)
 					{
 						if (OnTradingDays((double)tick))
-						{
 							largeTickPositions.Add(tick);
-						}
 					}
 				}
 			}
@@ -571,26 +552,16 @@ namespace NPlot
 
 					int secondsSkip;
 
-					if (timeLength < new TimeSpan(0, 0, 0, 10, 0))
-					{
+					if (timeLength < new TimeSpan( 0,0,0,10,0 ) )
 						secondsSkip = 1;
-					}
-					else if (timeLength < new TimeSpan(0, 0, 0, 20, 0))
-					{
+					else if ( timeLength < new TimeSpan(0,0,0,20,0) )
 						secondsSkip = 2;
-					}
-					else if (timeLength < new TimeSpan(0, 0, 0, 50, 0))
-					{
+					else if ( timeLength < new TimeSpan(0,0,0,50,0) )
 						secondsSkip = 5;
-					}
-					else if (timeLength < new TimeSpan(0, 0, 2, 30, 0))
-					{
+					else if ( timeLength < new TimeSpan(0,0,2,30,0) )
 						secondsSkip = 15;
-					}
 					else
-					{
 						secondsSkip = 30;
-					}
 
 					int second = worldMinDate.Second;
 					second -= second % secondsSkip;
@@ -605,33 +576,25 @@ namespace NPlot
 
 					skip = secondsSkip * TimeSpan.TicksPerSecond;
 				}
-				// Less than 2 hours, then large ticks on minute spacings.
+
+					// Less than 2 hours, then large ticks on minute spacings.
+
 				else if ( timeLength < new TimeSpan(0,2,0,0,0) )
 				{
 					this.LargeTickLabelType_ = LargeTickLabelType.hourMinute;
 
 					int minuteSkip;
 
-					if (timeLength < new TimeSpan(0, 0, 10, 0, 0))
-					{
+					if ( timeLength < new TimeSpan(0,0,10,0,0) )
 						minuteSkip = 1;
-					}
-					else if (timeLength < new TimeSpan(0, 0, 20, 0, 0))
-					{
+					else if ( timeLength < new TimeSpan(0,0,20,0,0) )
 						minuteSkip = 2;
-					}
-					else if (timeLength < new TimeSpan(0, 0, 50, 0, 0))
-					{
+					else if ( timeLength < new TimeSpan(0,0,50,0,0) )
 						minuteSkip = 5;
-					}
-					else if (timeLength < new TimeSpan(0, 2, 30, 0, 0))
-					{
+					else if ( timeLength < new TimeSpan(0,2,30,0,0) )
 						minuteSkip = 15;
-					}
 					else //( timeLength < new TimeSpan( 0,5,0,0,0) )
-					{
 						minuteSkip = 30;
-					}
 
 					int minute = worldMinDate.Minute;
 					minute -= minute % minuteSkip;
@@ -645,24 +608,21 @@ namespace NPlot
 
 					skip = minuteSkip * TimeSpan.TicksPerMinute;
 				}
-				// Else large ticks on hour spacings.
+
+					// Else large ticks on hour spacings.
+
 				else
 				{
 					this.LargeTickLabelType_ = LargeTickLabelType.hourMinute;
 
 					int hourSkip;
 					if (timeLength < new TimeSpan(0, 10, 0, 0, 0))
-					{
 						hourSkip = 1;
-					}
 					else if (timeLength < new TimeSpan(0, 20, 0, 0, 0))
-					{
 						hourSkip = 2;
-					}
 					else
-					{
 						hourSkip = 6;
-					}
+
 
 					int hour = worldMinDate.Hour;
 					hour -= hour % hourSkip;
@@ -676,7 +636,9 @@ namespace NPlot
 					skip = hourSkip * TimeSpan.TicksPerHour;
 				}
 
+
 				// place ticks
+
 				while (currentTickDate < worldMaxDate)
 				{
 					double world = (double)currentTickDate.Ticks;

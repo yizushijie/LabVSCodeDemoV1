@@ -36,7 +36,8 @@ namespace Harry.LabUserControlPlus
             //---异步调用
             if (rtBox.InvokeRequired)
             {
-                rtBox.Invoke((EventHandler)
+				rtBox.BeginInvoke((EventHandler)
+			   //rtBox.Invoke((EventHandler)
                          (delegate
                          {
                              rtBox.SelectionStart = rtBox.TextLength;
@@ -82,8 +83,9 @@ namespace Harry.LabUserControlPlus
             }
             if (rtBox.InvokeRequired)
             {
-                rtBox.Invoke((EventHandler)
-                         (delegate
+				rtBox.BeginInvoke((EventHandler)
+						 //rtBox.Invoke((EventHandler)
+						 (delegate
                          {
                              rtBox.SelectionStart = rtBox.TextLength;
                              rtBox.SelectionLength = 0;
@@ -137,8 +139,9 @@ namespace Harry.LabUserControlPlus
             }
             if (rtBox.InvokeRequired)
             {
-                rtBox.Invoke((EventHandler)
-                         (delegate
+				rtBox.BeginInvoke((EventHandler)
+						 //rtBox.Invoke((EventHandler)
+						 (delegate
                          {
                              temp = rtBox.Text;
                              rtBox.Clear();
@@ -204,8 +207,9 @@ namespace Harry.LabUserControlPlus
             }
             if (rtBox.InvokeRequired)
             {
-                rtBox.Invoke((EventHandler)
-                         (delegate
+				rtBox.BeginInvoke((EventHandler)
+						 //rtBox.Invoke((EventHandler)
+						 (delegate
                          {
                              rtBox.SelectionStart = rtBox.TextLength;
                              rtBox.SelectionLength = 0;
@@ -260,8 +264,9 @@ namespace Harry.LabUserControlPlus
             }
             if (rtBox.InvokeRequired)
             {
-                rtBox.Invoke((EventHandler)
-                         (delegate
+				rtBox.BeginInvoke((EventHandler)
+						 //rtBox.Invoke((EventHandler)
+						 (delegate
                          {
                              rtBox.SelectionStart = rtBox.TextLength;
                              rtBox.SelectionLength = 0;
@@ -314,8 +319,9 @@ namespace Harry.LabUserControlPlus
 
             if (rtBox.InvokeRequired)
             {
-                rtBox.Invoke((EventHandler)
-                         (delegate
+				rtBox.BeginInvoke((EventHandler)
+						 //rtBox.Invoke((EventHandler)
+						 (delegate
                          {
                              temp = rtBox.Text;
                              rtBox.Clear();
@@ -364,8 +370,9 @@ namespace Harry.LabUserControlPlus
 			//---异步调用
 			if (rtBox.InvokeRequired)
             {
-                rtBox.Invoke((EventHandler)
-                         (delegate
+				rtBox.BeginInvoke((EventHandler)
+						 //rtBox.Invoke((EventHandler)
+						 (delegate
                          {
                              temp = rtBox.Text;
                              rtBox.Clear();
@@ -407,8 +414,9 @@ namespace Harry.LabUserControlPlus
 			//---异步调用
 			if (rtBox.InvokeRequired)
             {
-                rtBox.Invoke((EventHandler)
-                         (delegate
+				rtBox.BeginInvoke((EventHandler)
+						 //rtBox.Invoke((EventHandler)
+						 (delegate
                          {
                              rtBox.Clear();
                          }));

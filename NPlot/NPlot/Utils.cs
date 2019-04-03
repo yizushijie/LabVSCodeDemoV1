@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -37,7 +37,6 @@ using System.Collections;
 
 namespace NPlot
 {
-
 	/// <summary>
 	/// General purpose utility functions used internally.
 	/// </summary>
@@ -246,6 +245,7 @@ namespace NPlot
 			}
 
 			return true;
+
 		}
 
 
@@ -292,11 +292,12 @@ namespace NPlot
 			}
 
 			return true;
+
 		}
 
 
 		/// <summary>
-		/// Returns unit vector along the line	a->b.
+		/// Returns unit vector along the line  a->b.
 		/// </summary>
 		/// <param name="a">line start point.</param>
 		/// <param name="b">line end point.</param>
@@ -311,7 +312,6 @@ namespace NPlot
 					(float)((1.0f/dirNorm)*dir.X), 
 					(float)((1.0f/dirNorm)*dir.Y) ); // normalised axis direction vector
 			}
-
 			return dir;
 		}
 
@@ -328,7 +328,6 @@ namespace NPlot
 			double sz = initial.Size;
 			sz = sz * scale ;
 			string nm = initial.Name;
-
 			return new Font( nm, (float)sz, fs, gu );
 		}
 
@@ -353,5 +352,8 @@ namespace NPlot
 
 			return final;
 		}
+
 	}
+
+
 }

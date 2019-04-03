@@ -29,88 +29,88 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(COMMBasePortPlus));
-			this.groupBox_COMMPortName = new System.Windows.Forms.GroupBox();
+			this.groupBox_COMMName = new System.Windows.Forms.GroupBox();
 			this.panel_COMMPortName = new System.Windows.Forms.Panel();
-			this.pictureBox_COMMPortState = new System.Windows.Forms.PictureBox();
-			this.button_COMMPortInit = new System.Windows.Forms.Button();
-			this.label_COMMPortName = new System.Windows.Forms.Label();
-			this.comboBox_COMMPortName = new System.Windows.Forms.ComboBox();
-			this.panel_COMMPort = new System.Windows.Forms.Panel();
-			this.groupBox_COMMPortName.SuspendLayout();
+			this.pictureBox_COMMState = new System.Windows.Forms.PictureBox();
+			this.button_COMMInit = new System.Windows.Forms.Button();
+			this.label_COMMName = new System.Windows.Forms.Label();
+			this.comboBox_COMMName = new System.Windows.Forms.ComboBox();
+			this.panel_COMM = new System.Windows.Forms.Panel();
+			this.groupBox_COMMName.SuspendLayout();
 			this.panel_COMMPortName.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMPortState)).BeginInit();
-			this.panel_COMMPort.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).BeginInit();
+			this.panel_COMM.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// groupBox_COMMPortName
+			// groupBox_COMMName
 			// 
-			this.groupBox_COMMPortName.Controls.Add(this.panel_COMMPortName);
-			resources.ApplyResources(this.groupBox_COMMPortName, "groupBox_COMMPortName");
-			this.groupBox_COMMPortName.Name = "groupBox_COMMPortName";
-			this.groupBox_COMMPortName.TabStop = false;
+			this.groupBox_COMMName.Controls.Add(this.panel_COMMPortName);
+			resources.ApplyResources(this.groupBox_COMMName, "groupBox_COMMName");
+			this.groupBox_COMMName.Name = "groupBox_COMMName";
+			this.groupBox_COMMName.TabStop = false;
 			// 
 			// panel_COMMPortName
 			// 
-			this.panel_COMMPortName.Controls.Add(this.pictureBox_COMMPortState);
-			this.panel_COMMPortName.Controls.Add(this.button_COMMPortInit);
-			this.panel_COMMPortName.Controls.Add(this.label_COMMPortName);
-			this.panel_COMMPortName.Controls.Add(this.comboBox_COMMPortName);
+			this.panel_COMMPortName.Controls.Add(this.pictureBox_COMMState);
+			this.panel_COMMPortName.Controls.Add(this.button_COMMInit);
+			this.panel_COMMPortName.Controls.Add(this.label_COMMName);
+			this.panel_COMMPortName.Controls.Add(this.comboBox_COMMName);
 			resources.ApplyResources(this.panel_COMMPortName, "panel_COMMPortName");
 			this.panel_COMMPortName.Name = "panel_COMMPortName";
 			// 
-			// pictureBox_COMMPortState
+			// pictureBox_COMMState
 			// 
-			resources.ApplyResources(this.pictureBox_COMMPortState, "pictureBox_COMMPortState");
-			this.pictureBox_COMMPortState.Name = "pictureBox_COMMPortState";
-			this.pictureBox_COMMPortState.TabStop = false;
-			this.pictureBox_COMMPortState.Tag = "1";
+			resources.ApplyResources(this.pictureBox_COMMState, "pictureBox_COMMState");
+			this.pictureBox_COMMState.Name = "pictureBox_COMMState";
+			this.pictureBox_COMMState.TabStop = false;
+			this.pictureBox_COMMState.Tag = "1";
 			// 
-			// button_COMMPortInit
+			// button_COMMInit
 			// 
-			resources.ApplyResources(this.button_COMMPortInit, "button_COMMPortInit");
-			this.button_COMMPortInit.Name = "button_COMMPortInit";
-			this.button_COMMPortInit.UseVisualStyleBackColor = true;
+			resources.ApplyResources(this.button_COMMInit, "button_COMMInit");
+			this.button_COMMInit.Name = "button_COMMInit";
+			this.button_COMMInit.UseVisualStyleBackColor = true;
 			// 
-			// label_COMMPortName
+			// label_COMMName
 			// 
-			resources.ApplyResources(this.label_COMMPortName, "label_COMMPortName");
-			this.label_COMMPortName.Name = "label_COMMPortName";
+			resources.ApplyResources(this.label_COMMName, "label_COMMName");
+			this.label_COMMName.Name = "label_COMMName";
 			// 
-			// comboBox_COMMPortName
+			// comboBox_COMMName
 			// 
-			this.comboBox_COMMPortName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBox_COMMPortName.FormattingEnabled = true;
-			resources.ApplyResources(this.comboBox_COMMPortName, "comboBox_COMMPortName");
-			this.comboBox_COMMPortName.Name = "comboBox_COMMPortName";
+			this.comboBox_COMMName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBox_COMMName.FormattingEnabled = true;
+			resources.ApplyResources(this.comboBox_COMMName, "comboBox_COMMName");
+			this.comboBox_COMMName.Name = "comboBox_COMMName";
 			// 
-			// panel_COMMPort
+			// panel_COMM
 			// 
-			this.panel_COMMPort.Controls.Add(this.groupBox_COMMPortName);
-			resources.ApplyResources(this.panel_COMMPort, "panel_COMMPort");
-			this.panel_COMMPort.Name = "panel_COMMPort";
+			this.panel_COMM.Controls.Add(this.groupBox_COMMName);
+			resources.ApplyResources(this.panel_COMM, "panel_COMM");
+			this.panel_COMM.Name = "panel_COMM";
 			// 
 			// COMMBasePortPlus
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.panel_COMMPort);
+			this.Controls.Add(this.panel_COMM);
 			this.Name = "COMMBasePortPlus";
-			this.groupBox_COMMPortName.ResumeLayout(false);
+			this.groupBox_COMMName.ResumeLayout(false);
 			this.panel_COMMPortName.ResumeLayout(false);
 			this.panel_COMMPortName.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMPortState)).EndInit();
-			this.panel_COMMPort.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).EndInit();
+			this.panel_COMM.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label_COMMPortName;
+        private System.Windows.Forms.Label label_COMMName;
 		public System.Windows.Forms.Panel panel_COMMPortName;
-		public System.Windows.Forms.PictureBox pictureBox_COMMPortState;
-		public System.Windows.Forms.Button button_COMMPortInit;
-		public System.Windows.Forms.Panel panel_COMMPort;
-		public System.Windows.Forms.ComboBox comboBox_COMMPortName;
-		public System.Windows.Forms.GroupBox groupBox_COMMPortName;
+		public System.Windows.Forms.PictureBox pictureBox_COMMState;
+		public System.Windows.Forms.Button button_COMMInit;
+		public System.Windows.Forms.Panel panel_COMM;
+		public System.Windows.Forms.ComboBox comboBox_COMMName;
+		public System.Windows.Forms.GroupBox groupBox_COMMName;
 	}
 }

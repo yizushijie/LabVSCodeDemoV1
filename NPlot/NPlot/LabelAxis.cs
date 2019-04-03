@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -97,7 +97,6 @@ namespace NPlot
 			Init();
 		}
 
-
 		/// <summary>
 		/// Default constructor
 		/// </summary>
@@ -106,7 +105,6 @@ namespace NPlot
 		{
 			Init();
 		}
-
 
 		/// <summary>
 		/// Constructor
@@ -159,8 +157,10 @@ namespace NPlot
 			PointF lastPos = WorldToPhysical( (double)numbers_[0], physicalMin, physicalMax, true );
 			for (int i=0; i<labels_.Count; ++i)
 			{
+				
 				if ((double)numbers_[i] > WorldMin && (double)numbers_[i] < WorldMax)
 				{
+					
 					// check to make sure labels are far enough appart.
 					PointF thisPos = WorldToPhysical( (double)numbers_[i], physicalMin, physicalMax, true );
 					float dist = Utils.Distance( thisPos, lastPos );
@@ -209,6 +209,7 @@ namespace NPlot
 						tLabelOffset, tBoundingBox );
 				}
 			}
+
 		}
 
 
@@ -266,6 +267,7 @@ namespace NPlot
 					}
 				}
 			}
+
 		}
 
 

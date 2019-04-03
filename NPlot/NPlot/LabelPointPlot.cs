@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -53,7 +53,6 @@ namespace NPlot
 			private object dataSource_;
 			private string dataMember_;
 
-
 			public TextDataAdapter( object dataSource, string dataMember, object data )
 			{
 				this.data_ = data;
@@ -61,12 +60,13 @@ namespace NPlot
 				this.dataMember_ = dataMember;
 			}
 
-
 			public string this[int i]
 			{
 				get
 				{
+
 					// this is inefficient [could set up delegates in constructor].
+
 					if (data_ is string[])
 					{
 						return ((string[])data_)[i];
@@ -94,10 +94,12 @@ namespace NPlot
 								rows = ((DataTable)((DataSet)dataSource_).Tables[0]).Rows;
 							}
 						}
+
 						else if (dataSource_ is System.Data.DataTable )
 						{
 							rows = ((DataTable)dataSource_).Rows;
 						}
+
 						else
 						{
 							throw new NPlotException ( "not implemented yet" );
@@ -110,9 +112,7 @@ namespace NPlot
 					{
 						object dataPoint = ((System.Collections.ArrayList)data_)[i];
 						if (dataPoint is string)
-						{
 							return (string)dataPoint;
-						}
 						throw new NPlotException( "TextDataAdapter: data not in recognised format" );
 					}
 					
@@ -131,6 +131,7 @@ namespace NPlot
 				get
 				{
 					// this is inefficient [could set up delegates in constructor].
+
 					if (data_ == null)
 					{
 						return 0;
@@ -146,6 +147,7 @@ namespace NPlot
 					throw new NPlotException( "Text data not in correct format" );
 				}
 			}
+
 		}
 
 
@@ -158,17 +160,14 @@ namespace NPlot
 			/// Above the point
 			/// </summary>
 			Above,
-
 			/// <summary>
 			/// Below the point
 			/// </summary>
 			Below,
-
 			/// <summary>
 			/// To the left of the point
 			/// </summary>
 			Left,
-
 			/// <summary>
 			/// To the right of the point
 			/// </summary>
@@ -260,7 +259,7 @@ namespace NPlot
 				new TextDataAdapter( this.DataSource, this.DataMember, this.TextData );
 
 			// first plot the marker
-			// we can do this cast, since the constructor accepts only this type!
+		    // we can do this cast, since the constructor accepts only this type!
 			for (int i=0; i<data.Count; ++i)
 			{
 				try
@@ -297,6 +296,9 @@ namespace NPlot
 					throw new NPlotException("Error in TextPlot.Draw");
 				}
 			}
+
 		}
+
+
 	}
 }

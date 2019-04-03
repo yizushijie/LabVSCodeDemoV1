@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -38,7 +38,7 @@ namespace NPlot
 {
 
 	/// <summary>
-	/// Encapsulates a Grid IDrawable object. Instances of this	 to a PlotSurface2D 
+	/// Encapsulates a Grid IDrawable object. Instances of this  to a PlotSurface2D 
 	/// instance to produce a grid.
 	/// </summary>
 	public class Grid : IDrawable
@@ -191,6 +191,7 @@ namespace NPlot
 		/// <param name="yAxis">The physical y axis to draw vertical lines parallel to.</param>
 		public void Draw( Graphics g, PhysicalAxis xAxis, PhysicalAxis yAxis )
 		{
+
 			ArrayList xLargePositions = null;
 			ArrayList yLargePositions = null;
 			ArrayList xSmallPositions = null;
@@ -208,6 +209,7 @@ namespace NPlot
 				DrawGridLines( g, yAxis, xAxis, yLargePositions, false, this.MajorGridPen );
 			}
 
+
 			if (this.horizontalGridType_ == GridType.Fine)
 			{
 				xAxis.Axis.WorldTickPositions_SecondPass( xAxis.PhysicalMin, xAxis.PhysicalMax, xLargePositions, ref xSmallPositions );
@@ -219,6 +221,8 @@ namespace NPlot
 				yAxis.Axis.WorldTickPositions_SecondPass( yAxis.PhysicalMin, yAxis.PhysicalMax, yLargePositions, ref ySmallPositions );
 				DrawGridLines( g, yAxis, xAxis, ySmallPositions, false, this.MinorGridPen );
 			}
+
 		}
+
 	}
 }

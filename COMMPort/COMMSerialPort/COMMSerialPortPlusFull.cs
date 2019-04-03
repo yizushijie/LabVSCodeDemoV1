@@ -13,6 +13,55 @@ namespace Harry.LabCOMMPort
 	{
 		#region 属性定义
 
+		#region 重载属性
+		/// <summary>
+		/// 窗体
+		/// </summary>
+		public override Form m_COMMForm
+		{
+			get
+			{
+				return base.m_COMMForm;
+			}
+			set
+			{
+				base.m_COMMForm = value;
+			}
+		}
+
+		/// <summary>
+		/// 消息
+		/// </summary>
+		public override RichTextBox m_COMMRichTextBox
+		{
+			get
+			{
+				return base.m_COMMRichTextBox;
+			}
+			set
+			{
+				base.m_COMMRichTextBox = value;
+			}
+		}
+
+		/// <summary>
+		/// 端口
+		/// </summary>
+		public override ComboBox m_COMMComboBox
+		{
+			get
+			{
+				return base.m_COMMComboBox;
+			}
+			set
+			{
+				base.m_COMMComboBox = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public override COMMBasePort m_COMMPort
 		{
 			get
@@ -25,6 +74,38 @@ namespace Harry.LabCOMMPort
 				base.m_COMMPort = value;
 			}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override PictureBox m_PictureBox_COMMState
+		{
+			get
+			{
+				return base.m_PictureBox_COMMState;
+			}
+			set
+			{
+				base.m_PictureBox_COMMState = value;
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public override Button m_Button_COMMInit
+		{
+			get
+			{
+				return base.m_Button_COMMInit;
+			}
+			set
+			{
+				base.m_Button_COMMInit = value;
+			}
+		}
+		
+		#endregion
 
 		#endregion
 

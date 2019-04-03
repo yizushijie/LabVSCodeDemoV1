@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -60,8 +60,8 @@ namespace NPlot
 
 		private int xOffset_;
 		private int yOffset_;
-		private XAxisPosition xAttach_;
-		private YAxisPosition yAttach_;
+		private PlotSurface2D.XAxisPosition xAttach_;
+		private PlotSurface2D.YAxisPosition yAttach_;
 		private Placement horizontalEdgePlacement_;
 		private Placement verticalEdgePlacement_;
 		private bool neverShiftAxes_;
@@ -156,7 +156,7 @@ namespace NPlot
 		/// </summary>
 		/// <param name="xa">Specify which horizontal axis the legend should be attached to.</param>
 		/// <param name="ya">Specify which vertical axis the legend should be attached to.</param>
-		public void AttachTo( XAxisPosition xa, YAxisPosition ya )
+		public void AttachTo( PlotSurface2D.XAxisPosition xa, PlotSurface2D.YAxisPosition ya )
 		{
 			xAttach_ = xa;
 			yAttach_ = ya; 
@@ -168,8 +168,8 @@ namespace NPlot
 		/// </summary>
 		public Legend()
 		{
-			xAttach_ = XAxisPosition.Top;
-			yAttach_ = YAxisPosition.Right;
+			xAttach_ = PlotSurface2D.XAxisPosition.Top;
+			yAttach_ = PlotSurface2D.YAxisPosition.Right;
 			xOffset_ = 10;
 			yOffset_ = 1;
 			verticalEdgePlacement_ = Placement.Outside;
@@ -220,9 +220,10 @@ namespace NPlot
 			// (1) calculate legend position.
 
 			// y
+
 			position.Y = this.yOffset_;
 			
-			if ( this.xAttach_ == XAxisPosition.Bottom )
+			if ( this.xAttach_ == PlotSurface2D.XAxisPosition.Bottom )
 			{
 				position.Y += pYAxis1.PhysicalMin.Y;
 				if ( this.horizontalEdgePlacement_ == Legend.Placement.Inside )
@@ -240,9 +241,10 @@ namespace NPlot
 			}
 	
 			// x
+
 			position.X = this.xOffset_;
 		
-			if ( this.yAttach_ == YAxisPosition.Left )
+			if ( this.yAttach_ == PlotSurface2D.YAxisPosition.Left )
 			{
 				if ( this.verticalEdgePlacement_ == Legend.Placement.Outside ) 
 				{
@@ -264,6 +266,7 @@ namespace NPlot
 
 			if ( !this.neverShiftAxes_ )
 			{
+
 				if ( position.X < padding )
 				{
 					int changeAmount = -position.X + padding;
@@ -319,7 +322,11 @@ namespace NPlot
 				pXAxis2.PhysicalMax = new Point( pXAxis2.PhysicalMax.X - rightIndent, pXAxis2.PhysicalMax.Y + topIndent );
 				pYAxis2.PhysicalMin = new Point( pYAxis2.PhysicalMin.X - rightIndent, pYAxis2.PhysicalMin.Y - bottomIndent );
 				pYAxis2.PhysicalMax = new Point( pYAxis2.PhysicalMax.X - rightIndent, pYAxis2.PhysicalMax.Y + topIndent );
+			
 			}
+
 		}
+
 	}
+
 }

@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -62,7 +62,6 @@ namespace NPlot
 			this.pen_ = new Pen( color );
 		}
 
-
 		/// <summary>
 		/// Constructor
 		/// </summary>
@@ -101,6 +100,7 @@ namespace NPlot
 				this.label_ = value;
 			}
 		}
+		
 		private string label_ = "";
 
 
@@ -140,7 +140,6 @@ namespace NPlot
 			return new LinearAxis( this.value_, this.value_ );
 		}
 
-
 		/// <summary>
 		/// Writes text data describing the horizontal line object to the supplied string builder. It is 
 		/// possible to specify that the data will be written only if the line is in the specified 
@@ -151,6 +150,7 @@ namespace NPlot
 		/// <param name="onlyInRegion">If true, data will be written only if the line is in the specified region.</param>
 		public void WriteData(System.Text.StringBuilder sb, RectangleD region, bool onlyInRegion)
 		{
+
 			// return if line is not in plot region and 
 			if (value_ > region.Y+region.Height || value_ < region.Y)
 			{
@@ -165,8 +165,8 @@ namespace NPlot
 			sb.Append( "\r\n" );
 			sb.Append( value_.ToString() );
 			sb.Append( "\r\n" );
-		}
 
+		}
 
 		/// <summary>
 		/// Draws the horizontal line plot on a GDI+ surface against the provided x and y axes.
@@ -196,7 +196,7 @@ namespace NPlot
 			// todo:  clip and proper logic for flipped axis min max.
 		}
 
-
+		private double value_;
 		/// <summary>
 		/// ordinate (Y) value to draw horizontal line at.
 		/// </summary>
@@ -211,9 +211,8 @@ namespace NPlot
 				value_ = value;
 			}
 		}
-		private double value_;
 
-		
+		private Pen pen_ = new Pen( Color.Black );
 		/// <summary>
 		/// Pen to use to draw the horizontal line.
 		/// </summary>
@@ -228,7 +227,6 @@ namespace NPlot
 				pen_ = value;
 			}
 		}
-		private Pen pen_ = new Pen(Color.Black);
 
 		
 		/// <summary>
@@ -264,5 +262,6 @@ namespace NPlot
 			}
 		}
 		private float scale_ = 1.0f;
+
 	}
 }

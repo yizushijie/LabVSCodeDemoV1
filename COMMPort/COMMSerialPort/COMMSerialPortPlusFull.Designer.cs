@@ -37,9 +37,9 @@
 			this.comboBox_COMMPortParity = new System.Windows.Forms.ComboBox();
 			this.label_COMMPortParity = new System.Windows.Forms.Label();
 			this.panel_COMMPortName.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMPortState)).BeginInit();
-			this.panel_COMMPort.SuspendLayout();
-			this.groupBox_COMMPortName.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).BeginInit();
+			this.panel_COMM.SuspendLayout();
+			this.groupBox_COMMName.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel_COMMPortName
@@ -53,9 +53,9 @@
 			this.panel_COMMPortName.Controls.Add(this.comboBox_COMMPortBaudRate);
 			this.panel_COMMPortName.Controls.Add(this.label_COMMPortBaudRate);
 			this.panel_COMMPortName.Size = new System.Drawing.Size(145, 163);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMPortName, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.button_COMMPortInit, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.pictureBox_COMMPortState, 0);
+			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMName, 0);
+			this.panel_COMMPortName.Controls.SetChildIndex(this.button_COMMInit, 0);
+			this.panel_COMMPortName.Controls.SetChildIndex(this.pictureBox_COMMState, 0);
 			this.panel_COMMPortName.Controls.SetChildIndex(this.label_COMMPortBaudRate, 0);
 			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMPortBaudRate, 0);
 			this.panel_COMMPortName.Controls.SetChildIndex(this.label_COMMPortStopBits, 0);
@@ -67,20 +67,20 @@
 			// 
 			// pictureBox_COMMPortState
 			// 
-			this.pictureBox_COMMPortState.Location = new System.Drawing.Point(19, 135);
+			this.pictureBox_COMMState.Location = new System.Drawing.Point(19, 135);
 			// 
 			// button_COMMPortInit
 			// 
-			this.button_COMMPortInit.Location = new System.Drawing.Point(57, 135);
-			this.button_COMMPortInit.Size = new System.Drawing.Size(83, 25);
+			this.button_COMMInit.Location = new System.Drawing.Point(57, 135);
+			this.button_COMMInit.Size = new System.Drawing.Size(83, 25);
 			// 
 			// panel_COMMPort
 			// 
-			this.panel_COMMPort.Size = new System.Drawing.Size(157, 189);
+			this.panel_COMM.Size = new System.Drawing.Size(157, 189);
 			// 
 			// groupBox_COMMPortName
 			// 
-			this.groupBox_COMMPortName.Size = new System.Drawing.Size(151, 183);
+			this.groupBox_COMMName.Size = new System.Drawing.Size(151, 183);
 			// 
 			// label_COMMPortBaudRate
 			// 
@@ -197,9 +197,9 @@
 			this.Size = new System.Drawing.Size(157, 191);
 			this.panel_COMMPortName.ResumeLayout(false);
 			this.panel_COMMPortName.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMPortState)).EndInit();
-			this.panel_COMMPort.ResumeLayout(false);
-			this.groupBox_COMMPortName.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).EndInit();
+			this.panel_COMM.ResumeLayout(false);
+			this.groupBox_COMMName.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

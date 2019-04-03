@@ -30,10 +30,8 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.richTextBoxEx1 = new Harry.LabUserControlPlus.RichTextBoxEx();
-			this.commBasePortPlus1 = new Harry.LabCOMMPort.COMMBasePortPlus();
 			this.commSerialPortPlusFull1 = new Harry.LabCOMMPort.COMMSerialPortPlusFull();
 			this.commSerialPortPlus1 = new Harry.LabCOMMPort.COMMSerialPortPlus();
-			this.appContainer1 = new Harry.LabUserControlPlus.PanelPlus();
 			this.SuspendLayout();
 			// 
 			// richTextBoxEx1
@@ -43,17 +41,6 @@
 			this.richTextBoxEx1.Size = new System.Drawing.Size(420, 165);
 			this.richTextBoxEx1.TabIndex = 2;
 			this.richTextBoxEx1.Text = "";
-			// 
-			// commBasePortPlus1
-			// 
-			this.commBasePortPlus1.Location = new System.Drawing.Point(0, 257);
-			this.commBasePortPlus1.m_COMMForm = null;
-			this.commBasePortPlus1.m_COMMPort = null;
-			this.commBasePortPlus1.m_COMMRichTextBox = null;
-			this.commBasePortPlus1.Name = "commBasePortPlus1";
-			this.commBasePortPlus1.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.commBasePortPlus1.Size = new System.Drawing.Size(267, 61);
-			this.commBasePortPlus1.TabIndex = 3;
 			// 
 			// commSerialPortPlusFull1
 			// 
@@ -77,20 +64,11 @@
 			this.commSerialPortPlus1.Size = new System.Drawing.Size(267, 61);
 			this.commSerialPortPlus1.TabIndex = 0;
 			// 
-			// appContainer1
-			// 
-			this.appContainer1.Location = new System.Drawing.Point(469, 156);
-			this.appContainer1.Name = "appContainer1";
-			this.appContainer1.Size = new System.Drawing.Size(480, 320);
-			this.appContainer1.TabIndex = 4;
-			// 
 			// TestForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(990, 516);
-			this.Controls.Add(this.appContainer1);
-			this.Controls.Add(this.commBasePortPlus1);
 			this.Controls.Add(this.richTextBoxEx1);
 			this.Controls.Add(this.commSerialPortPlusFull1);
 			this.Controls.Add(this.commSerialPortPlus1);
@@ -108,8 +86,6 @@
 		private Harry.LabCOMMPort.COMMSerialPortPlus commSerialPortPlus1;
 		private Harry.LabCOMMPort.COMMSerialPortPlusFull commSerialPortPlusFull1;
 		private Harry.LabUserControlPlus.RichTextBoxEx richTextBoxEx1;
-		private Harry.LabCOMMPort.COMMBasePortPlus commBasePortPlus1;
-		private Harry.LabUserControlPlus.PanelPlus appContainer1;
 	}
 }
 

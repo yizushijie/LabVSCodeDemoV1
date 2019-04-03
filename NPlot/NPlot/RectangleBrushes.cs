@@ -9,13 +9,13 @@
  * are permitted provided that the following conditions are met:
  * 
  * 1. Redistributions of source code must retain the above copyright notice, this
- *	  list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *	  this list of conditions and the following disclaimer in the documentation
- *	  and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  * 3. Neither the name of NPlot nor the names of its contributors may
- *	  be used to endorse or promote products derived from this software without
- *	  specific prior written permission.
+ *    be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -42,20 +42,12 @@ namespace NPlot
 	/// </summary>
 	public interface IRectangleBrush
 	{
-
 		/// <summary>
 		/// Gets a brush according to the supplied rectangle.
 		/// </summary>
 		/// <param name="rectangle">the rectangle used to construct the brush</param>
 		/// <returns>The brush</returns>
 		Brush Get( Rectangle rectangle );
-
-		/// <summary>
-		/// Gets a brush according to the supplied rectangle.
-		/// </summary>
-		/// <param name="rectangle">the rectangle used to construct the brush</param>
-		/// <returns>The brush</returns>
-		Brush Get(RectangleF rectangle);
 	}
 
 	/// <summary>
@@ -86,11 +78,6 @@ namespace NPlot
 			/// <param name="rectangle">the rectangle used to construct the brush</param>
 			/// <returns>The solid brush</returns>
 			public Brush Get( Rectangle rectangle )
-			{
-				return brush_;
-			}
-
-			public Brush Get(RectangleF rectangle)
 			{
 				return brush_;
 			}
@@ -1657,7 +1644,6 @@ namespace NPlot
 		/// </summary>
 		public class Horizontal : IRectangleBrush
 		{
-
 			private Color c1_;
 			private Color c2_;
 			
@@ -1672,7 +1658,6 @@ namespace NPlot
 				c2_ = c2;
 			}
 
-
 			/// <summary>
 			/// Gets a brush according to the supplied rectangle.
 			/// </summary>
@@ -1681,12 +1666,6 @@ namespace NPlot
 			public Brush Get( Rectangle rectangle )
 			{
 				return new LinearGradientBrush( rectangle, c1_, c2_, LinearGradientMode.Horizontal );
-			}
-
-
-			public Brush Get(RectangleF rectangle)
-			{
-				return new LinearGradientBrush(rectangle, c1_, c2_, LinearGradientMode.Horizontal);
 			}
 
 			#region DefaultBrushes
@@ -1734,7 +1713,6 @@ namespace NPlot
 		/// </summary>
 		public class Vertical : IRectangleBrush
 		{
-
 			private Color c1_;
 			private Color c2_;
 			
@@ -1759,11 +1737,6 @@ namespace NPlot
 				return new LinearGradientBrush( rectangle, c1_, c2_, LinearGradientMode.Vertical );
 			}
 
-
-			public Brush Get(RectangleF rectangle)
-			{
-				return new LinearGradientBrush(rectangle, c1_, c2_, LinearGradientMode.Vertical);
-			}
 
 			#region DefaultBrushes
 
@@ -1809,7 +1782,6 @@ namespace NPlot
 		/// </summary>
 		public class HorizontalCenterFade : IRectangleBrush
 		{
-
 			private Color c1_;
 			private Color c2_;
 
@@ -1824,7 +1796,6 @@ namespace NPlot
 				c2_ = c2;
 			}
 
-
 			/// <summary>
 			/// Gets a brush according to the supplied rectangle.
 			/// </summary>
@@ -1834,20 +1805,7 @@ namespace NPlot
 			{
 				LinearGradientBrush brush = new LinearGradientBrush( rectangle, c1_, c2_, LinearGradientMode.Horizontal );
 				float[] relativeIntensities = { 0.0f, 0.9f, 1.0f, 0.9f, 0.0f };
-				float[] relativePositions	= { 0.0f, 0.4f, 0.5f, 0.6f, 1.0f };
-				Blend blend = new Blend();
-				blend.Factors = relativeIntensities;
-				blend.Positions = relativePositions;
-				brush.Blend = blend;
-				return brush;
-			}
-
-
-			public Brush Get(RectangleF rectangle)
-			{
-				LinearGradientBrush brush = new LinearGradientBrush(rectangle, c1_, c2_, LinearGradientMode.Horizontal);
-				float[] relativeIntensities = { 0.0f, 0.9f, 1.0f, 0.9f, 0.0f };
-				float[] relativePositions = { 0.0f, 0.4f, 0.5f, 0.6f, 1.0f };
+				float[] relativePositions   = { 0.0f, 0.4f, 0.5f, 0.6f, 1.0f };
 				Blend blend = new Blend();
 				blend.Factors = relativeIntensities;
 				blend.Positions = relativePositions;
@@ -1900,7 +1858,6 @@ namespace NPlot
 		/// </summary>
 		public class VerticalCenterFade : IRectangleBrush
 		{
-
 			private Color c1_;
 			private Color c2_;
 
@@ -1915,7 +1872,6 @@ namespace NPlot
 				c2_ = c2;
 			}
 
-
 			/// <summary>
 			/// Gets a brush according to the supplied rectangle.
 			/// </summary>
@@ -1925,20 +1881,7 @@ namespace NPlot
 			{
 				LinearGradientBrush brush = new LinearGradientBrush( rectangle, c1_, c2_, LinearGradientMode.Vertical );
 				float[] relativeIntensities = { 0.0f, 0.9f, 1.0f, 0.9f, 0.0f };
-				float[] relativePositions	= { 0.0f, 0.4f, 0.5f, 0.6f, 1.0f };
-				Blend blend = new Blend();
-				blend.Factors = relativeIntensities;
-				blend.Positions = relativePositions;
-				brush.Blend = blend;
-				return brush;
-			}
-
-
-			public Brush Get(RectangleF rectangle)
-			{
-				LinearGradientBrush brush = new LinearGradientBrush(rectangle, c1_, c2_, LinearGradientMode.Vertical);
-				float[] relativeIntensities = { 0.0f, 0.9f, 1.0f, 0.9f, 0.0f };
-				float[] relativePositions = { 0.0f, 0.4f, 0.5f, 0.6f, 1.0f };
+				float[] relativePositions   = { 0.0f, 0.4f, 0.5f, 0.6f, 1.0f };
 				Blend blend = new Blend();
 				blend.Factors = relativeIntensities;
 				blend.Positions = relativePositions;
@@ -1982,6 +1925,9 @@ namespace NPlot
 			}
 
 			#endregion
+
 		}
+
+
 	}
 }

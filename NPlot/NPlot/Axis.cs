@@ -564,6 +564,7 @@ namespace NPlot
 		/// </summary>
 		protected static void DoClone( Axis b, Axis a )
 		{
+
 			// value items
 			a.autoScaleText_ = b.autoScaleText_;
 			a.autoScaleTicks_ = b.autoScaleTicks_;
@@ -603,6 +604,7 @@ namespace NPlot
 
 			a.FontScale = b.FontScale;
 			a.TickScale = b.TickScale;
+
 		}
 
 
@@ -1203,6 +1205,7 @@ namespace NPlot
 				}
 				else
 				{
+
 					float bx1 = (textCenterX - textSize.Width/2.0f);
 					float by1 = (textCenterY - textSize.Height/2.0f);
 					float bx2 = textSize.Width;
@@ -1231,6 +1234,7 @@ namespace NPlot
 					labelOffset = new Point( (int)textCenterX, (int)textCenterY );
 				}
 			} 
+
 		}
 
 
@@ -1259,6 +1263,7 @@ namespace NPlot
 
 			if (!Hidden)
 			{
+				
 				// (1) Draw the axis line.
 				g.DrawLine( this.linePen_, physicalMin.X, physicalMin.Y, physicalMax.X, physicalMax.Y );
 
