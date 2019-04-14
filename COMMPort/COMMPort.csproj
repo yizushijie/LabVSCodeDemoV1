@@ -51,6 +51,18 @@
       <DependentUpon>COMMBasePortPlus.cs</DependentUpon>
     </Compile>
     <Compile Include="COMMBasePort\COMMWatcherPort.cs" />
+    <Compile Include="COMMPortForm\COMMBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMMPortForm\COMMBaseForm.Designer.cs">
+      <DependentUpon>COMMBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="COMMPortForm\COMMSerialPortParamForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="COMMPortForm\COMMSerialPortParamForm.Designer.cs">
+      <DependentUpon>COMMSerialPortParamForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="COMMSerialPort\COMMSerialPort.cs" />
     <Compile Include="COMMSerialPort\COMMSerialPortPlus.cs">
       <SubType>UserControl</SubType>
@@ -83,6 +95,10 @@
       <Project>{E54A51A6-A054-4F21-AC22-A827B5EF4D36}</Project>
       <Name>UserControlPlus</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserGenFunc\UserGenFunc.csproj">
+      <Project>{C64AEEA0-7A08-4786-9F1E-BD66608E190E}</Project>
+      <Name>UserGenFunc</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="COMMBasePort\COMMBasePortPlus.en.resx">
@@ -96,6 +112,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="COMMBasePort\COMMBasePortPlus.zh.resx">
       <DependentUpon>COMMBasePortPlus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COMMPortForm\COMMSerialPortParamForm.resx">
+      <DependentUpon>COMMSerialPortParamForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="COMMSerialPort\COMMSerialPortPlus.resx">
+      <DependentUpon>COMMSerialPortPlus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="COMMSerialPort\COMMSerialPortPlusFull.resx">
       <DependentUpon>COMMSerialPortPlusFull.cs</DependentUpon>

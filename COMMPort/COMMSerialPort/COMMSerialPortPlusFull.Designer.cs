@@ -52,7 +52,9 @@
 			this.panel_COMMPortName.Controls.Add(this.label_COMMPortStopBits);
 			this.panel_COMMPortName.Controls.Add(this.comboBox_COMMPortBaudRate);
 			this.panel_COMMPortName.Controls.Add(this.label_COMMPortBaudRate);
-			this.panel_COMMPortName.Size = new System.Drawing.Size(145, 163);
+			this.panel_COMMPortName.Location = new System.Drawing.Point(5, 23);
+			this.panel_COMMPortName.Margin = new System.Windows.Forms.Padding(5);
+			this.panel_COMMPortName.Size = new System.Drawing.Size(189, 199);
 			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMName, 0);
 			this.panel_COMMPortName.Controls.SetChildIndex(this.button_COMMInit, 0);
 			this.panel_COMMPortName.Controls.SetChildIndex(this.pictureBox_COMMState, 0);
@@ -65,29 +67,38 @@
 			this.panel_COMMPortName.Controls.SetChildIndex(this.label_COMMPortParity, 0);
 			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMPortParity, 0);
 			// 
-			// pictureBox_COMMPortState
+			// pictureBox_COMMState
 			// 
-			this.pictureBox_COMMState.Location = new System.Drawing.Point(19, 135);
+			this.pictureBox_COMMState.Location = new System.Drawing.Point(25, 169);
+			this.pictureBox_COMMState.Margin = new System.Windows.Forms.Padding(5);
 			// 
-			// button_COMMPortInit
+			// button_COMMInit
 			// 
-			this.button_COMMInit.Location = new System.Drawing.Point(57, 135);
-			this.button_COMMInit.Size = new System.Drawing.Size(83, 25);
+			this.button_COMMInit.Location = new System.Drawing.Point(76, 169);
+			this.button_COMMInit.Margin = new System.Windows.Forms.Padding(5);
+			this.button_COMMInit.Size = new System.Drawing.Size(109, 31);
+			this.button_COMMInit.Text = "配置设备";
 			// 
-			// panel_COMMPort
+			// panel_COMM
 			// 
-			this.panel_COMM.Size = new System.Drawing.Size(157, 189);
+			this.panel_COMM.Margin = new System.Windows.Forms.Padding(5);
+			this.panel_COMM.Padding = new System.Windows.Forms.Padding(5);
+			this.panel_COMM.Size = new System.Drawing.Size(209, 237);
 			// 
-			// groupBox_COMMPortName
+			// groupBox_COMMName
 			// 
-			this.groupBox_COMMName.Size = new System.Drawing.Size(151, 183);
+			this.groupBox_COMMName.Location = new System.Drawing.Point(5, 5);
+			this.groupBox_COMMName.Margin = new System.Windows.Forms.Padding(5);
+			this.groupBox_COMMName.Padding = new System.Windows.Forms.Padding(5);
+			this.groupBox_COMMName.Size = new System.Drawing.Size(199, 227);
 			// 
 			// label_COMMPortBaudRate
 			// 
 			this.label_COMMPortBaudRate.AutoSize = true;
-			this.label_COMMPortBaudRate.Location = new System.Drawing.Point(6, 34);
+			this.label_COMMPortBaudRate.Location = new System.Drawing.Point(8, 42);
+			this.label_COMMPortBaudRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label_COMMPortBaudRate.Name = "label_COMMPortBaudRate";
-			this.label_COMMPortBaudRate.Size = new System.Drawing.Size(47, 12);
+			this.label_COMMPortBaudRate.Size = new System.Drawing.Size(60, 15);
 			this.label_COMMPortBaudRate.TabIndex = 4;
 			this.label_COMMPortBaudRate.Tag = "";
 			this.label_COMMPortBaudRate.Text = "波特率:";
@@ -96,6 +107,7 @@
 			// 
 			this.comboBox_COMMPortBaudRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBox_COMMPortBaudRate.FormattingEnabled = true;
+			this.comboBox_COMMPortBaudRate.IntegralHeight = false;
 			this.comboBox_COMMPortBaudRate.Items.AddRange(new object[] {
             "自定义",
             "1382400",
@@ -114,30 +126,34 @@
             "4800",
             "2400",
             "1200"});
-			this.comboBox_COMMPortBaudRate.Location = new System.Drawing.Point(57, 31);
+			this.comboBox_COMMPortBaudRate.Location = new System.Drawing.Point(76, 39);
+			this.comboBox_COMMPortBaudRate.Margin = new System.Windows.Forms.Padding(4);
 			this.comboBox_COMMPortBaudRate.Name = "comboBox_COMMPortBaudRate";
-			this.comboBox_COMMPortBaudRate.Size = new System.Drawing.Size(83, 20);
+			this.comboBox_COMMPortBaudRate.Size = new System.Drawing.Size(109, 23);
 			this.comboBox_COMMPortBaudRate.TabIndex = 5;
 			// 
 			// comboBox_COMMPortStopBits
 			// 
 			this.comboBox_COMMPortStopBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBox_COMMPortStopBits.FormattingEnabled = true;
+			this.comboBox_COMMPortStopBits.IntegralHeight = false;
 			this.comboBox_COMMPortStopBits.Items.AddRange(new object[] {
             "1",
             "1.5",
             "2"});
-			this.comboBox_COMMPortStopBits.Location = new System.Drawing.Point(57, 57);
+			this.comboBox_COMMPortStopBits.Location = new System.Drawing.Point(76, 71);
+			this.comboBox_COMMPortStopBits.Margin = new System.Windows.Forms.Padding(4);
 			this.comboBox_COMMPortStopBits.Name = "comboBox_COMMPortStopBits";
-			this.comboBox_COMMPortStopBits.Size = new System.Drawing.Size(83, 20);
+			this.comboBox_COMMPortStopBits.Size = new System.Drawing.Size(109, 23);
 			this.comboBox_COMMPortStopBits.TabIndex = 7;
 			// 
 			// label_COMMPortStopBits
 			// 
 			this.label_COMMPortStopBits.AutoSize = true;
-			this.label_COMMPortStopBits.Location = new System.Drawing.Point(6, 60);
+			this.label_COMMPortStopBits.Location = new System.Drawing.Point(8, 75);
+			this.label_COMMPortStopBits.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label_COMMPortStopBits.Name = "label_COMMPortStopBits";
-			this.label_COMMPortStopBits.Size = new System.Drawing.Size(47, 12);
+			this.label_COMMPortStopBits.Size = new System.Drawing.Size(60, 15);
 			this.label_COMMPortStopBits.TabIndex = 6;
 			this.label_COMMPortStopBits.Tag = "";
 			this.label_COMMPortStopBits.Text = "停止位:";
@@ -146,22 +162,25 @@
 			// 
 			this.comboBox_COMMPortDataBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBox_COMMPortDataBits.FormattingEnabled = true;
+			this.comboBox_COMMPortDataBits.IntegralHeight = false;
 			this.comboBox_COMMPortDataBits.Items.AddRange(new object[] {
             "8",
             "7",
             "6",
             "5"});
-			this.comboBox_COMMPortDataBits.Location = new System.Drawing.Point(57, 83);
+			this.comboBox_COMMPortDataBits.Location = new System.Drawing.Point(76, 104);
+			this.comboBox_COMMPortDataBits.Margin = new System.Windows.Forms.Padding(4);
 			this.comboBox_COMMPortDataBits.Name = "comboBox_COMMPortDataBits";
-			this.comboBox_COMMPortDataBits.Size = new System.Drawing.Size(83, 20);
+			this.comboBox_COMMPortDataBits.Size = new System.Drawing.Size(109, 23);
 			this.comboBox_COMMPortDataBits.TabIndex = 9;
 			// 
 			// label_COMMPortDataBits
 			// 
 			this.label_COMMPortDataBits.AutoSize = true;
-			this.label_COMMPortDataBits.Location = new System.Drawing.Point(6, 86);
+			this.label_COMMPortDataBits.Location = new System.Drawing.Point(8, 108);
+			this.label_COMMPortDataBits.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label_COMMPortDataBits.Name = "label_COMMPortDataBits";
-			this.label_COMMPortDataBits.Size = new System.Drawing.Size(47, 12);
+			this.label_COMMPortDataBits.Size = new System.Drawing.Size(60, 15);
 			this.label_COMMPortDataBits.TabIndex = 8;
 			this.label_COMMPortDataBits.Tag = "";
 			this.label_COMMPortDataBits.Text = "数据位:";
@@ -170,31 +189,35 @@
 			// 
 			this.comboBox_COMMPortParity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBox_COMMPortParity.FormattingEnabled = true;
+			this.comboBox_COMMPortParity.IntegralHeight = false;
 			this.comboBox_COMMPortParity.Items.AddRange(new object[] {
             "无",
             "奇校验",
             "偶校验"});
-			this.comboBox_COMMPortParity.Location = new System.Drawing.Point(57, 109);
+			this.comboBox_COMMPortParity.Location = new System.Drawing.Point(76, 136);
+			this.comboBox_COMMPortParity.Margin = new System.Windows.Forms.Padding(4);
 			this.comboBox_COMMPortParity.Name = "comboBox_COMMPortParity";
-			this.comboBox_COMMPortParity.Size = new System.Drawing.Size(83, 20);
+			this.comboBox_COMMPortParity.Size = new System.Drawing.Size(109, 23);
 			this.comboBox_COMMPortParity.TabIndex = 11;
 			// 
 			// label_COMMPortParity
 			// 
 			this.label_COMMPortParity.AutoSize = true;
-			this.label_COMMPortParity.Location = new System.Drawing.Point(6, 112);
+			this.label_COMMPortParity.Location = new System.Drawing.Point(8, 140);
+			this.label_COMMPortParity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label_COMMPortParity.Name = "label_COMMPortParity";
-			this.label_COMMPortParity.Size = new System.Drawing.Size(47, 12);
+			this.label_COMMPortParity.Size = new System.Drawing.Size(60, 15);
 			this.label_COMMPortParity.TabIndex = 10;
 			this.label_COMMPortParity.Tag = "";
 			this.label_COMMPortParity.Text = "校验位:";
 			// 
 			// COMMSerialPortPlusFull
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Margin = new System.Windows.Forms.Padding(5);
 			this.Name = "COMMSerialPortPlusFull";
-			this.Size = new System.Drawing.Size(157, 191);
+			this.Size = new System.Drawing.Size(209, 239);
 			this.panel_COMMPortName.ResumeLayout(false);
 			this.panel_COMMPortName.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).EndInit();

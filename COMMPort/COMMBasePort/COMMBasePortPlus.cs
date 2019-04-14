@@ -24,6 +24,12 @@ namespace Harry.LabCOMMPort
 		/// </summary>
 		private COMMBasePort commPort = null;
 
+		/// <summary>
+		/// 串口的配置参数
+		/// </summary>
+		private COMMSerialPortParam commSerialPortParam = null;
+
+
 		#endregion
 
 
@@ -107,7 +113,7 @@ namespace Harry.LabCOMMPort
 		/// <summary>
 		/// 状态图片
 		/// </summary>
-		public virtual PictureBox m_PictureBox_COMMState
+		public virtual PictureBox m_PictureBoxCOMMState
 		{
 			get
 			{
@@ -122,7 +128,7 @@ namespace Harry.LabCOMMPort
 		/// <summary>
 		/// 设备初始化按钮
 		/// </summary>
-		public virtual Button m_Button_COMMInit
+		public virtual Button m_ButtonCOMMInit
 		{
 			get
 			{
@@ -133,7 +139,40 @@ namespace Harry.LabCOMMPort
 				this.button_COMMInit = value;
 			}
 		}
-		
+
+		public virtual GroupBox m_GroupBoxCOMMName
+		{
+			get
+			{
+				return this.groupBox_COMMName;
+			}
+			set
+			{
+				this.groupBox_COMMName = value;
+
+			}
+		}
+
+		/// <summary>
+		/// 端口的配置参数
+		/// </summary>
+		public virtual COMMSerialPortParam m_COMMSerialPortParam
+		{
+			get
+			{
+				return this.commSerialPortParam;
+			}
+			set
+			{
+				if (this.commSerialPortParam==null)
+				{
+					this.commSerialPortParam = new COMMSerialPortParam();
+				}
+
+				this.commSerialPortParam = value;
+			}
+		}
+
 		#endregion
 
 		#region 构造函数
@@ -299,39 +338,86 @@ namespace Harry.LabCOMMPort
 		/// <param name="e"></param>
 		public virtual void AddWatcherPortRemove(object sender, System.EventArgs e)
 		{
+			if ((this.m_COMMPort.IsAttached() == false) && (this.button_COMMInit.Text == "关闭设备"))
+			{
+				if (this.m_ButtonCOMMInit.InvokeRequired)
+				{
+					this.m_ButtonCOMMInit.BeginInvoke((EventHandler)
+						//this.m_Button_COMMInit.Invoke((EventHandler)
+						(delegate
+						{
+							this.m_ButtonCOMMInit.Text = "打开设备";
+						}));
+				}
+				else
+				{
+					this.m_ButtonCOMMInit.Text = "打开设备";
+				}
+				//---执行端口关闭
+				this.m_COMMPort.CloseDevice();
+				//---刷新端口的只是ICO图标
+				if (this.m_PictureBoxCOMMState.InvokeRequired)
+				{
+					this.m_PictureBoxCOMMState.BeginInvoke((EventHandler)
+						//this.m_PictureBox_COMMState.Invoke((EventHandler)
+						(delegate
+						{
+							this.m_PictureBoxCOMMState.Image = Properties.Resources.lost;
+						}));
+				}
+				else
+				{
+					this.m_PictureBoxCOMMState.Image = Properties.Resources.lost;
+				}
 
+				this.RefreshComboBox(this.m_COMMComboBox);
+			}
 		}
 
+		/// <summary>
+		/// 添加端口移除事件函数
+		/// </summary>
+		public virtual void AddWatcherPortRemoveEvent()
+		{
+			if (this.m_COMMPort != null)
+			{
+				this.m_COMMPort.m_OnRemoveDeviceEvent = AddWatcherPortRemove;
+			}
+		}
+		
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		public virtual void Button_Clik(object sender, System.EventArgs e)
+		public virtual void Button_Click(object sender, System.EventArgs e)
 		{
 			Button btn = (Button)sender;
 			btn.Enabled = false;
 			switch (btn.Name)
 			{
 				case "button_COMMInit":
-
 					if (btn.Text == "打开设备")
 					{
-						if ((this.commPort!=null)&&(this.commPort.OpenDevice(this.comboBox_COMMName.Text, this.commRichTextBox) == 0))
+						//if ((this.commPort != null) &&(this.commPort.OpenDevice(this.comboBox_COMMName.Text, this.commRichTextBox) == 0))
+						if ((this.commPort != null) && (this.commPort.OpenDevice(this.m_COMMSerialPortParam, this.commRichTextBox) == 0))
 						{
 							btn.Text = "关闭设备";
 							this.pictureBox_COMMState.Image = Properties.Resources.open;
-							
+
 							//---消息显示
 							if (this.commRichTextBox != null)
 							{
-								RichTextBoxPlus.AppendTextInfoTopWithDataTime(this.commRichTextBox, "设备打开成功!\r\n", Color.Black, false);
+								RichTextBoxPlus.AppendTextInfoTopWithDataTime(this.commRichTextBox, "设备打开成功!\r\n",
+									Color.Black, false);
 							}
 
+							this.COMMControl(false);
+
 							//---加载设备移除处理
-							if (this.commPort.m_OnRemoveDeviceEvent==null)
+							if (this.commPort.m_OnRemoveDeviceEvent == null)
 							{
-								this.commPort.m_OnRemoveDeviceEvent = AddWatcherPortRemove;
+								this.commPort.m_OnRemoveDeviceEvent = this.AddWatcherPortRemove;
 							}
 						}
 						else
@@ -339,7 +425,8 @@ namespace Harry.LabCOMMPort
 							this.pictureBox_COMMState.Image = Properties.Resources.error;
 							if (this.commRichTextBox != null)
 							{
-								RichTextBoxPlus.AppendTextInfoTopWithDataTime(this.commRichTextBox, "设备打开失败!\r\n", Color.Red, false);
+								RichTextBoxPlus.AppendTextInfoTopWithDataTime(this.commRichTextBox, "设备打开失败!\r\n",
+									Color.Red, false);
 							}
 						}
 					}
@@ -350,13 +437,20 @@ namespace Harry.LabCOMMPort
 							this.commPort.CloseDevice();
 							btn.Text = "打开设备";
 							this.pictureBox_COMMState.Image = Properties.Resources.lost;
-							
+
 							//---消息显示
 							if (this.commRichTextBox != null)
 							{
-								RichTextBoxPlus.AppendTextInfoTopWithDataTime(this.commRichTextBox, "设备关闭成功!\r\n", Color.Black, false);
+								RichTextBoxPlus.AppendTextInfoTopWithDataTime(this.commRichTextBox, "设备关闭成功!\r\n",
+									Color.Black, false);
 							}
+
+							this.COMMControl(true);
 						}
+					}
+					else if (btn.Text == "配置设备")
+					{
+						//---更新设备配置参数
 					}
 					else
 					{
@@ -397,19 +491,77 @@ namespace Harry.LabCOMMPort
 			ptb.Enabled = true;
 		}
 
+		/// <summary>
+		/// 刷新控件
+		/// </summary>
+		/// <param name="isEnable"></param>
+		public virtual void COMMControl(bool isEnable)
+		{
+			this.m_COMMComboBox.Enabled = isEnable;
+		}
+
+		/// <summary>
+		/// 刷新控件
+		/// </summary>
+		/// <param name="cbb"></param>
+		public virtual void RefreshComboBox(ComboBox cbb)
+		{
+			//---控件使能
+			if (cbb.InvokeRequired)
+			{
+				cbb.BeginInvoke((EventHandler)
+					//this.m_Button_COMMInit.Invoke((EventHandler)
+					(delegate
+					{
+						if (cbb.Enabled == false)
+						{
+							cbb.Enabled = true;
+						}
+					}));
+			}
+			else
+			{
+				if (cbb.Enabled == false)
+				{
+					cbb.Enabled = true;
+				}
+			}
+		}
+
+		/// <summary>
+		/// 刷新控件
+		/// </summary>
+		/// <param name="cbb"></param>
+		public virtual void RefreshComboBox(ComboBox cbb,bool isEnable)
+		{
+			//---控件使能
+			if (cbb.InvokeRequired)
+			{
+				cbb.BeginInvoke((EventHandler)
+					//this.m_Button_COMMInit.Invoke((EventHandler)
+					(delegate
+					{
+						cbb.Enabled = isEnable;
+					}));
+			}
+			else
+			{
+				cbb.Enabled = isEnable;
+			}
+		}
 
 		#endregion
 
 		#region 私有函数
 
-		/// <summary>
-		/// 添加事件处理函数
-		/// </summary>
 		private void AddEventHandler()
 		{
-			this.button_COMMInit.Click += new System.EventHandler(this.Button_Clik);
+			//---button 点击事件
+			this.button_COMMInit.Click += new System.EventHandler(this.Button_Click);
+			//---端口状态刷新事件
 			this.pictureBox_COMMState.Click += new EventHandler(this.PictureBox_Click);
-				 
+			//---端口移除事件
+			this.AddWatcherPortRemoveEvent();
 		}
 
 		#endregion

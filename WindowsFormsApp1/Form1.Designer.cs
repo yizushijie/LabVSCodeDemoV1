@@ -1,6 +1,6 @@
-﻿namespace TestForms
+﻿namespace WindowsFormsApp1
 {
-	partial class TestForm
+	partial class Form1
 	{
 		/// <summary>
 		/// 必需的设计器变量。
@@ -30,62 +30,49 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.richTextBoxEx1 = new Harry.LabUserControlPlus.RichTextBoxEx();
-			this.commSerialPortPlusFull1 = new Harry.LabCOMMPort.COMMSerialPortPlusFull();
 			this.commSerialPortPlus1 = new Harry.LabCOMMPort.COMMSerialPortPlus();
 			this.SuspendLayout();
 			// 
 			// richTextBoxEx1
 			// 
-			this.richTextBoxEx1.Location = new System.Drawing.Point(0, 339);
+			this.richTextBoxEx1.Location = new System.Drawing.Point(39, 166);
 			this.richTextBoxEx1.Name = "richTextBoxEx1";
-			this.richTextBoxEx1.Size = new System.Drawing.Size(420, 165);
-			this.richTextBoxEx1.TabIndex = 2;
+			this.richTextBoxEx1.Size = new System.Drawing.Size(647, 218);
+			this.richTextBoxEx1.TabIndex = 0;
 			this.richTextBoxEx1.Text = "";
-			// 
-			// commSerialPortPlusFull1
-			// 
-			this.commSerialPortPlusFull1.Location = new System.Drawing.Point(0, 60);
-			this.commSerialPortPlusFull1.m_COMMForm = null;
-			this.commSerialPortPlusFull1.m_COMMPort = null;
-			this.commSerialPortPlusFull1.m_COMMRichTextBox = null;
-			this.commSerialPortPlusFull1.Name = "commSerialPortPlusFull1";
-			this.commSerialPortPlusFull1.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.commSerialPortPlusFull1.Size = new System.Drawing.Size(157, 191);
-			this.commSerialPortPlusFull1.TabIndex = 1;
 			// 
 			// commSerialPortPlus1
 			// 
-			this.commSerialPortPlus1.Location = new System.Drawing.Point(0, 2);
+			this.commSerialPortPlus1.Location = new System.Drawing.Point(39, 36);
 			this.commSerialPortPlus1.m_COMMForm = null;
 			this.commSerialPortPlus1.m_COMMPort = null;
 			this.commSerialPortPlus1.m_COMMRichTextBox = null;
+			this.commSerialPortPlus1.m_COMMSerialPortParam = null;
+			this.commSerialPortPlus1.Margin = new System.Windows.Forms.Padding(4);
 			this.commSerialPortPlus1.Name = "commSerialPortPlus1";
 			this.commSerialPortPlus1.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.commSerialPortPlus1.Size = new System.Drawing.Size(267, 61);
-			this.commSerialPortPlus1.TabIndex = 0;
+			this.commSerialPortPlus1.Size = new System.Drawing.Size(356, 76);
+			this.commSerialPortPlus1.TabIndex = 1;
 			// 
-			// TestForm
+			// Form1
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(990, 516);
-			this.Controls.Add(this.richTextBoxEx1);
-			this.Controls.Add(this.commSerialPortPlusFull1);
+			this.ClientSize = new System.Drawing.Size(792, 515);
 			this.Controls.Add(this.commSerialPortPlus1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.Name = "TestForm";
+			this.Controls.Add(this.richTextBoxEx1);
+			this.Name = "Form1";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Form1";
-			this.Load += new System.EventHandler(this.TestForm_Load);
+			this.Load += new System.EventHandler(this.Form1_Load);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private Harry.LabCOMMPort.COMMSerialPortPlus commSerialPortPlus1;
-		private Harry.LabCOMMPort.COMMSerialPortPlusFull commSerialPortPlusFull1;
 		private Harry.LabUserControlPlus.RichTextBoxEx richTextBoxEx1;
+		private Harry.LabCOMMPort.COMMSerialPortPlus commSerialPortPlus1;
 	}
 }
 

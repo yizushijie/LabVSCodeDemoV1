@@ -31,15 +31,15 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(COMMBasePortPlus));
 			this.groupBox_COMMName = new System.Windows.Forms.GroupBox();
 			this.panel_COMMPortName = new System.Windows.Forms.Panel();
-			this.pictureBox_COMMState = new System.Windows.Forms.PictureBox();
 			this.button_COMMInit = new System.Windows.Forms.Button();
 			this.label_COMMName = new System.Windows.Forms.Label();
 			this.comboBox_COMMName = new System.Windows.Forms.ComboBox();
 			this.panel_COMM = new System.Windows.Forms.Panel();
+			this.pictureBox_COMMState = new System.Windows.Forms.PictureBox();
 			this.groupBox_COMMName.SuspendLayout();
 			this.panel_COMMPortName.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).BeginInit();
 			this.panel_COMM.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox_COMMName
@@ -57,13 +57,6 @@
 			this.panel_COMMPortName.Controls.Add(this.comboBox_COMMName);
 			resources.ApplyResources(this.panel_COMMPortName, "panel_COMMPortName");
 			this.panel_COMMPortName.Name = "panel_COMMPortName";
-			// 
-			// pictureBox_COMMState
-			// 
-			resources.ApplyResources(this.pictureBox_COMMState, "pictureBox_COMMState");
-			this.pictureBox_COMMState.Name = "pictureBox_COMMState";
-			this.pictureBox_COMMState.TabStop = false;
-			this.pictureBox_COMMState.Tag = "1";
 			// 
 			// button_COMMInit
 			// 
@@ -89,6 +82,13 @@
 			resources.ApplyResources(this.panel_COMM, "panel_COMM");
 			this.panel_COMM.Name = "panel_COMM";
 			// 
+			// pictureBox_COMMState
+			// 
+			resources.ApplyResources(this.pictureBox_COMMState, "pictureBox_COMMState");
+			this.pictureBox_COMMState.Name = "pictureBox_COMMState";
+			this.pictureBox_COMMState.TabStop = false;
+			this.pictureBox_COMMState.Tag = "1";
+			// 
 			// COMMBasePortPlus
 			// 
 			resources.ApplyResources(this, "$this");
@@ -98,8 +98,8 @@
 			this.groupBox_COMMName.ResumeLayout(false);
 			this.panel_COMMPortName.ResumeLayout(false);
 			this.panel_COMMPortName.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).EndInit();
 			this.panel_COMM.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).EndInit();
 			this.ResumeLayout(false);
 
         }

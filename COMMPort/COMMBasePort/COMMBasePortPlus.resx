@@ -372,13 +372,19 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHSFf/u3/w+2T6lYadR/UgAAAABJRU5ErkJggg==
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pictureBox_COMMState.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBox_COMMState.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 3</value>
+    <value>195, 4</value>
+  </data>
+  <data name="pictureBox_COMMState.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="pictureBox_COMMState.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>33, 31</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox_COMMState.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
@@ -398,11 +404,17 @@
   <data name="&gt;&gt;pictureBox_COMMState.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="button_COMMInit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="button_COMMInit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 3</value>
+    <value>236, 4</value>
+  </data>
+  <data name="button_COMMInit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="button_COMMInit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 25</value>
+    <value>99, 31</value>
   </data>
   <data name="button_COMMInit.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -425,17 +437,20 @@
   <data name="label_COMMName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label_COMMName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label_COMMName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 9</value>
+    <value>8, 11</value>
   </data>
   <data name="label_COMMName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 3, 1, 3</value>
+    <value>8, 4, 1, 4</value>
   </data>
   <data name="label_COMMName.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 2, 0</value>
+    <value>0, 0, 3, 0</value>
   </data>
   <data name="label_COMMName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 12</value>
+    <value>63, 15</value>
   </data>
   <data name="label_COMMName.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -455,14 +470,17 @@
   <data name="&gt;&gt;label_COMMName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="comboBox_COMMName.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="comboBox_COMMName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 5</value>
+    <value>76, 6</value>
   </data>
   <data name="comboBox_COMMName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 3, 3, 3</value>
+    <value>1, 4, 4, 4</value>
   </data>
   <data name="comboBox_COMMName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 20</value>
+    <value>109, 23</value>
   </data>
   <data name="comboBox_COMMName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -486,10 +504,13 @@
     <value>NoControl</value>
   </data>
   <data name="panel_COMMPortName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 17</value>
+    <value>4, 22</value>
+  </data>
+  <data name="panel_COMMPortName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel_COMMPortName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 33</value>
+    <value>340, 40</value>
   </data>
   <data name="panel_COMMPortName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -510,10 +531,16 @@
     <value>Fill</value>
   </data>
   <data name="groupBox_COMMName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>4, 4</value>
+  </data>
+  <data name="groupBox_COMMName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox_COMMName.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="groupBox_COMMName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 53</value>
+    <value>348, 66</value>
   </data>
   <data name="groupBox_COMMName.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -542,11 +569,14 @@
   <data name="panel_COMM.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 2</value>
   </data>
+  <data name="panel_COMM.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="panel_COMM.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel_COMM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 59</value>
+    <value>356, 74</value>
   </data>
   <data name="panel_COMM.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -567,13 +597,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
+    <value>8, 15</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 2, 0, 0</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 61</value>
+    <value>356, 76</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>COMMBasePortPlus</value>

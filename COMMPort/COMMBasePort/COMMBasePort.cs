@@ -22,19 +22,22 @@ namespace Harry.LabCOMMPort
 	/// </summary>
 	public enum USE_STATE : byte
     {
-        IDLE = 0,                       //---空闲状态
-        POLL_READ = 1,                  //---轮训读取状态
-        WRITE=2,                        //---写入状态
-        EVENT_READ=3,                   //---事件读取状态
-        ERROR = 4,                      //---错误状态
+        IDLE = 0,               //---空闲状态
+        POLL_READ = 1,          //---轮训读取状态
+        WRITE=2,                //---写入状态
+        EVENT_READ=3,           //---事件读取状态
+        ERROR = 4,              //---错误状态
     };
 
-    /// <summary>
-    /// 数据通讯结构
-    /// </summary>
-    public class COMMDataType
-    {
+	#region 通讯数据格式
+
+	/// <summary>
+	/// 数据通讯结构
+	/// </summary>
+	public class COMMDataType
+	{
 		#region 变量定义
+
 		/// <summary>
 		/// crc校验值
 		/// </summary>
@@ -43,17 +46,28 @@ namespace Harry.LabCOMMPort
 		/// <summary>
 		/// 使用的CRC方式
 		/// </summary>
-		public USE_CRC commCRC =USE_CRC.CRC_NONE;
+		public USE_CRC commCRCMode = USE_CRC.CRC_NONE;
 
 		/// <summary>
-		/// 数据长度
+		/// 数据原始长度
 		/// </summary>
-		public int commLemgth = 0;
+		public int commDefaultLength = 0;
+
+		/// <summary>
+		/// 数据的实际长度
+		/// </summary>
+		public int commLength = 0;
+
+		/// <summary>
+		/// 数据的原始格式
+		/// </summary>
+		public List<byte> commDefaultByte = null;
 
 		/// <summary>
 		/// 数据存储
 		/// </summary>
-		public List<byte> commByte=null;
+		public List<byte> commByte = null;
+
 		#endregion
 
 		#region 构造函数
@@ -63,95 +77,25 @@ namespace Harry.LabCOMMPort
 		/// </summary>
 		public COMMDataType()
 		{
-			this.commCRCVal = 0;
-			this.commCRC = USE_CRC.CRC_NONE;
-			this.commLemgth = 0;
-			this.commByte = null;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="crc"></param>
-		public COMMDataType(UInt32 crc)
-		{
-			this.commCRCVal = crc;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="crcVal"></param>
-		/// <param name="crcMode"></param>
-		public COMMDataType(UInt32 crcVal, USE_CRC crcMode)
-		{
-			this.commCRCVal = crcVal;
-			this.commCRC = crcMode;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="crcVal"></param>
-		/// <param name="crcMode"></param>
-		public COMMDataType(UInt32 crcVal, USE_CRC crcMode,byte[] commByte)
-		{
-			this.commCRCVal = crcVal;
-			this.commCRC = crcMode;
-			this.commByte = new List<byte>();
-			this.commByte.AddRange(commByte);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="crcVal"></param>
-		/// <param name="crcMode"></param>
-		public COMMDataType(UInt32 crcVal, USE_CRC crcMode, List<byte>commByte)
-		{
-			this.commCRCVal = crcVal;
-			this.commCRC = crcMode;
-			this.commByte = commByte;
-		}
-
-		#endregion
-
-		#region 函数定义
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Init()
-		{
-			this.commCRCVal = 0;
-			this.commCRC = USE_CRC.CRC_NONE;
-			this.commLemgth = 0;
-			this.commByte = null;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Init(byte[] commByte)
-		{
-
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public void Init(USE_CRC crcMode,byte[] commByte)
-		{
-
+			this.Init();
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="commByte"></param>
-		public void Init(List<byte> commByte)
+		public COMMDataType(int bufferSize, byte[] commByte)
 		{
+			this.Init(bufferSize,commByte);
+		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="commByte"></param>
+		public COMMDataType(int bufferSize, List<byte> commByte)
+		{
+			this.Init(bufferSize,commByte);
 		}
 
 		/// <summary>
@@ -159,28 +103,221 @@ namespace Harry.LabCOMMPort
 		/// </summary>
 		/// <param name="crcMode"></param>
 		/// <param name="commByte"></param>
-		public void Init(USE_CRC crcMode, List<byte> commByte)
+		public COMMDataType(int bufferSize, USE_CRC crcMode, byte[] commByte)
 		{
+			this.Init(bufferSize,crcMode, commByte);
+		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcVal"></param>
+		/// <param name="crcMode"></param>
+		public COMMDataType(int bufferSize, UInt32 crcVal, USE_CRC crcMode, byte[] commByte)
+		{
+			this.Init(bufferSize,crcVal, crcMode, commByte);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcVal"></param>
+		/// <param name="crcMode"></param>
+		public COMMDataType(int bufferSize, USE_CRC crcMode, List<byte> commByte)
+		{
+			this.Init(bufferSize, crcMode, commByte);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcVal"></param>
+		/// <param name="crcMode"></param>
+		public COMMDataType(int bufferSize, UInt32 crcVal, USE_CRC crcMode, List<byte> commByte)
+		{
+			this.Init(bufferSize, crcVal, crcMode, commByte);
 		}
 
 		#endregion
 
+		#region 私有函数
 
+		/// <summary>
+		/// 获取通讯数据
+		/// </summary>
+		private int  GetCOMMByte(int bufferSize)
+		{
+			int _return = 0;
+			if ((this.commDefaultByte==null)||(this.commDefaultByte.Count==0))
+			{
+				_return = 1 ;
+			}
+			else
+			{
+				//---数据总长度
+				this.commDefaultLength = this.commDefaultByte.Count;
+				this.commLength = this.commDefaultLength;
+				//---解析CRC
+				if ((this.commCRCMode==USE_CRC.CRC_CHECKSUM)||(this.commCRCMode==USE_CRC.CRC_CRC8))
+				{
+					this.commLength -= 1;
+					this.commCRCVal = this.commDefaultByte[this.commLength];
+				}
+				else if (this.commCRCMode==USE_CRC.CRC_CRC16)
+				{
+					this.commLength -= 2;
+					this.commCRCVal = this.commDefaultByte[this.commLength];
+					this.commCRCVal = (this.commCRCVal<<8)+this.commDefaultByte[this.commLength];
+				}
+				else if(this.commCRCMode==USE_CRC.CRC_CRC32)
+				{
+					this.commLength -= 2;
+					this.commCRCVal = this.commDefaultByte[this.commLength];
+					this.commCRCVal = (this.commCRCVal << 8) + this.commDefaultByte[this.commLength + 1];
+					this.commCRCVal = (this.commCRCVal << 8) + this.commDefaultByte[this.commLength + 2];
+					this.commCRCVal = (this.commCRCVal << 8) + this.commDefaultByte[this.commLength + 2];
+				}
+
+				//---数据缓存区
+				if (this.commByte==null)
+				{
+					this.commByte = new List<byte>();
+				}
+
+				//---数据拷贝
+				for ( _return = 0; _return < this.commLength; _return++)
+				{
+					this.commByte.Add(this.commDefaultByte[_return]);
+				}
+
+				//---数据传输最大缓存区
+				if (bufferSize < 250)
+				{
+					this.commLength -= 2;
+					this.commByte[1] = (byte)(this.commLength);
+				}
+				else
+				{
+					this.commLength -= 3;
+					this.commByte[1] = (byte)(this.commLength >> 8);
+					this.commByte[2] = (byte)(this.commLength);
+				}
+				_return = 0;
+			}
+			return _return;
+		}
+
+		#endregion
+
+		#region 公共函数
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Init()
+		{
+			this.commCRCVal = 0;
+			this.commCRCMode = USE_CRC.CRC_NONE;
+			this.commDefaultLength = 0;
+			this.commDefaultByte = null;
+			this.commByte = null;
+
+			return 0;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int  Init(int bufferSize, byte[] commByte)
+		{
+			this.commDefaultByte = new List<byte>();
+			this.commDefaultByte.AddRange(commByte);
+			return this.GetCOMMByte(bufferSize);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="commByte"></param>
+		public int Init(int bufferSize,List<byte> commByte)
+		{
+			this.commDefaultByte = commByte;
+			return this.GetCOMMByte(bufferSize);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public int Init(int bufferSize, USE_CRC crcMode, byte[] commByte)
+		{
+			this.commCRCMode = crcMode;
+			this.commDefaultByte = new List<byte>();
+			this.commDefaultByte.AddRange(commByte);
+			return this.GetCOMMByte(bufferSize);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcVal"></param>
+		/// <param name="crcMode"></param>
+		public int Init(int bufferSize, UInt32 crcVal, USE_CRC crcMode, byte[] commByte)
+		{
+			this.commCRCVal = crcVal;
+			this.commCRCMode = crcMode;
+			this.commDefaultByte = new List<byte>();
+			this.commDefaultByte.AddRange(commByte);
+			return this.GetCOMMByte(bufferSize);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcMode"></param>
+		/// <param name="commByte"></param>
+		public int Init(int bufferSize, USE_CRC crcMode, List<byte> commByte)
+		{
+			this.commCRCMode = crcMode;
+			this.commDefaultByte = commByte;
+			return this.GetCOMMByte(bufferSize);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="crcVal"></param>
+		/// <param name="crcMode"></param>
+		/// <param name="commByte"></param>
+		public int Init(int bufferSize, UInt32 crcVal, USE_CRC crcMode, List<byte> commByte)
+		{
+			this.commCRCVal = crcVal;
+			this.commCRCMode = crcMode;
+			this.commDefaultByte = commByte;
+			return this.GetCOMMByte(bufferSize);
+		}
+		#endregion
 	};
 
-    /// <summary>
-    /// 通讯串口的参数
-    /// </summary>
-    public class COMMSerialPortParam
-    {
+	#endregion
+
+
+	#region 串口端口的配置参数
+
+	/// <summary>
+	/// 通讯串口的参数
+	/// </summary>
+	public class COMMSerialPortParam
+	{
 		#region 变量定义
-		public string name=null;
-		public string baudRate="115200";
-		public string parity="NONE";
-		public string dataBits="8";
-		public string stopBits="1";
+
+		public string name = null;
+		public string baudRate = "115200";
+		public string parity = "NONE";
+		public string dataBits = "8";
+		public string stopBits = "1";
+
 		#endregion
+
 		#region 构造函数
 
 		/// <summary>
@@ -235,7 +372,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="baudRate"></param>
 		/// <param name="parity"></param>
 		/// <param name="dataBits"></param>
-		public COMMSerialPortParam(string name, string baudRate, string parity, string dataBits )
+		public COMMSerialPortParam(string name, string baudRate, string parity, string dataBits)
 		{
 			this.name = name;
 			this.baudRate = baudRate;
@@ -332,7 +469,11 @@ namespace Harry.LabCOMMPort
 
 	};
 
-	public partial class COMMBasePort:IDisposable
+	#endregion
+
+	#region 通讯端口的基类
+
+	public partial class COMMBasePort : IDisposable
 	{
 		#region 变量定义
 
@@ -396,10 +537,10 @@ namespace Harry.LabCOMMPort
 		/// </summary>
 		private Form commForm = null;
 
-        /// <summary>
-        /// 通讯写数据报头
-        /// </summary>
-        private byte commWriteID = 0x55;
+		/// <summary>
+		/// 通讯写数据报头
+		/// </summary>
+		private byte commWriteID = 0x55;
 
 		/// <summary>
 		/// 通讯读数据报头
@@ -690,7 +831,7 @@ namespace Harry.LabCOMMPort
 			}
 			set
 			{
-				if (this.commRichTextBox==null)
+				if (this.commRichTextBox == null)
 				{
 					this.commRichTextBox = new RichTextBox();
 				}
@@ -709,7 +850,7 @@ namespace Harry.LabCOMMPort
 			}
 			set
 			{
-				if (this.commComboBox==null)
+				if (this.commComboBox == null)
 				{
 					this.commComboBox = new ComboBox();
 				}
@@ -728,7 +869,7 @@ namespace Harry.LabCOMMPort
 			}
 			set
 			{
-				if (this.commSerialPortParam==null)
+				if (this.commSerialPortParam == null)
 				{
 					this.commSerialPortParam = new COMMSerialPortParam();
 				}
@@ -900,7 +1041,7 @@ namespace Harry.LabCOMMPort
 		{
 			return 1;
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -932,7 +1073,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="vid"></param>
 		/// <param name="msg"></param>
 		/// <returns></returns>
-		public virtual int Init(int pid,int vid, RichTextBox msg = null)
+		public virtual int Init(int pid, int vid, RichTextBox msg = null)
 		{
 			return 1;
 		}
@@ -942,7 +1083,7 @@ namespace Harry.LabCOMMPort
 		/// </summary>
 		/// <param name="cbb"></param>
 		/// <param name="msg"></param>
-		public virtual  void GetPortNames(ComboBox cbb, RichTextBox msg = null)
+		public virtual void GetPortNames(ComboBox cbb, RichTextBox msg = null)
 		{
 
 		}
@@ -954,7 +1095,7 @@ namespace Harry.LabCOMMPort
 		/// <returns></returns>
 		public virtual void SetMultiDevice(bool isMultiDevice, byte multiDeviceID)
 		{
-			
+
 		}
 
 		/// <summary>
@@ -974,7 +1115,7 @@ namespace Harry.LabCOMMPort
 		/// <returns></returns>
 		public virtual void ClearMultiDevice()
 		{
-			
+
 		}
 
 
@@ -994,7 +1135,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="cbb"></param>
 		/// <param name="msg"></param>
 		/// <returns></returns>
-		public virtual bool AddWatcherPort(Form argForm,ComboBox cbb = null, RichTextBox msg = null)
+		public virtual bool AddWatcherPort(Form argForm, ComboBox cbb = null, RichTextBox msg = null)
 		{
 			return false;
 		}
@@ -1123,7 +1264,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="cmd"></param>
 		/// <param name="msg"></param>
 		/// <returns></returns>
-		public virtual int WriteToDevice(int argIndex,byte[] cmd, RichTextBox msg = null)
+		public virtual int WriteToDevice(int argIndex, byte[] cmd, RichTextBox msg = null)
 		{
 			return 1;
 		}
@@ -1159,7 +1300,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="cmd"></param>
 		/// <param name="msg"></param>
 		/// <returns></returns>
-		public virtual int WriteToDevice(string argName,ref byte[] cmd, RichTextBox msg = null)
+		public virtual int WriteToDevice(string argName, ref byte[] cmd, RichTextBox msg = null)
 		{
 			return 1;
 		}
@@ -1184,7 +1325,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="timeout"></param>
 		/// <param name="msg"></param>
 		/// <returns></returns>
-		public virtual int ReadFromDevice(int argIndex,ref byte[] cmd, int timeout = 200, RichTextBox msg = null)
+		public virtual int ReadFromDevice(int argIndex, ref byte[] cmd, int timeout = 200, RichTextBox msg = null)
 		{
 			return 1;
 		}
@@ -1231,6 +1372,62 @@ namespace Harry.LabCOMMPort
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="argName"></param>
+		/// <param name="cmd"></param>
+		/// <param name="res"></param>
+		/// <param name="timeout"></param>
+		/// <param name="msg"></param>
+		/// <returns></returns>
+		public virtual int SendCmdAndReadResponse(string argName,byte[] cmd, ref byte[] res, int timeout = 200, RichTextBox msg = null)
+		{
+			return 1;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="argName"></param>
+		/// <param name="cmd"></param>
+		/// <param name="res"></param>
+		/// <param name="timeout"></param>
+		/// <param name="msg"></param>
+		/// <returns></returns>
+		public virtual int SendCmdAndReadResponse(string argName, ref byte[] cmd, ref byte[] res, int timeout = 200, RichTextBox msg = null)
+		{
+			return 1;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="argName"></param>
+		/// <param name="cmd"></param>
+		/// <param name="res"></param>
+		/// <param name="timeout"></param>
+		/// <param name="msg"></param>
+		/// <returns></returns>
+		public virtual int SendCmdAndReadResponse(int argIndex, byte[] cmd, ref byte[] res, int timeout = 200, RichTextBox msg = null)
+		{
+			return 1;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="argName"></param>
+		/// <param name="cmd"></param>
+		/// <param name="res"></param>
+		/// <param name="timeout"></param>
+		/// <param name="msg"></param>
+		/// <returns></returns>
+		public virtual int SendCmdAndReadResponse(int argIndex, ref byte[] cmd, ref byte[] res, int timeout = 200, RichTextBox msg = null)
+		{
+			return 1;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <returns></returns>
 		public virtual int OpenDevice()
 		{
@@ -1265,7 +1462,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="argName"></param>
 		/// <param name="msg"></param>
 		/// <returns></returns>
-		public virtual int OpenDevice(string argName,int baudRate, RichTextBox msg = null)
+		public virtual int OpenDevice(string argName, int baudRate, RichTextBox msg = null)
 		{
 			return 1;
 		}
@@ -1289,7 +1486,6 @@ namespace Harry.LabCOMMPort
 		{
 			return 1;
 		}
-
 
 		/// <summary>
 		/// 
@@ -1341,7 +1537,7 @@ namespace Harry.LabCOMMPort
 		{
 			return false;
 		}
-		
+
 		#endregion
 
 		#region 事件定义
@@ -1355,33 +1551,33 @@ namespace Harry.LabCOMMPort
 		public delegate void COMMEventHandler(object sender, EventArgs e);
 
 
-        /// <summary>
-        /// 接收事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        [Description("委托接收事件"), Category("自定义事件")]
-        private event COMMEventHandler OnReceivedEvent = null;
+		/// <summary>
+		/// 接收事件
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		[Description("委托接收事件"), Category("自定义事件")]
+		private event COMMEventHandler OnReceivedEvent = null;
 
-        /// <summary>
-        /// 事件的属性为读写
-        /// </summary>
-        public virtual COMMEventHandler m_OnReceivedEvent
-        {
-            get
-            {
-                return this.OnReceivedEvent;
-            }
-            set
-            {
-                //---判断事件是否为空，避免多次进入
-                if (this.OnReceivedEvent!= null)
-                {
-                    this.OnReceivedEvent = null;
-                }
-                this.OnReceivedEvent = value;
-            }
-        }
+		/// <summary>
+		/// 事件的属性为读写
+		/// </summary>
+		public virtual COMMEventHandler m_OnReceivedEvent
+		{
+			get
+			{
+				return this.OnReceivedEvent;
+			}
+			set
+			{
+				//---判断事件是否为空，避免多次进入
+				if (this.OnReceivedEvent != null)
+				{
+					this.OnReceivedEvent = null;
+				}
+				this.OnReceivedEvent = value;
+			}
+		}
 
 		/// <summary>
 		/// 接收事件
@@ -1411,19 +1607,18 @@ namespace Harry.LabCOMMPort
 			}
 		}
 
-
 		/// <summary>
 		/// 通讯数据接收事件
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		public virtual void OnReceivedEventHandler(object sender, EventArgs e)
-        {
+		{
 
-        }
-
-		
+		}
 		#endregion
-
 	}
+
+	#endregion
+
 }

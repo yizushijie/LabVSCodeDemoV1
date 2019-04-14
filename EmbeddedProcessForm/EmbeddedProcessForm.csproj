@@ -44,9 +44,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WinAPI">
-      <HintPath>..\WinAPI\bin\Debug\WinAPI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmbeddedProcessForm.cs">
@@ -84,10 +81,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NPlot\NPlot.csproj">
-      <Project>{e4b99177-77a3-4c92-b881-a6cb57e3bf89}</Project>
-      <Name>NPlot</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UserControlPlus\UserControlPlus.csproj">
       <Project>{E54A51A6-A054-4F21-AC22-A827B5EF4D36}</Project>
       <Name>UserControlPlus</Name>

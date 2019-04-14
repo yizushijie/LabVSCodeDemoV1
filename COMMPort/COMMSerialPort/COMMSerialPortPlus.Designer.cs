@@ -28,8 +28,28 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			components = new System.ComponentModel.Container();
+			this.panel_COMMPortName.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).BeginInit();
+			this.panel_COMM.SuspendLayout();
+			this.groupBox_COMMName.SuspendLayout();
+			this.SuspendLayout();
+			// 
+			// comboBox_COMMName
+			// 
+			this.comboBox_COMMName.IntegralHeight = false;
+			// 
+			// COMMSerialPortPlus
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Name = "COMMSerialPortPlus";
+			this.panel_COMMPortName.ResumeLayout(false);
+			this.panel_COMMPortName.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).EndInit();
+			this.panel_COMM.ResumeLayout(false);
+			this.groupBox_COMMName.ResumeLayout(false);
+			this.ResumeLayout(false);
+
 		}
 
 		#endregion
