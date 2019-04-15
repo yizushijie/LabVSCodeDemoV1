@@ -85,7 +85,7 @@ namespace Harry.LabCOMMPort
 					return;
 				}
 				_borderSingleStyle = value;
-				Invalidate();
+				this.Invalidate();
 			}
 		}
 
@@ -104,7 +104,7 @@ namespace Harry.LabCOMMPort
 					return;
 				}
 				_borderColor = value;
-				Invalidate();
+				this.Invalidate();
 			}
 		}
 
@@ -122,17 +122,17 @@ namespace Harry.LabCOMMPort
 				prms.Style &= ~0x40000;        //WS_SIZEBOX       去除
 				prms.Style &= ~0x800000;       //WS_BORDER        去除
 				prms.Style &= ~0x400000;       //WS_DLGFRAME      去除
-											   //prms.Style &= ~0x20000;      //WS_MINIMIZEBOX   去除
-											   //prms.Style &= ~0x10000;      //WS_MAXIMIZEBOX   去除
+				//prms.Style &= ~0x20000;      //WS_MINIMIZEBOX   去除
+				//prms.Style &= ~0x10000;      //WS_MAXIMIZEBOX   去除
 
 				prms.ExStyle = 0;
 				//prms.ExStyle |= 0x1;         //WS_EX_DLGMODALFRAME 立体边框
 				//prms.ExStyle |= 0x8;         //WS_EX_TOPMOST
 				prms.ExStyle |= 0x10000;       //WS_EX_CONTROLPARENT
-											   //prms.ExStyle |= 0x80;        //WS_EX_TOOLWINDOW
-											   //prms.ExStyle |= 0x100;       //WS_EX_WINDOWEDGE
-											   //prms.ExStyle |= 0x8000000;   //WS_EX_NOACTIVATE
-											   //prms.ExStyle |= 0x4;         //WS_EX_NOPARENTNOTIFY
+				//prms.ExStyle |= 0x80;        //WS_EX_TOOLWINDOW
+				//prms.ExStyle |= 0x100;       //WS_EX_WINDOWEDGE
+				//prms.ExStyle |= 0x8000000;   //WS_EX_NOACTIVATE
+				//prms.ExStyle |= 0x4;         //WS_EX_NOPARENTNOTIFY
 
 				return prms;
 			}
@@ -145,7 +145,7 @@ namespace Harry.LabCOMMPort
 			_mouseMsgFilter = new AppMouseMessageHandler(this);
 
 			//初始化基类属性
-			InitBaseProperties();
+			this.InitBaseProperties();
 
 			//初始化边框相关
 			_borderType = BorderStyle.Fixed3D;
@@ -159,8 +159,9 @@ namespace Harry.LabCOMMPort
 		/// </summary>
 		public virtual void CloseForm()
 		{
+			this.Hide();
 			//---关闭窗体
-			this.Dispose();
+			this.Dispose(true);
 		}
 
 		/// <summary>
@@ -170,7 +171,10 @@ namespace Harry.LabCOMMPort
 		protected override void OnLoad(EventArgs e)
 		{
 			//防止重入
-			if (_isShowDialogAgain) { return; }
+			if (_isShowDialogAgain)
+			{
+				return;
+			}
 
 			//需得减掉两层边框宽度，运行时尺寸才与设计时完全相符，原因不明
 			//确定与ControlBox、FormBorderStyle有关，但具体联系不明
@@ -185,10 +189,16 @@ namespace Harry.LabCOMMPort
 		protected override void OnShown(EventArgs e)
 		{
 			//防止重入
-			if (_isShowDialogAgain) { return; }
+			if (_isShowDialogAgain)
+			{
+				return;
+			}
 
 			//在OnShown中为首次ShowDialog设标记
-			if (Modal) { _isShowDialogAgain = true; }
+			if (Modal)
+			{
+				_isShowDialogAgain = true;
+			}
 
 			if (!DesignMode)
 			{
@@ -202,12 +212,15 @@ namespace Harry.LabCOMMPort
 			base.OnShown(e);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="m"></param>
 		protected override void WndProc(ref Message m)
 		{
 			//当本窗体作为ShowDialog弹出时，在收到WM_SHOWWINDOW前，Owner会被Disable
 			//故需在收到该消息后立即Enable它，不然Owner窗体和本窗体都将处于无响应状态
-			if (m.Msg == 0x18 && m.WParam != IntPtr.Zero && m.LParam == IntPtr.Zero
-				&& Modal && Owner != null && !Owner.IsDisposed)
+			if (m.Msg == 0x18 && m.WParam != IntPtr.Zero && m.LParam == IntPtr.Zero&& Modal && Owner != null && !Owner.IsDisposed)
 			{
 				if (Owner.IsMdiChild)
 				{
@@ -224,7 +237,10 @@ namespace Harry.LabCOMMPort
 			base.WndProc(ref m);
 		}
 
-		//画边框
+		/// <summary>
+		/// 画边框
+		/// </summary>
+		/// <param name="e"></param>
 		protected override void OnPaintBackground(PaintEventArgs e)
 		{
 			base.OnPaintBackground(e);
@@ -239,7 +255,10 @@ namespace Harry.LabCOMMPort
 			}
 		}
 
-		//显示后添加鼠标消息筛选器以开始捕捉，隐藏时则移除筛选器。之所以不放Dispose中是想尽早移除筛选器
+		/// <summary>
+		/// 显示后添加鼠标消息筛选器以开始捕捉，隐藏时则移除筛选器。之所以不放Dispose中是想尽早移除筛选器
+		/// </summary>
+		/// <param name="e"></param>
 		protected override void OnVisibleChanged(EventArgs e)
 		{
 			if (!DesignMode)
@@ -250,8 +269,11 @@ namespace Harry.LabCOMMPort
 			base.OnVisibleChanged(e);
 		}
 
-		//实现窗体客户区拖动
-		//在WndProc中实现这个较麻烦，所以放到这里做
+		/// <summary>
+		/// 实现窗体客户区拖动
+		/// 在WndProc中实现这个较麻烦，所以放到这里做
+		/// </summary>
+		/// <param name="e"></param>
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
 			//让鼠标点击客户区时达到与点击标题栏一样的效果，以此实现客户区拖动
@@ -267,7 +289,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="control">显示在该控件下方</param>
 		public DialogResult ShowDialog(Control control)
 		{
-			return ShowDialog(control, 0, control.Height);
+			return this.ShowDialog(control, 0, control.Height);
 		}
 
 		/// <summary>
@@ -278,7 +300,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="offsetY">相对control垂直偏移</param>
 		public DialogResult ShowDialog(Control control, int offsetX, int offsetY)
 		{
-			return ShowDialog(control, new Point(offsetX, offsetY));
+			return this.ShowDialog(control, new Point(offsetX, offsetY));
 		}
 
 		/// <summary>
@@ -297,7 +319,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="item">显示在该工具栏项的下方</param>
 		public DialogResult ShowDialog(ToolStripItem item)
 		{
-			return ShowDialog(item, 0, item.Height);
+			return this.ShowDialog(item, 0, item.Height);
 		}
 
 		/// <summary>
@@ -308,7 +330,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="offsetY">相对item垂直偏移</param>
 		public DialogResult ShowDialog(ToolStripItem item, int offsetX, int offsetY)
 		{
-			return ShowDialog(item, new Point(offsetX, offsetY));
+			return this.ShowDialog(item, new Point(offsetX, offsetY));
 		}
 
 		/// <summary>
@@ -327,7 +349,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="control">显示在该控件下方</param>
 		public void Show(Control control)
 		{
-			Show(control, 0, control.Height);
+			this.Show(control, 0, control.Height);
 		}
 
 		/// <summary>
@@ -338,7 +360,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="offsetY">相对control垂直偏移</param>
 		public void Show(Control control, int offsetX, int offsetY)
 		{
-			Show(control, new Point(offsetX, offsetY));
+			this.Show(control, new Point(offsetX, offsetY));
 		}
 
 		/// <summary>
@@ -357,7 +379,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="item">显示在该工具栏下方</param>
 		public void Show(ToolStripItem item)
 		{
-			Show(item, 0, item.Height);
+			this.Show(item, 0, item.Height);
 		}
 
 		/// <summary>
@@ -368,7 +390,7 @@ namespace Harry.LabCOMMPort
 		/// <param name="offsetY">相对item垂直偏移</param>
 		public void Show(ToolStripItem item, int offsetX, int offsetY)
 		{
-			Show(item, new Point(offsetX, offsetY));
+			this.Show(item, new Point(offsetX, offsetY));
 		}
 
 		/// <summary>
@@ -392,8 +414,36 @@ namespace Harry.LabCOMMPort
 				return System.Windows.Forms.DialogResult.None;
 			}
 
+			if (base.Visible)
+			{
+				return System.Windows.Forms.DialogResult.None;
+			}
+
 			this.SetLocationAndOwner(controlOrItem, offset);
-			return base.ShowDialog();
+			DialogResult _return= System.Windows.Forms.DialogResult.None;
+
+			try
+			{
+				if (this.InvokeRequired)
+				{
+					this.Invoke((EventHandler)
+						(delegate
+						{
+							_return = base.ShowDialog();
+						}
+						));
+				}
+				else
+				{
+					_return = base.ShowDialog();
+				}
+			}
+			catch 
+			{
+				throw new NotImplementedException();
+			}
+			
+			return _return;
 		}
 
 		/// <summary>
@@ -474,28 +524,58 @@ namespace Harry.LabCOMMPort
 		//屏蔽原方法
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		[Obsolete("请使用别的重载！", true)]
-		public new DialogResult ShowDialog() { throw new NotImplementedException(); }
+		public new DialogResult ShowDialog()
+		{
+			throw new NotImplementedException();
+		}
 
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		[Obsolete("请使用别的重载！", true)]
-		public new DialogResult ShowDialog(IWin32Window owner) { throw new NotImplementedException(); }
+		public new DialogResult ShowDialog(IWin32Window owner)
+		{
+			throw new NotImplementedException();
+		}
 
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		[Obsolete("请使用别的重载！", true)]
-		public new void Show() { throw new NotImplementedException(); }
+		public new void Show()
+		{
+			throw new NotImplementedException();
+		}
 
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		[Obsolete("请使用别的重载！", true)]
-		public new void Show(IWin32Window owner) { throw new NotImplementedException(); }
+		public new void Show(IWin32Window owner)
+		{
+			throw new NotImplementedException();
+		}
 
 		//屏蔽原属性
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		[Obsolete("禁用该属性！", true)]
-		public new bool ControlBox { get { return false; } set { } }
+		public new bool ControlBox
+		{
+			get
+			{
+				return false;
+			}
+			set
+			{
+			}
+		}
 
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		[Obsolete("设置边框请使用Border相关属性！", true)]
-		public new FormBorderStyle FormBorderStyle { get { return System.Windows.Forms.FormBorderStyle.SizableToolWindow; } set { } }
+		public new FormBorderStyle FormBorderStyle
+		{
+			get
+			{
+				return System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+			}
+			set
+			{
+			}
+		}
 
 		
 		//[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -505,7 +585,17 @@ namespace Harry.LabCOMMPort
 
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		[Obsolete("禁用该属性！", true)]
-		public new bool HelpButton { get { return false; } set { } }
+		public new bool HelpButton
+		{
+			get
+			{
+				return false;
+			}
+			set
+			{
+
+			}
+		}
 
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		[Obsolete("禁用该属性！", true)]

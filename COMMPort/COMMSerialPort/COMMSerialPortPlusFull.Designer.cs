@@ -36,7 +36,7 @@
 			this.label_COMMPortDataBits = new System.Windows.Forms.Label();
 			this.comboBox_COMMPortParity = new System.Windows.Forms.ComboBox();
 			this.label_COMMPortParity = new System.Windows.Forms.Label();
-			this.panel_COMMPortName.SuspendLayout();
+			this.panel_COMMName.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).BeginInit();
 			this.panel_COMM.SuspendLayout();
 			this.groupBox_COMMName.SuspendLayout();
@@ -44,28 +44,28 @@
 			// 
 			// panel_COMMPortName
 			// 
-			this.panel_COMMPortName.Controls.Add(this.comboBox_COMMPortParity);
-			this.panel_COMMPortName.Controls.Add(this.label_COMMPortParity);
-			this.panel_COMMPortName.Controls.Add(this.comboBox_COMMPortDataBits);
-			this.panel_COMMPortName.Controls.Add(this.label_COMMPortDataBits);
-			this.panel_COMMPortName.Controls.Add(this.comboBox_COMMPortStopBits);
-			this.panel_COMMPortName.Controls.Add(this.label_COMMPortStopBits);
-			this.panel_COMMPortName.Controls.Add(this.comboBox_COMMPortBaudRate);
-			this.panel_COMMPortName.Controls.Add(this.label_COMMPortBaudRate);
-			this.panel_COMMPortName.Location = new System.Drawing.Point(5, 23);
-			this.panel_COMMPortName.Margin = new System.Windows.Forms.Padding(5);
-			this.panel_COMMPortName.Size = new System.Drawing.Size(189, 199);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMName, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.button_COMMInit, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.pictureBox_COMMState, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.label_COMMPortBaudRate, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMPortBaudRate, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.label_COMMPortStopBits, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMPortStopBits, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.label_COMMPortDataBits, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMPortDataBits, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.label_COMMPortParity, 0);
-			this.panel_COMMPortName.Controls.SetChildIndex(this.comboBox_COMMPortParity, 0);
+			this.panel_COMMName.Controls.Add(this.comboBox_COMMPortParity);
+			this.panel_COMMName.Controls.Add(this.label_COMMPortParity);
+			this.panel_COMMName.Controls.Add(this.comboBox_COMMPortDataBits);
+			this.panel_COMMName.Controls.Add(this.label_COMMPortDataBits);
+			this.panel_COMMName.Controls.Add(this.comboBox_COMMPortStopBits);
+			this.panel_COMMName.Controls.Add(this.label_COMMPortStopBits);
+			this.panel_COMMName.Controls.Add(this.comboBox_COMMPortBaudRate);
+			this.panel_COMMName.Controls.Add(this.label_COMMPortBaudRate);
+			this.panel_COMMName.Location = new System.Drawing.Point(5, 23);
+			this.panel_COMMName.Margin = new System.Windows.Forms.Padding(5);
+			this.panel_COMMName.Size = new System.Drawing.Size(189, 199);
+			this.panel_COMMName.Controls.SetChildIndex(this.comboBox_COMMName, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.button_COMMInit, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.pictureBox_COMMState, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.label_COMMPortBaudRate, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.comboBox_COMMPortBaudRate, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.label_COMMPortStopBits, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.comboBox_COMMPortStopBits, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.label_COMMPortDataBits, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.comboBox_COMMPortDataBits, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.label_COMMPortParity, 0);
+			this.panel_COMMName.Controls.SetChildIndex(this.comboBox_COMMPortParity, 0);
 			// 
 			// pictureBox_COMMState
 			// 
@@ -218,8 +218,8 @@
 			this.Margin = new System.Windows.Forms.Padding(5);
 			this.Name = "COMMSerialPortPlusFull";
 			this.Size = new System.Drawing.Size(209, 239);
-			this.panel_COMMPortName.ResumeLayout(false);
-			this.panel_COMMPortName.PerformLayout();
+			this.panel_COMMName.ResumeLayout(false);
+			this.panel_COMMName.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).EndInit();
 			this.panel_COMM.ResumeLayout(false);
 			this.groupBox_COMMName.ResumeLayout(false);

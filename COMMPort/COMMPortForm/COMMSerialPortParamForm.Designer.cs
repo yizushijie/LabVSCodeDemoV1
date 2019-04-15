@@ -55,8 +55,11 @@
 			this.Text = "COMMSerialPortParamForm";
 			this.ResumeLayout(false);
 
-			this.commSerialPortPlusFullParam.button_COMMInit.Text = "配置设备";
-
+			//this.commSerialPortPlusFullParam.m_COMMComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+			//this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortBaudRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+			//this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortDataBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+			//this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortStopBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+			//this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortParity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
 		}
 
 		#endregion

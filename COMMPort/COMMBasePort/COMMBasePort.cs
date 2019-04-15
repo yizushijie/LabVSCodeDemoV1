@@ -570,7 +570,7 @@ namespace Harry.LabCOMMPort
 		/// <summary>
 		/// 串口使用的参数
 		/// </summary>
-		private COMMSerialPortParam commSerialPortParam = null;
+		private COMMSerialPortParam commSerialPortParam = new COMMSerialPortParam();
 
 		#endregion
 

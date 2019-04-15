@@ -6,7 +6,7 @@ namespace Harry.LabCOMMPort
 {
 	public class COMMUSBPort:COMMBasePort
     {
-
+		
 		#region 事件定义
 
 		/// <summary>

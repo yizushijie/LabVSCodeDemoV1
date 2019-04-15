@@ -7,13 +7,8 @@ namespace Harry.LabCOMMPort
 {
 	public partial class COMMSerialPortPlus : COMMBasePortPlus
 	{
-
 		#region 变量定义
-		/// <summary>
-		/// 右键功能按键
-		/// </summary>
-		private ContextMenuStrip usedContextMenuStrip = new ContextMenuStrip();
-
+		
 		#endregion
 
 		#region 属性定义
@@ -155,7 +150,7 @@ namespace Harry.LabCOMMPort
 			InitializeComponent();
 			base.Init();
 
-			this.AddCOMMSerialPortParam();
+			this.AddEventHandler();
 
 			//this.AddWatcherPortRemoveEvent();
 		}
@@ -168,7 +163,7 @@ namespace Harry.LabCOMMPort
 
 			base.Init(argForm);
 
-			this.AddCOMMSerialPortParam();
+			this.AddEventHandler();
 
 			//this.AddWatcherPortRemoveEvent();
 		}
@@ -181,7 +176,7 @@ namespace Harry.LabCOMMPort
 
 			base.Init(argRichTextBox);
 
-			this.AddCOMMSerialPortParam();
+			this.AddEventHandler();
 
 			//this.AddWatcherPortRemoveEvent();
 		}
@@ -195,7 +190,7 @@ namespace Harry.LabCOMMPort
 
 			base.Init(argForm,argRichTextBox);
 
-			this.AddCOMMSerialPortParam();
+			this.AddEventHandler();
 
 			//this.AddWatcherPortRemoveEvent();
 		}
@@ -208,7 +203,7 @@ namespace Harry.LabCOMMPort
 			InitializeComponent();
 			this.Init(argForm, argCOMM,argRichTextBox);
 
-			this.AddCOMMSerialPortParam();
+			this.AddEventHandler();
 
 			//this.AddWatcherPortRemoveEvent();
 		}
@@ -280,60 +275,6 @@ namespace Harry.LabCOMMPort
 			}
 		}
 
-		/*
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		public override void AddWatcherPortRemove(object sender, EventArgs e)
-		{
-			if ((this.m_COMMPort.IsAttached()==false)&&(this.button_COMMInit.Text=="关闭设备"))
-			{
-				if (this.m_Button_COMMInit.InvokeRequired)
-				{
-					this.m_Button_COMMInit.BeginInvoke((EventHandler)
-					//this.m_Button_COMMInit.Invoke((EventHandler)
-								 (delegate
-								 {
-									 this.m_Button_COMMInit.Text = "打开设备";
-								 }));
-				}
-				else
-				{
-					this.m_Button_COMMInit.Text = "打开设备";
-				}
-				//---执行端口关闭
-				this.m_COMMPort.CloseDevice();
-				//---刷新端口的只是ICO图标
-				if (this.m_PictureBox_COMMState.InvokeRequired)
-				{
-					this.m_PictureBox_COMMState.BeginInvoke((EventHandler)
-							 //this.m_PictureBox_COMMState.Invoke((EventHandler)
-							 (delegate
-							 {
-								 this.m_PictureBox_COMMState.Image = Properties.Resources.lost;
-							 }));
-				}
-				else
-				{
-					this.m_PictureBox_COMMState.Image = Properties.Resources.lost;
-				}
-			}
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public override void AddWatcherPortRemoveEvent()
-		{
-			if (this.m_COMMPort != null)
-			{
-				this.m_COMMPort.m_OnRemoveDeviceEvent = AddWatcherPortRemove;
-			}
-		}
-		*/
-
 		/// <summary>
 		/// 设置参数
 		/// </summary>
@@ -343,7 +284,7 @@ namespace Harry.LabCOMMPort
 		{
 			if ((this.m_COMMComboBox.Text!=null)&&(this.m_COMMComboBox.Items.Count>0))
 			{
-				COMMBaseForm p = new COMMSerialPortParamForm(this.m_COMMComboBox.Text);
+				COMMSerialPortParamForm p = new COMMSerialPortParamForm(this.m_COMMComboBox.Text);
 
 				if (p.ShowDialog(this.m_COMMComboBox) != System.Windows.Forms.DialogResult.OK)
 				{
@@ -365,29 +306,76 @@ namespace Harry.LabCOMMPort
 			}
 		}
 
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ComboBoxMouseDown_Click(object sender, MouseEventArgs e)
+		{
+			ComboBox cbb = (ComboBox)sender;
+			switch (cbb.Name)
+			{
+				case "comboBox_COMMName":
+					//---判断鼠标按下的按键
+					if (e.Button==MouseButtons.Right)
+					{
+						//---鼠标右键配置通信端口的参数
+						this.SetCOMMSerialPortParam();
+					}
+					break;
+				default:
+					break;
+			}
+		}
+
 		#endregion
 
 		#region 私有函数
 
-		#endregion
 
 		/// <summary>
-		/// 添加串口参数配置
+		/// 添加时间处理函数
 		/// </summary>
-		private void AddCOMMSerialPortParam()
+		private void AddEventHandler()
 		{
-
-			//---添加右键菜单
-			//加载contextMenuTrip的子项---消息显示的清楚和
-			ToolStripItem tsItem;
-
-			this.ContextMenuStrip = this.usedContextMenuStrip;
-
-			//---添加清楚消息的功能
-			tsItem = ContextMenuPlus.AddContextMenu("参数配置", this.usedContextMenuStrip.Items, new EventHandler(this.COMMSerialPortParam_Click));
-
-			this.ContextMenuStrip.Width = 32;
+			//---增加鼠标移动时间
+			this.m_COMMComboBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ComboBoxMouseDown_Click);
 		}
+
+		/// <summary>
+		/// 设置通信端口的参数
+		/// </summary>
+		private void SetCOMMSerialPortParam()
+		{
+			if ((this.m_COMMComboBox.Text != null) && (this.m_COMMComboBox.Items.Count > 0))
+			{
+				COMMSerialPortParamForm p = new COMMSerialPortParamForm(this.m_COMMComboBox.Text,this.m_COMMSerialPortParam);
+
+				if (p.ShowDialog(this.m_COMMComboBox) != System.Windows.Forms.DialogResult.OK)
+				{
+					if (this.m_COMMRichTextBox != null)
+					{
+						RichTextBoxPlus.AppendTextInfoTopWithDataTime(this.m_COMMRichTextBox, "通信端口参数配置失败。\r\n", Color.Red, false);
+					}
+				}
+				else
+				{
+					this.m_COMMSerialPortParam = ((COMMSerialPortParamForm)p).m_COMMSerialPortParam;
+
+					if (this.m_COMMRichTextBox != null)
+					{
+						RichTextBoxPlus.AppendTextInfoTopWithDataTime(this.m_COMMRichTextBox, "通信端口参数配置成功。\r\n", Color.Black, false);
+					}
+
+					p.CloseForm();
+				}
+
+			}
+		
+		}
+		#endregion
 
 		#endregion
 

@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panel_COMMPortName.SuspendLayout();
+			this.panel_COMMName.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).BeginInit();
 			this.panel_COMM.SuspendLayout();
 			this.groupBox_COMMName.SuspendLayout();
@@ -43,8 +43,8 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Name = "COMMSerialPortPlus";
-			this.panel_COMMPortName.ResumeLayout(false);
-			this.panel_COMMPortName.PerformLayout();
+			this.panel_COMMName.ResumeLayout(false);
+			this.panel_COMMName.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox_COMMState)).EndInit();
 			this.panel_COMM.ResumeLayout(false);
 			this.groupBox_COMMName.ResumeLayout(false);

@@ -7,17 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Harry.LabUserControlPlus;
+using System.Text.RegularExpressions;
 
 namespace Harry.LabCOMMPort
 {
 	public partial class COMMSerialPortPlusFull : COMMBasePortPlus
 	{
 		#region 变量定义
-		
+
 		#endregion
 
 		#region 属性定义
-
 
 		#region 重载属性
 		/// <summary>
@@ -142,6 +142,67 @@ namespace Harry.LabCOMMPort
 			}
 		}
 
+		/// <summary>
+		/// 配置波特率
+		/// </summary>
+		public virtual ComboBox m_ComboBoxCOMMPortBaudRate
+		{
+			get
+			{
+				return this.comboBox_COMMPortBaudRate;
+			}
+			set
+			{
+				this.comboBox_COMMPortBaudRate = value;
+			}
+		}
+
+		/// <summary>
+		/// 配置数据位
+		/// </summary>
+		public virtual ComboBox m_ComboBoxCOMMPortDataBits
+		{
+			get
+			{
+				return this.comboBox_COMMPortDataBits;
+			}
+			set
+			{
+				this.comboBox_COMMPortDataBits = value;
+			}
+		}
+
+		/// <summary>
+		/// 配置停止位
+		/// </summary>
+		public virtual ComboBox m_ComboBoxCOMMPortStopBits
+		{
+			get
+			{
+				return this.comboBox_COMMPortStopBits;
+			}
+			set
+			{
+				this.comboBox_COMMPortStopBits = value;
+			}
+		}
+
+		/// <summary>
+		/// 配置校验
+		/// </summary>
+		public virtual ComboBox m_ComboBoxCOMMPortParity
+		{
+			get
+			{
+				return this.comboBox_COMMPortParity;
+			}
+			set
+			{
+				this.comboBox_COMMPortParity = value;
+			}
+		}
+
+
 		#endregion
 
 		#endregion
@@ -156,6 +217,7 @@ namespace Harry.LabCOMMPort
 			this.InitControl();
 			base.Init();
 		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -260,6 +322,27 @@ namespace Harry.LabCOMMPort
 				//---注册端口监控
 				base.AddWatcherPort();
 			}
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="commSerialPortParam"></param>
+		public void Init(COMMSerialPortParam commSerialPortParam)
+		{
+			if (commSerialPortParam==null)
+			{
+				return;
+			}
+			int index = this.comboBox_COMMPortBaudRate.Items.IndexOf(commSerialPortParam.baudRate);
+			if (index<0)
+			{
+				this.comboBox_COMMPortBaudRate.SelectedIndex = 0;
+				if (comboBox_COMMPortBaudRate.DropDownStyle != System.Windows.Forms.ComboBoxStyle.DropDown)
+				{
+					comboBox_COMMPortBaudRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+				}
+			}
+			this.comboBox_COMMPortBaudRate.Text = commSerialPortParam.baudRate;
 		}
 
 		/// <summary>
@@ -401,6 +484,42 @@ namespace Harry.LabCOMMPort
 				this.m_COMMSerialPortParam.Init(this.m_COMMComboBox.Text, this.comboBox_COMMPortBaudRate.Text, this.comboBox_COMMPortParity.Text, this.comboBox_COMMPortDataBits.Text, this.comboBox_COMMPortStopBits.Text);
 			}
 
+			this.comboBox_COMMPortBaudRate.SelectedIndexChanged += new EventHandler(this.ComboBox_SelectedIndexChanged);
+
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private  void ComboBox_SelectedIndexChanged(object sender, System.EventArgs e)
+		{
+			ComboBox cbb = (ComboBox)sender;
+			switch (cbb.Name)
+			{
+				case "comboBox_COMMPortBaudRate":
+					if (cbb.Text=="自定义")
+					{
+						if (this.m_ComboBoxCOMMPortBaudRate.DropDownStyle != System.Windows.Forms.ComboBoxStyle.DropDown)
+						{
+							this.m_ComboBoxCOMMPortBaudRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+						}
+						cbb.SelectedValue = "";
+						cbb.SelectedText = "";
+						cbb.Text = "";
+					}
+					else
+					{
+						if (this.m_ComboBoxCOMMPortBaudRate.DropDownStyle == System.Windows.Forms.ComboBoxStyle.DropDown)
+						{
+							this.m_ComboBoxCOMMPortBaudRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+						}
+					}
+					break;
+				default:
+					break;
+			}
 		}
 
 		#endregion
