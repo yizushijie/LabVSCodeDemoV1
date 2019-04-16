@@ -112,6 +112,51 @@ namespace Harry.LabCOMMPort
 		public virtual void Init(string argName,COMMSerialPortParam commSerialPortParam)
 		{
 			this.Init(argName);
+			if (commSerialPortParam==null)
+			{
+				return;
+			}
+			//---波特率
+			int index = this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortBaudRate.Items.IndexOf(commSerialPortParam.baudRate);
+			if (index<0)
+			{
+				this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortBaudRate.Items.Add(commSerialPortParam.baudRate);
+				this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortBaudRate.SelectedIndex = this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortBaudRate.Items.Count - 1;
+			}
+			else
+			{
+				this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortBaudRate.SelectedIndex = index;
+			}
+			//---数据位
+			index= this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortDataBits.Items.IndexOf(commSerialPortParam.dataBits);
+			if (index<0)
+			{
+				this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortDataBits.SelectedIndex = 0;
+			}
+			else
+			{
+				this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortDataBits.SelectedIndex = index;
+			}
+			//---停止位
+			index = this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortStopBits.Items.IndexOf(commSerialPortParam.stopBits);
+			if (index < 0)
+			{
+				this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortStopBits.SelectedIndex = 0;
+			}
+			else
+			{
+				this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortStopBits.SelectedIndex = index;
+			}
+			//---校验位
+			index = this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortParity.Items.IndexOf(commSerialPortParam.parity);
+			if (index < 0)
+			{
+				this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortParity.SelectedIndex = 0;
+			}
+			else
+			{
+				this.commSerialPortPlusFullParam.m_ComboBoxCOMMPortParity.SelectedIndex = index;
+			}
 		}
 
 

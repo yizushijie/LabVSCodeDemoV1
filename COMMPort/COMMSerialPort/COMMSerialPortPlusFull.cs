@@ -15,6 +15,8 @@ namespace Harry.LabCOMMPort
 	{
 		#region 变量定义
 
+		private int commSerialPortBaudRateMaxNum = 0;
+
 		#endregion
 
 		#region 属性定义
@@ -201,7 +203,6 @@ namespace Harry.LabCOMMPort
 				this.comboBox_COMMPortParity = value;
 			}
 		}
-
 
 		#endregion
 
@@ -486,6 +487,8 @@ namespace Harry.LabCOMMPort
 
 			this.comboBox_COMMPortBaudRate.SelectedIndexChanged += new EventHandler(this.ComboBox_SelectedIndexChanged);
 
+			this.commSerialPortBaudRateMaxNum = this.comboBox_COMMPortBaudRate.Items.Count;
+
 		}
 
 		/// <summary>
@@ -508,6 +511,12 @@ namespace Harry.LabCOMMPort
 						cbb.SelectedValue = "";
 						cbb.SelectedText = "";
 						cbb.Text = "";
+
+						//---判断是否添加了新数据，如果添加，去除新添加的数据
+						if (cbb.Items.Count>this.commSerialPortBaudRateMaxNum)
+						{
+							cbb.Items.Remove(cbb.Items[cbb.Items.Count - 1]);
+						}
 					}
 					else
 					{
